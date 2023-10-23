@@ -28,6 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function (){
+    Route::match(['get','post'],'login','AdminController@login');
+    Route::get('dashboard','AdminController@dashboard');
+});
+
 require __DIR__.'/auth.php';
 
-Route::get('/admin/dashboard',[App\Http\Controllers\Admin\AdminController::class,'dashboard']);
+
