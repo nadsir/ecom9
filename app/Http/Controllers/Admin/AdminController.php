@@ -16,6 +16,22 @@ class   AdminController extends Controller
         if ($request->isMethod('post')){
             $data=$request->all();
             /*echo "<pre>";print_r($data);die;*/
+            //default validation
+/*            $validated=$request->validate([
+                'email'=>'required|email|max:255',
+                'password'=>'required'
+            ]);*/
+            //validation with custom message
+            $rule=[
+                'email'=>'required|email|max:255',
+                'password'=>'required'
+            ];
+            $customMessages=[
+              'email.required'=>'فیلد ایمیل اجباری می باشد',
+                'email.required'=>'فیلد ایمیل اشتباه وارد شده',
+                'password.required'=>'فیلد کلمه عبور اجباری می باشد',
+            ];
+            $this->validate(  $request,$rule,$customMessages);
 
             if (Auth::guard('admin')->attempt(['email'=>$data['email'],'password'=>$data['password'],'status'=>1])){
                 return  redirect('admin/dashboard');

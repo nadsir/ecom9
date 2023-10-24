@@ -321,7 +321,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{url('admin/logout')}}" class="nav-link">
-                            <button type="button" class="btn btn-block btn-warning">خروج</button>
+                            <button type="button" class="btn btn-block btn-warning"> <i class="fa fa-sign-out" style="font-size:24px"></i>خروج</button>
                         </a>
                     </li>
 

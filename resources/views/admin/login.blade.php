@@ -37,17 +37,32 @@
                     {{Session::get('error_message')}}
                 </div>
             @endif
+            @if($errors->any())
+
+                    <ul>
+
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                 {{$error}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endforeach
+                    </ul>
+
+            @endif
 
             <form action="{{url('admin/login')}}" method="post">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="ایمیل">
+                    <input type="email" name="email" id="email" class="form-control" required placeholder="ایمیل">
                     <div class="input-group-append">
                         <span class="fa fa-envelope input-group-text"></span>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" name="password" id="password" class="form-control" placeholder="رمز عبور">
+                    <input type="password" name="password" id="password" class="form-control" required placeholder="رمز عبور">
                     <div class="input-group-append">
                         <span class="fa fa-lock input-group-text"></span>
                     </div>
