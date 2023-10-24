@@ -30,7 +30,11 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function (){
     Route::match(['get','post'],'login','AdminController@login');
-    Route::get('dashboard','AdminController@dashboard');
+
+    Route::group(['middleware'=>['admin']],function (){
+        Route::get('dashboard','AdminController@dashboard');
+    });
+
 });
 
 require __DIR__.'/auth.php';
