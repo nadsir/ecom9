@@ -32,16 +32,22 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">فرم زیر را تکمیل کنید و ورود بزنید</p>
+            @if(Session::has('error_message'))
+                <div class="alert alert-danger" role="alert">
+                    {{Session::get('error_message')}}
+                </div>
+            @endif
 
-            <form action="../../index2.html" method="post">
+            <form action="{{url('admin/login')}}" method="post">
+                @csrf
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="ایمیل">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="ایمیل">
                     <div class="input-group-append">
                         <span class="fa fa-envelope input-group-text"></span>
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="رمز عبور">
+                    <input type="password" name="password" id="password" class="form-control" placeholder="رمز عبور">
                     <div class="input-group-append">
                         <span class="fa fa-lock input-group-text"></span>
                     </div>

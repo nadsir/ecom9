@@ -319,6 +319,12 @@
                             <p>اطلاعات</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{url('admin/logout')}}" class="nav-link">
+                            <button type="button" class="btn btn-block btn-warning">خروج</button>
+                        </a>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
