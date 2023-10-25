@@ -29,43 +29,69 @@
                             <div class="card-header">
                                 <h3 class="card-title">بروز رسانی پسورد</h3>
                             </div>
-                            <!-- /.card-header -->
+                            @if(Session::has('error_message'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>پیام خطا !</strong>
+                                    {{Session::get('error_message')}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            @if(Session::has('success_message'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>پیام پذیرش !</strong>
+                                    {{Session::get('success_message')}}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                        @endif
+
+                        <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form">
+                            <form role="form" action="{{url('admin/update-admin-password')}}" method="post">
+                                @csrf
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputUsername">نام کاربری</label>
-                                        <input type="text" class="form-control" id="exampleInputUsername" placeholder="" disabled value="{{$adminDetails['type']}}">
+                                        <input type="text" class="form-control" id="exampleInputUsername" placeholder=""
+                                               disabled value="{{$adminDetails['type']}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">آدرس ایمیل</label>
-                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="" disabled value="{{$adminDetails['email']}}">
+                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder=""
+                                               disabled value="{{$adminDetails['email']}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="current_password">پسورد قبلی</label>
-                                        <input @keydown="check_current_password" v-model="current_password" type="password" class="form-control" id="current_password" placeholder="پسورد قبلی" name="current_password" required>
+                                        <input @keydown="check_current_password" v-model="current_password"
+                                               type="password" class="form-control" id="current_password"
+                                               placeholder="پسورد قبلی" name="current_password" required>
                                         <span v-html="showmessage"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="new_password">پسورد جدید</label>
-                                        <input type="password" class="form-control" id="new_password" placeholder="پسورد جدید" name="new_password" required>
+                                        <input type="password" class="form-control" id="new_password"
+                                               placeholder="پسورد جدید" name="new_password" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="confirm_password">تایید پسورد جدید</label>
-                                        <input type="password" class="form-control" id="confirm_password" placeholder="تایید پسورد جدید" name="confirm_password" required>
+                                        <input type="password" class="form-control" id="confirm_password"
+                                               placeholder="تایید پسورد جدید" name="confirm_password" required>
                                     </div>
-<!--                                    <div class="form-group">
-                                        <label for="exampleInputFile">ارسال فایل</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">Upload</span>
-                                            </div>
-                                        </div>
-                                    </div>-->
+                                    <!--                                    <div class="form-group">
+                                                                            <label for="exampleInputFile">ارسال فایل</label>
+                                                                            <div class="input-group">
+                                                                                <div class="custom-file">
+                                                                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                                                    <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
+                                                                                </div>
+                                                                                <div class="input-group-append">
+                                                                                    <span class="input-group-text" id="">Upload</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
                                     <div class="form-check">
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                         <label class="form-check-label" for="exampleCheck1">مرا بخاطر بسپار</label>

@@ -13,7 +13,23 @@ class   AdminController extends Controller
     public function dashboard(){
         return view('admin.dashboard');
     }
-    public function updateAdminPassword(){
+    public function updateAdminPassword(Request $request){
+        if ($request->isMethod('post')){
+            $data=$request->all();
+            //check if current password enter by admin is correct
+            if (Hash::check($data['current_password'],Auth::guard('admin')->user()->password)){
+                //check if new password is matching with confirm password
+                if ($data['new_password'] == $data['confirm_password']){
+                    Admin::where('id',Auth::guard('admin')->user()->id)->update(['password'=>bcrypt($data['new_password'])]);
+                    return redirect()->back()->with('success_message','پسورد با موفقیت عوض شد');
+                }else{
+                    return redirect()->back()->with('error_message','پسوردها جدید مطابقت ندارند');
+                }
+
+            }else{
+                return redirect()->back()->with('error_message','پسورد کنونی اشتباه وارد شده');
+            }
+        }
         $adminDetails=Admin::where('email',Auth::guard('admin')->user()->email)->first()->toArray();
         return view('admin.settings.update-admin-password')->with(compact('adminDetails'));
 
