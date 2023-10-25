@@ -1,6 +1,7 @@
 @extends('admin.layout.layout')
 @section('content')
-<div class="content-wrapper">
+
+<div class="content-wrapper" >
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -8,6 +9,9 @@
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">داشبورد دوم</h1>
                 </div><!-- /.col -->
+                <button @click="warn('Form cannot be submitted yet.', $event)">
+                    Submit
+                </button>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item"><a href="#">خانه</a></li>

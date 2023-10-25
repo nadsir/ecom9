@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="{{url('admin/dist/css/bootstrap-rtl.min.css')}}">
     <!-- template rtl version -->
     <link rel="stylesheet" href="{{url('admin/dist/css/custom-style.css')}}">
-
+    @vite('resources/css/app.css')
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="app">
     <!-- Navbar -->
 @include('admin.layout.header')
 <!-- /.navbar -->
@@ -42,6 +42,7 @@
 
     <!-- Main Footer -->
     @include('admin.layout.footer')
+    @vite('resources/js/app.js')
 </div>
 <!-- ./wrapper -->
 

@@ -1,15 +1,15 @@
 import { createApp } from 'vue/dist/vue.esm-bundler';
 import { ref } from 'vue'
-import CompomemtA from './components/CompomemtA.vue';
 
 
 createApp({
     components:{
-        CompomemtA
+
     },
     data() {
         return {
-            name: 'Vue.js'
+            name: 'Vue.js',
+            data:''
         }
     },
     methods: {
@@ -19,6 +19,9 @@ createApp({
                 event.preventDefault()
             }
             alert(message)
+        },
+        getdata(event){
+            this.data=event;
         }
     }
 }).mount('#app');
