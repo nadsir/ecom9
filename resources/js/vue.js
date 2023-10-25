@@ -1,6 +1,6 @@
 import { createApp } from 'vue/dist/vue.esm-bundler';
 import { ref } from 'vue'
-
+import axios, {isCancel, AxiosError} from 'axios';
 
 createApp({
     components:{
@@ -9,7 +9,8 @@ createApp({
     data() {
         return {
             name: 'Vue.js',
-            data:''
+            showmessage:'',
+            current_password:''
         }
     },
     methods: {
@@ -20,8 +21,28 @@ createApp({
             }
             alert(message)
         },
-        getdata(event){
-            this.data=event;
+
+
+    },
+    computed:{
+        check_current_password(){
+            axios.post('/admin/checkpassword', {
+                password: this.current_password,
+            })  .then(response => {
+                if (this.current_password !=''){
+                if (response.data==false)
+                {
+                    this.showmessage="<p style='color: red'>پسورد اشتباه می باشد</p>"
+                    console.log(response.data)
+                }else{
+                    this.showmessage="<p style='color: green'>پسورد صحیح می باشد</p>"
+                    console.log(response.data)
+                }
+                }else {
+                    this.showmessage='';
+                }
+            })
+                .catch(error => console.log(error))
         }
     }
 }).mount('#app');

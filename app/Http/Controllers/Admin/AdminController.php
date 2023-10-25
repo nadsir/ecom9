@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use League\CommonMark\Extension\Embed\EmbedRenderer;
 use App\Models\Admin;
 class   AdminController extends Controller
@@ -15,6 +16,16 @@ class   AdminController extends Controller
     public function updateAdminPassword(){
         $adminDetails=Admin::where('email',Auth::guard('admin')->user()->email)->first()->toArray();
         return view('admin.settings.update-admin-password')->with(compact('adminDetails'));
+
+    }
+    public function checkPassword(Request $request){
+        $data=$request->all();
+        if (Hash::check($data['password'],Auth::guard('admin')->user()->password)){
+            return "true";
+        }else{
+            return "false";
+        }
+
 
     }
     public function login(Request $request){

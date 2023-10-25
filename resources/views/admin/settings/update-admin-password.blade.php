@@ -43,7 +43,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="current_password">پسورد قبلی</label>
-                                        <input type="password" class="form-control" id="current_password" placeholder="پسورد قبلی" name="current_password" required>
+                                        <input @keydown="check_current_password" v-model="current_password" type="password" class="form-control" id="current_password" placeholder="پسورد قبلی" name="current_password" required>
+                                        <span v-html="showmessage"></span>
                                     </div>
                                     <div class="form-group">
                                         <label for="new_password">پسورد جدید</label>
