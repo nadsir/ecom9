@@ -35,7 +35,7 @@
                     </li>
                     <li class="nav-item has-treeview ">
                         <a href="#" class="nav-link ">
-                            <i class="nav-icon fa fa-dashboard"></i>
+                            <i class="nav-icon fa fa-cogs" ></i>
                             <p>
                                 تنظیمات
                                 <i class="right fa fa-angle-left"></i>
@@ -49,17 +49,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="./index2.html" class="nav-link active">
+                                <a href="{{url('admin/update-admin-details')}}" class="nav-link active">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>داشبورد دوم</p>
+                                    <p>بروز رسانی پروفایل ادمین</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="./index3.html" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>داشبورد سوم</p>
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
                     <li class="nav-item">

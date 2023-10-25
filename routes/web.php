@@ -42,6 +42,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::match(['get','post'],'update-admin-password','AdminController@updateAdminPassword');
         //check password
         Route::post('checkpassword','AdminController@checkPassword');
+        //updating admin details
+        Route::match(['get','post'],'update-admin-details','AdminController@updateAdminDetails');
     });
 
 });

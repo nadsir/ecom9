@@ -38,9 +38,7 @@
                 </div>
             @endif
             @if($errors->any())
-
                     <ul>
-
                         @foreach($errors->all() as $error)
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                  {{$error}}
@@ -50,7 +48,6 @@
                             </div>
                         @endforeach
                     </ul>
-
             @endif
 
             <form action="{{url('admin/login')}}" method="post">
