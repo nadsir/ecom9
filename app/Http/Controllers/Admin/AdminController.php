@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use League\CommonMark\Extension\Embed\EmbedRenderer;
 use App\Models\Admin;
+use Image;
+
 
 class   AdminController extends Controller
 {
@@ -65,9 +67,27 @@ class   AdminController extends Controller
 
             ];
             $this->validate($request,$rules,$customMessages);
+            //Upload Admin Photo
+            if ($request->hasFile('admin_image')){
+                $image_temp=$request->file('admin_image');
+                if ($image_temp->isValid()){
+                    //Get Image Extension
+                    $extension=$image_temp->getClientOriginalExtension();
+                    //Generate New Image Name
+                    $imageName=rand(111,99999).'.'.$extension;
+                    $imagePath='admin/images/photos/'.$imageName;
+                    //Upload the Image
+                    Image::make($image_temp)->save($imagePath);
+                }
+
+            }
+            else if (!empty($data['current_admin_image'])){$imageName=$data['current_admin_image'];}
+            else {$imageName='';}
+
+
+            //Update Admin Details
             Admin::where('id', Auth::guard('admin')->user()->id)->update(
-                ['name' => $data['admin_name'],'mobile' => $data['admin_mobile']
-                    ]);
+                ['name' => $data['admin_name'],'mobile' => $data['admin_mobile'],'image'=>$imageName]);
             return redirect()->back()->with('success_message','بروزرسانی با موفقیت انجام شد.');
         }
         return view('admin.settings.update-admin-details');

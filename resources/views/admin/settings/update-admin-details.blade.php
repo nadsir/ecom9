@@ -46,7 +46,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                        @endif
+                            @endif
                             @if($errors->any())
                                 <ul>
                                     @foreach($errors->all() as $error)
@@ -61,48 +61,55 @@
                         @endif
                         <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" action="{{url('admin/update-admin-details')}}" method="post">
+                            <form role="form" action="{{url('admin/update-admin-details')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
 
                                     <div class="form-group">
                                         <label for="admin_email">آدرس ایمیل</label>
                                         <input type="admin_email" class="form-control" id="admin_email" placeholder=""
-                                                value="{{Auth::guard('admin')->user()->email}}" name="admin_email" disabled>
+                                               value="{{Auth::guard('admin')->user()->email}}" name="admin_email"
+                                               disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="admin_type">نوع کاربری</label>
                                         <input type="text" class="form-control" id="admin_type" placeholder=""
-                                                value="{{Auth::guard('admin')->user()->type}}" name="admin_type" disabled>
+                                               value="{{Auth::guard('admin')->user()->type}}" name="admin_type"
+                                               disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="admin_name">نام</label>
                                         <input type="text" class="form-control" id="admin_name" placeholder=""
-                                                value="{{Auth::guard('admin')->user()->name}}" name="admin_name">
+                                               value="{{Auth::guard('admin')->user()->name}}" name="admin_name">
                                     </div>
                                     <div class="form-group">
                                         <label for="admin_mobile">موبایل</label>
                                         <input type="text" class="form-control" id="admin_mobile" placeholder=""
-                                                value="{{Auth::guard('admin')->user()->mobile}}" name="admin_mobile"
-                                        maxlength="12" minlength="10">
+                                               value="{{Auth::guard('admin')->user()->mobile}}" name="admin_mobile"
+                                               maxlength="12" minlength="10">
                                     </div>
 
-                                    <!--                                    <div class="form-group">
-                                                                            <label for="exampleInputFile">ارسال فایل</label>
-                                                                            <div class="input-group">
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" class="custom-file-input" id="exampleInputFile">
-                                                                                    <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
-                                                                                </div>
-                                                                                <div class="input-group-append">
-                                                                                    <span class="input-group-text" id="">Upload</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">مرا بخاطر بسپار</label>
+                                    <div class="form-group">
+                                        <label for="admin-image">ارسال فایل</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="admin_image"
+                                                       name="admin_image">
+                                                <label class="custom-file-label" for="admin_image">انتخاب فایل</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="">Upload</span>
+                                            </div>
+                                        </div>
+                                        @if(!empty(Auth::guard('admin')->user()->image))
+                                            <a href="{{url('admin/images/photos/'.Auth::guard('admin')->user()->image)}}">
+                                                مشاهده عکس کنونی
+                                            </a>
+                                            <input type="hidden" name="current_admin_image" value="{{Auth::guard('admin')->user()->image}}">
+
+                                        @endif
                                     </div>
+
                                 </div>
                                 <!-- /.card-body -->
 
