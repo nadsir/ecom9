@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +17,63 @@ class   AdminController extends Controller
     public function dashboard()
     {
         return view('admin.dashboard');
+    }
+
+    public function updateVendorDetails($slug,Request $request){
+        if ($slug=="personal"){
+            if ($request->isMethod('post')){
+                $data=$request->all();
+                $rules=[
+                    'vendor_name'=>'required|regex:/^[\pL\s\-]+$/u',
+                    'vendor_city'=>'required|regex:/^[\pL\s\-]+$/u',
+                    'vendor_mobile'=>'required|numeric'
+                ];
+                $customMessages = [
+                    'vendor_name.required' => 'فیلد نام اجباری می باشد',
+                    'vendor_name.regex' => 'فیلد نام باید مجاز باشد',
+                    'vendor_city.required' => 'فیلد شهر اجباری می باشد',
+                    'vendor_city.regex' => 'فیلد شهر باید مجاز باشد',
+                    'vendor_mobile.required' => 'فیلد ایمیل اشتباه وارد شده',
+                    'vendor_mobile.numeric' => 'فیلد تلفن باید عدد باشد',
+
+                ];
+                $this->validate($request,$rules,$customMessages);
+                //Upload Admin Photo
+                if ($request->hasFile('vendor_image')){
+                    $image_temp=$request->file('vendor_image');
+                    if ($image_temp->isValid()){
+                        //Get Image Extension
+                        $extension=$image_temp->getClientOriginalExtension();
+                        //Generate New Image Name
+                        $imageName=rand(111,99999).'.'.$extension;
+                        $imagePath='admin/images/photos/'.$imageName;
+                        //Upload the Image
+                        Image::make($image_temp)->save($imagePath);
+                    }
+
+                }
+                else if (!empty($data['current_vendor_image'])){$imageName=$data['current_vendor_image'];}
+                else {$imageName='';}
+
+
+                //Update in Admin table
+                Admin::where('id', Auth::guard('admin')->user()->id)->update(
+                    ['name' => $data['vendor_name'],'mobile' => $data['vendor_mobile'],'image'=>$imageName]);
+                //Update in Vendor table
+                Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->update(
+                    ['name' => $data['vendor_name'],'address' => $data['vendor_address'],'city' => $data['vendor_city'],'state' => $data['vendor_state']
+                        ,'country' => $data['vendor_country'],'pincode' => $data['vendor_pincode'],'mobile' => $data['vendor_mobile']]);
+                return redirect()->back()->with('success_message','بروزرسانی با موفقیت انجام شد.');
+            }
+            $vendorDetails=Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+
+        }else if ($slug=="business"){
+
+        }else if ($slug=="bank"){
+
+        }
+        return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
+
     }
 
     public function updateAdminPassword(Request $request)

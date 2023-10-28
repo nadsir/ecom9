@@ -33,6 +33,37 @@
                             </p>
                         </a>
                     </li>
+                    @if(Auth::guard('admin')->user()->type=="vendor")
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fa fa-cogs" ></i>
+                                <p>
+                                  تنظیمات فروشندگان
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{url('admin/update-vendor-details/personal')}}" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>اطلاعات شخصی</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/update-vendor-details/details')}}" class="nav-link ">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>اطلاعات کاری</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/update-admin-details/bank')}}" class="nav-link ">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>اطلاعات بانکی</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                     <li class="nav-item has-treeview ">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fa fa-cogs" ></i>
