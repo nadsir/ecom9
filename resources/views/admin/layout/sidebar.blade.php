@@ -50,7 +50,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('admin/update-vendor-details/details')}}" class="nav-link ">
+                                    <a href="{{url('admin/update-vendor-details/business')}}" class="nav-link ">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>اطلاعات کاری</p>
                                     </a>

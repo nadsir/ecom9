@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use App\Models\VendorsBusinessDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -67,11 +68,62 @@ class   AdminController extends Controller
             }
             $vendorDetails=Vendor::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
 
-        }else if ($slug=="business"){
+        }
+        else if ($slug=="business"){
+            if ($request->isMethod('post')){
+                $data=$request->all();
+                $rules=[
+                    'shop_name'=>'required|regex:/^[\pL\s\-]+$/u',
+                    'shop_city'=>'required|regex:/^[\pL\s\-]+$/u',
+                    'shop_mobile'=>'required|numeric',
+                    'address_proof'=>'required',
 
-        }else if ($slug=="bank"){
+                ];
+                $customMessages = [
+                    'shop_name.required' => 'فیلد نام اجباری می باشد',
+                   ' shop_name.regex' => 'فیلد نام باید مجاز باشد',
+                    'shop_city.required' => 'فیلد شهر اجباری می باشد',
+                    'shop_city.regex' => 'فیلد شهر باید مجاز باشد',
+                    'shop_mobile.required' => 'فیلد ایمیل اشتباه وارد شده',
+                    'shop_mobile.numeric' => 'فیلد تلفن باید عدد باشد',
+                    'address_proof.required' => 'فیلد عکس اجباری می باشد',
+
+
+                ];
+                $this->validate($request,$rules,$customMessages);
+                //Upload Admin Photo
+                if ($request->hasFile('address_proof_image')){
+                    $image_temp=$request->file('address_proof_image');
+                    if ($image_temp->isValid()){
+                        //Get Image Extension
+                        $extension=$image_temp->getClientOriginalExtension();
+                        //Generate New Image Name
+                        $imageName=rand(111,99999).'.'.$extension;
+                        $imagePath='admin/images/proof/'.$imageName;
+                        //Upload the Image
+                        Image::make($image_temp)->save($imagePath);
+                    }
+
+                }
+                else if (!empty($data['current_address_proof'])){$imageName=$data['current_address_proof'];}
+                else {$imageName='';}
+
+
+                //Update in vendors_business_details table
+                VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(
+                    ['shop_name' => $data['shop_name'],'shop_address' => $data['shop_address'],'shop_city' => $data['shop_city'],'shop_state' => $data['shop_state']
+                        ,'shop_country' => $data['shop_country'],'shop_pincode' => $data['shop_pincode'],'shop_mobile' => $data['shop_mobile'],
+                        'business_license_number' => $data['business_license_number'],'gst_number' => $data['gst_number'],
+                    'pan_number' => $data['pan_number'],'address_proof' => $data['address_proof'],'address_proof_image' => $imageName,
+                        'shop_mobile' => $data['shop_mobile']
+                    ]);
+                return redirect()->back()->with('success_message','بروزرسانی با موفقیت انجام شد.');
+            }
+
+            $vendorDetails=VendorsBusinessDetail::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
 
         }
+        else if ($slug=="bank"){}
         return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
 
     }
