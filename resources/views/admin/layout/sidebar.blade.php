@@ -56,7 +56,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('admin/update-admin-details/bank')}}" class="nav-link ">
+                                    <a href="{{url('admin/update-vendor-details/bank')}}" class="nav-link ">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>اطلاعات بانکی</p>
                                     </a>

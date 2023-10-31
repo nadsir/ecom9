@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vendor;
+use App\Models\VendorsBankDetail;
 use App\Models\VendorsBusinessDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -123,7 +124,34 @@ class   AdminController extends Controller
             $vendorDetails=VendorsBusinessDetail::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
 
         }
-        else if ($slug=="bank"){}
+        else if ($slug=="bank"){
+            if ($request->isMethod('post')){
+                $data=$request->all();
+                $rules=[
+                    'account_holder_name'=>'required|regex:/^[\pL\s\-]+$/u',
+                    'bank_name'=>'required',
+                    'account_number'=>'required|numeric',
+                    'bank_ifcs_code'=>'required'
+                ];
+                $customMessages = [
+                    'account_holder_name.required' => 'فیلد نام صاحب حساب اجباری می باشد',
+                    'bank_name.required' => 'فیلد نام بانک اجباری می باشد',
+                    'account_number.required' => 'فیلد شماره حساب اجباری می باشد',
+                    'bank_ifcs_code.required' => 'فیلد کد شعبه اجباری می باشد',
+                    'account_holder_name.regex' => 'فیلد نام صاحب حساب باید مجاز باشد',
+                    'account_number.numeric' => 'فیلد شماره حساب باید عدد باشد',
+
+                ];
+                $this->validate($request,$rules,$customMessages);
+
+                //Update in Vendor_bank_details table
+                VendorsBankDetail::where('id',Auth::guard('admin')->user()->vendor_id)->update(
+                    ['account_holder_name' => $data['account_holder_name'],'bank_name' => $data['bank_name'],
+                        'account_number' => $data['account_number'],'bank_ifcs_code' => $data['bank_ifcs_code']]);
+                return redirect()->back()->with('success_message','بروزرسانی با موفقیت انجام شد.');
+            }
+            $vendorDetails=VendorsBankDetail::where('id',Auth::guard('admin')->user()->vendor_id)->first()->toArray();
+        }
         return view('admin.settings.update_vendor_details')->with(compact('slug','vendorDetails'));
 
     }

@@ -304,7 +304,98 @@
                         <!--/.col (right) -->
                     </div>
                 @elseif($slug=="bank")
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-6">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">بروز رسانی اطلاعات بانکی فروشنده</h3>
+                                </div>
+                                @if(Session::has('error_message'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>پیام خطا !</strong>
+                                        {{Session::get('error_message')}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                @if(Session::has('success_message'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>پیام پذیرش !</strong>
+                                        {{Session::get('success_message')}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                @if($errors->any())
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                {{$error}}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        @endforeach
+                                    </ul>
+                            @endif
+                            <!-- /.card-header -->
+                                <!-- form start -->
+                                <form role="form" action="{{url('admin/update-vendor-details/bank')}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="card-body">
 
+                                        <div class="form-group">
+                                            <label for="vendor_email">آدرس ایمیل فروشنده</label>
+                                            <input type="vendor_email" class="form-control" id="vendor_email" placeholder=""
+                                                   value="{{Auth::guard('admin')->user()->email}}" name="vendor_email" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="account_holder_name">نام داردنده حساب</label>
+                                            <input type="text" class="form-control" id="account_holder_name" placeholder=""
+                                                   value="{{$vendorDetails['account_holder_name']}}" name="account_holder_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bank_name">نام بانک</label>
+                                            <input type="text" class="form-control" id="bank_name" placeholder=""
+                                                   value="{{$vendorDetails['bank_name']}}" name="bank_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="account_number">شماره حساب</label>
+                                            <input type="text" class="form-control" id="account_number" placeholder=""
+                                                   value="{{$vendorDetails['account_number']}}" name="account_number">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bank_ifcs_code">کد بانک</label>
+                                            <input type="text" class="form-control" id="bank_ifcs_code" placeholder=""
+                                                   value="{{$vendorDetails['bank_ifcs_code']}}" name="bank_ifcs_code">
+                                        </div>
+
+
+
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">ارسال</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+
+                            <!-- Form Element sizes -->
+
+                            <!-- /.card -->
+
+                        </div>
+                        <!--/.col (left) -->
+                        <!-- right column -->
+
+                        <!--/.col (right) -->
+                    </div>
                 @endif
 
                 <!-- /.row -->
