@@ -265,6 +265,22 @@ class   AdminController extends Controller
 
     }
 
+    public function admins($type=null){
+        $admins=Admin::query();
+
+        if (!empty($type)){
+            $admins=$admins->where('type',$type);
+            $title=ucfirst($type).'s';
+        }else{
+            $title="All";
+        }
+        $admins=$admins->get()->toArray();
+
+
+        return view('admin.admins.admins')->with(compact('admins','title'));
+
+    }
+
     public function logout()
     {
         Auth::guard('admin')->logout();

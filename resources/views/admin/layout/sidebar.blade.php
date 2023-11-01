@@ -63,7 +63,7 @@
                                 </li>
                             </ul>
                         </li>
-                    @endif
+                    @else
                     <li class="nav-item has-treeview ">
                         <a href="#" class="nav-link ">
                             <i class="nav-icon fa fa-cogs" ></i>
@@ -88,6 +88,69 @@
 
                         </ul>
                     </li>
+
+                    <li class="nav-item has-treeview ">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon  fa fa-lock" ></i>
+                            <p>
+                                مدیرت ادمینها
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{url('admin/admins/admin')}}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>مدیران ارشد</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url('admin/admins/subadmin')}}" class="nav-link ">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>مدیران</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url('admin/admins/vendor')}}" class="nav-link ">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>فروشندگان</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url('admin/admins')}}" class="nav-link ">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>کلیه مدیران</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item has-treeview ">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon  fa fa-lock" ></i>
+                            <p>
+                                مدیرت کاربران
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{url('admin/users')}}" class="nav-link">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p> کاربران</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{url('admin/subscribers')}}" class="nav-link ">
+                                    <i class="fa fa-circle-o nav-icon"></i>
+                                    <p>امضا کننده</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    @endif
+
                     <li class="nav-item">
                         <a href="pages/widgets.html" class="nav-link">
                             <i class="nav-icon fa fa-th"></i>
