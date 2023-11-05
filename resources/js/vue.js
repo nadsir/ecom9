@@ -10,7 +10,12 @@ createApp({
         return {
             name: 'Vue.js',
             showmessage:'',
-            current_password:''
+            current_password:'',
+            activeClass:'fa-toggle-on',
+            deactiveClass:'fa-toggle-off',
+            info:''
+
+
         }
     },
     methods: {
@@ -21,8 +26,18 @@ createApp({
             }
             alert(message)
         },
-
-
+        changeStatus(item){
+           this.info=document.getElementById(item).className;
+           if (this.info=='fa fa-toggle-on'){
+               var element = document.getElementById(item);
+               element.classList.remove("fa-toggle-on");
+               document.getElementById(item).classList.add('fa-toggle-off');
+           } else if (this.info=='fa fa-toggle-off'){
+               var element = document.getElementById(item);
+               element.classList.remove("fa-toggle-off");
+               document.getElementById(item).classList.add('fa-toggle-on');
+           }
+        }
     },
     computed:{
         check_current_password(){
@@ -43,7 +58,9 @@ createApp({
                 }
             })
                 .catch(error => console.log(error))
-        }
+        },
+
+
     }
 }).mount('#app');
 

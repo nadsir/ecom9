@@ -96,15 +96,20 @@
 
                                                     <img class="rounded-circle" alt="Cinque Terre" width="100" height="100" src="{{asset('admin/images/photos/'.$admin['image'])}}" alt="User Image">
 
-                                                <td>@if($admin['status'] ==1)
-                                                        <i class="fa fa-toggle-on" style="font-size:24px"></i>
+                                                <td>
+                                                    @if($admin['status'] ==1)
+                                                        <i id="item{{$admin['id']}}" ref="input" class="fa" :class="activeClass" v-on:click="changeStatus('item'+{{$admin['id']}})" style="font-size:24px"></i>
                                                     @else
-                                                        <i class="fa fa-toggle-off" style="font-size:24px"></i>
+                                                        <i id="item{{$admin['id']}}"  ref="input" class="fa" :class="deactiveClass" v-on:click="changeStatus('item'+{{$admin['id']}})" style="font-size:24px"></i>
                                                     @endif
-
-
                                                 </td>
-                                                <td>action</td>
+                                                <td>
+                                                    @if($admin['type']=='vendor')
+                                                    <a href="{{url('admin/view-vendor-details/'.$admin['id'])}}">
+                                                        <i class="fa fa-file-archive-o" style="font-size:24px"></i>
+                                                    </a>
+                                                        @endif
+                                                </td>
 
                                             </tr>
                                             @endforeach
