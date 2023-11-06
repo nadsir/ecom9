@@ -26,18 +26,32 @@ createApp({
             }
             alert(message)
         },
+        //update admin status
         changeStatus(item){
-           this.info=document.getElementById(item).className;
-           if (this.info=='fa fa-toggle-on'){
-               var element = document.getElementById(item);
-               element.classList.remove("fa-toggle-on");
-               document.getElementById(item).classList.add('fa-toggle-off');
-           } else if (this.info=='fa fa-toggle-off'){
-               var element = document.getElementById(item);
-               element.classList.remove("fa-toggle-off");
-               document.getElementById(item).classList.add('fa-toggle-on');
-           }
+            var status=document.getElementById(item).getAttribute("status");
+            var admin_id=document.getElementById(item).getAttribute("admin-id");
+            axios.post('/admin/update-admin-status',{
+                status:status,admin_id:admin_id
+            }).then(function (response) {
+                var data=document.getElementById(item).className;
+                if (data=='fa fa-toggle-on'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-on");
+                    element.classList.add('fa-toggle-off');
+                    element.setAttribute("status", "Deactive");
+                } else if (data=='fa fa-toggle-off'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-off");
+                    element.classList.add('fa-toggle-on');
+                    element.setAttribute("status", "Active");
+                }
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
+
         }
+
     },
     computed:{
         check_current_password(){

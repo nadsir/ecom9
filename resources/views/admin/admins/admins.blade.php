@@ -98,9 +98,9 @@
 
                                                 <td>
                                                     @if($admin['status'] ==1)
-                                                        <i id="item{{$admin['id']}}" ref="input" class="fa" :class="activeClass" v-on:click="changeStatus('item'+{{$admin['id']}})" style="font-size:24px"></i>
+                                                        <i status="Active" admin-id="{{$admin['id']}}" id="admin-{{$admin['id']}}" ref="input" class="fa" :class="activeClass" v-on:click="changeStatus('admin-'+{{$admin['id']}})" style="font-size:24px"></i>
                                                     @else
-                                                        <i id="item{{$admin['id']}}"  ref="input" class="fa" :class="deactiveClass" v-on:click="changeStatus('item'+{{$admin['id']}})" style="font-size:24px"></i>
+                                                        <i status="Deactive" admin-id="{{$admin['id']}}" id="admin-{{$admin['id']}}"  ref="input" class="fa" :class="deactiveClass" v-on:click="changeStatus('admin-'+{{$admin['id']}})" style="font-size:24px"></i>
                                                     @endif
                                                 </td>
                                                 <td>
