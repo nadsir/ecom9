@@ -88,18 +88,28 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="vendor_state">استان</label>
-                                            <input type="text" class="form-control" id="vendor_state" placeholder=""
+                                           <input type="text" class="form-control" id="vendor_state" placeholder=""
                                                    value="{{$vendorDetails['state']}}" name="vendor_state">
+
                                         </div>
                                         <div class="form-group">
                                             <label for="vendor_country">کشور</label>
-                                            <input type="text" class="form-control" id="vendor_country" placeholder=""
-                                                   value="{{$vendorDetails['country']}}" name="vendor_country">
+                                            <select class="form-control" name="vendor_country" id="vendor_country">
+                                                <option value="">Select Country</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{$country['country_name']}} "
+                                                            @if($country['country_name']==$vendorDetails['country'])selected @endif
+
+                                                        >{{$country['country_name']}}</option>
+
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="vendor_pincode">پین کد</label>
                                             <input type="text" class="form-control" id="vendor_pincode" placeholder=""
                                                    value="{{$vendorDetails['pincode']}}" name="vendor_pincode">
+
                                         </div>
                                         <div class="form-group">
                                             <label for="vendor_mobile">موبایل</label>
@@ -221,8 +231,16 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="shop_country">کشور محل کسب</label>
-                                            <input type="text" class="form-control" id="shop_country" placeholder=""
-                                                   value="{{$vendorDetails['shop_country']}}" name="shop_country">
+                                            <select class="form-control" name="shop_country" id="shop_country">
+                                                <option value="">Select Country</option>
+                                                @foreach($countries as $country)
+                                                    <option value="{{$country['country_name']}} "
+                                                            @if($country['country_name']==$vendorDetails['shop_country'])selected @endif
+
+                                                    >{{$country['country_name']}}</option>
+
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="shop_pincode">پین کد کسب وکار</label>
@@ -404,3 +422,9 @@
         <!-- /.content -->
     </div>
 @endsection
+<script>
+    import Options from "../../../../public/admin/plugins/chart.js/docs/general/options.html";
+    export default {
+        components: {Options}
+    }
+</script>
