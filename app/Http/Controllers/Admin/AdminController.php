@@ -12,17 +12,20 @@ use Illuminate\Support\Facades\Hash;
 use League\CommonMark\Extension\Embed\EmbedRenderer;
 use App\Models\Admin;
 use Image;
+use Session;
 
 
 class   AdminController extends Controller
 {
     public function dashboard()
     {
+        Session::put('page','dashboard');
         return view('admin.dashboard');
     }
 
     public function updateVendorDetails($slug,Request $request){
         if ($slug=="personal"){
+            Session::put('page','update_personal_details');
             if ($request->isMethod('post')){
                 $data=$request->all();
                 $rules=[
@@ -71,6 +74,7 @@ class   AdminController extends Controller
 
         }
         else if ($slug=="business"){
+            Session::put('page','update_business_details');
             if ($request->isMethod('post')){
                 $data=$request->all();
                 $rules=[
@@ -125,6 +129,7 @@ class   AdminController extends Controller
 
         }
         else if ($slug=="bank"){
+            Session::put('page','update_bank_details');
             if ($request->isMethod('post')){
                 $data=$request->all();
                 $rules=[
@@ -174,6 +179,7 @@ class   AdminController extends Controller
                 return redirect()->back()->with('error_message', 'پسورد کنونی اشتباه وارد شده');
             }
         }
+        Session::put('page','update-admin-password');
         $adminDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first()->toArray();
         return view('admin.settings.update-admin-password')->with(compact('adminDetails'));
 
@@ -228,6 +234,7 @@ class   AdminController extends Controller
                 ['name' => $data['admin_name'],'mobile' => $data['admin_mobile'],'image'=>$imageName]);
             return redirect()->back()->with('success_message','بروزرسانی با موفقیت انجام شد.');
         }
+        Session::put('page','update-admin-details');
         return view('admin.settings.update-admin-details');
 
     }
@@ -256,6 +263,7 @@ class   AdminController extends Controller
 
             if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1])) {
                 return redirect('admin/dashboard');
+
             } else {
                 return redirect()->back()->with('error_message', 'نام کاربری یا کلمه عبور اشتباه است');
             }
@@ -271,7 +279,11 @@ class   AdminController extends Controller
         if (!empty($type)){
             $admins=$admins->where('type',$type);
             $title=ucfirst($type).'s';
+
+            Session::put('page','view_'.strtolower($title));
+
         }else{
+            Session::put('page','view_all');
             $title="All";
         }
         $admins=$admins->get()->toArray();
