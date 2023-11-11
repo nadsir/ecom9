@@ -21,6 +21,7 @@
     "dependencies": {
         "@vitejs/plugin-vue": "^4.2.3",
         "gsap": "^3.12.2",
+        "sweetalert2": "^11.9.0",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.1"
     }

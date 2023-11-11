@@ -74,6 +74,42 @@ createApp({
                 .catch(function (error) {
                     alert(error);
                 });
+        },
+        //Confirm Delete
+        /*confirmDelete(item){
+            var title=document.getElementById(item).getAttribute("title");
+           if (confirm("Are you sure to delete this "+title+"?")){
+               return true;
+
+           }else {
+                loaded: false;
+           }
+        }*/
+
+        //Confirm Sweet Alert Delete
+        confirmDelete(item){
+            var title=document.getElementById(item).getAttribute("title");
+            var module=document.getElementById(item).getAttribute("module");
+            var moduleid=document.getElementById(item).getAttribute("moduleid");
+            Swal.fire({
+                title: "از حذف بخش مورد نظر اطمینان دارید ؟",
+                text: "بخش حذف شده غیر قابل برگشت می باشد",
+                icon: "هشدار",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "بله حذف کن",
+                cancelButtonText:"انصراف"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "حذف شد",
+                        text: "بخش مورد نظر با موفقیت حذف شد",
+                        icon: "موفقیت"
+                    });
+                    window.location="/admin/delete-"+module+"/"+moduleid;
+                }
+            });
         }
 
     },

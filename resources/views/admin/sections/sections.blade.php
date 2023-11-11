@@ -80,16 +80,17 @@
                                                       </tr>
                                                     </thead>
                                                     <tbody>
+                                                    @php($i=1)
                                                     @foreach($sections as $section)
                                                         <tr>
 
-                                                            <td>{{$section['id']}}</td>
+                                                            <td>{{$i}}</td>
                                                             <td>{{$section['name']}}</td>
                                                             <td>
                                                                 @if($section['status'] ==1)
-                                                                    <i status="Active" section-id="{{$section['id']}}" id="section-{{$section['id']}}" ref="input" class="fa" :class="activeClass" v-on:click="changeSectionStatus('section-'+{{$section['id']}})" style="font-size:24px"></i>
+                                                                    <i status="Active" section-id="{{$section['id']}}" id="section-{{$section['id']}}"  ref="input" class=" fa" :class="activeClass" v-on:click="changeSectionStatus('section-'+{{$section['id']}})" style="font-size:24px"></i>
                                                                 @else
-                                                                    <i status="Deactive" section-id="{{$section['id']}}" id="section-{{$section['id']}}"  ref="input" class="fa" :class="deactiveClass" v-on:click="changeSectionStatus('section-'+{{$section['id']}})" style="font-size:24px"></i>
+                                                                    <i status="Deactive" section-id="{{$section['id']}}" id="section-{{$section['id']}}"  ref="input" class=" fa" :class="deactiveClass" v-on:click="changeSectionStatus('section-'+{{$section['id']}})" style="font-size:24px"></i>
                                                                 @endif
                                                             </td>
                                                             <td>
@@ -99,7 +100,10 @@
                                                                     <a href="{{url('admin/add-edit-section/'.$section['id'])}}" style="padding: 10px">
                                                                         <i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i>
                                                                     </a>
-                                                                    <a href="{{url('admin/delete-section/'.$section['id'])}}" style="padding: 10px">
+<!--                                                                    <a  href="{{url('admin/delete-section/'.$section['id'])}}" title="section" id="delete-{{$section['id']}}" v-on:click="confirmDelete('delete-'+{{$section['id']}})" style="padding: 10px">
+                                                                        <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
+                                                                    </a>-->
+                                                                    <a module="section" moduleid="{{$section['id']}}"  href="javascript:void(0)" title="section" id="delete-{{$section['id']}}" v-on:click="confirmDelete('delete-'+{{$section['id']}})" style="padding: 10px">
                                                                         <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
                                                                     </a>
                                                                 </a>
@@ -107,6 +111,7 @@
                                                             </td>
 
                                                         </tr>
+                                                        @php($i++)
                                                     @endforeach
                                                     </tbody>
                                                     <tfoot>

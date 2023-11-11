@@ -79,6 +79,8 @@
 <script src="{{url('admin/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
 <script src="{{url('admin/plugins/fastclick/fastclick.js')}}"></script>
+<!--sweet alert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 <script>

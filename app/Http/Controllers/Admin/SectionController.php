@@ -25,4 +25,11 @@ class SectionController extends Controller
         Section::where('id',$data['section_id'])->update(['status'=>$status]);
         return response()->json(['status'=>$status,'section_id',$data['section_id']]);
     }
+    public function deleteSection($id){
+        //Delete Section
+        Section::where('id',$id)->delete();
+        $message="بخش مورد نظر با موفقیت حذف شد !";
+        return redirect()->back()->with('success_message',$message);
+
+    }
 }
