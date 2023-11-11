@@ -25,7 +25,8 @@
                     <!-- left column -->
                     <div class="col-md-8">
                         <!-- general form elements -->
-                        <div class="card card-primary">
+                        <div class="card card-light">
+                            <a style="max-width: 150px;float: right;display: inline-block" href="{{url('admin/add-edit-section')}}" class="btn btn-block btn-primary">اضافه کردن بخش</a>
 
                             @if(Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
