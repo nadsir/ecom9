@@ -11,12 +11,14 @@ use Session;
 class SectionController extends Controller
 {
     public function sections(){
+        Session::put('page','sections');
         $sections=Section::get()->toArray();
         return view('admin.sections.sections')->with(compact('sections'));
 
 
     }
     public function updateSectionStatus(Request $request){
+        Session::put('page','sections');
         $data=$request->all();
         if ($data['status']=='Active'){
             $status=0;
