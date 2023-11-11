@@ -49,7 +49,31 @@ createApp({
                 .catch(function (error) {
                     alert(error);
                 });
-
+        },
+        //update section status
+        changeSectionStatus(item){
+            console.log(item)
+            var status=document.getElementById(item).getAttribute("status");
+            var section_id=document.getElementById(item).getAttribute("section-id");
+            axios.post('/admin/update-section-status',{
+                status:status,section_id:section_id
+            }).then(function (response) {
+                var data=document.getElementById(item).className;
+                if (data=='fa fa-toggle-on'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-on");
+                    element.classList.add('fa-toggle-off');
+                    element.setAttribute("status", "Deactive");
+                } else if (data=='fa fa-toggle-off'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-off");
+                    element.classList.add('fa-toggle-on');
+                    element.setAttribute("status", "Active");
+                }
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
         }
 
     },

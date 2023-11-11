@@ -67,8 +67,47 @@
 <script src="{{url('admin/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <!-- ChartJS 1.0.2 -->
 <script src="{{url('admin/plugins/chartjs-old/Chart.min.js')}}"></script>
-
+<!-- DataTables -->
+<link rel="stylesheet" href="{{url('admin/plugins/datatables/dataTables.bootstrap4.css')}}">
 <!-- PAGE SCRIPTS -->
 <script src="{{url('admin/dist/js/pages/dashboard2.js')}}"></script>
+
+<!-- DataTables -->
+<script src="{{url('admin/plugins/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{url('admin/plugins/datatables/dataTables.bootstrap4.js')}}"></script>
+<!-- SlimScroll -->
+<script src="{{url('admin/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
+<!-- FastClick -->
+<script src="{{url('admin/plugins/fastclick/fastclick.js')}}"></script>
+
+
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "language": {
+                "paginate": {
+                    "next": "بعدی",
+                    "previous" : "قبلی"
+                }
+            },
+            "info" : false,
+        });
+        $('#example2').DataTable({
+            "language": {
+                "paginate": {
+                    "next": "بعدی",
+                    "previous" : "قبلی"
+                }
+            },
+            "info" : false,
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "autoWidth": false
+        });
+    });
+</script>
+
 </body>
 </html>

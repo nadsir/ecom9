@@ -12,7 +12,8 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="https://secure.gravatar.com/avatar/5ffa2a1ffeb767c60ab7e1052e385d5c?s=52&d=mm&r=g" class="img-circle elevation-2" alt="User Image">
+                    <img src="https://secure.gravatar.com/avatar/5ffa2a1ffeb767c60ab7e1052e385d5c?s=52&d=mm&r=g"
+                         class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{Auth::guard('admin')->user()->name}}</a>
@@ -21,7 +22,8 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item has-treeview menu-open">
@@ -36,27 +38,31 @@
                     @if(Auth::guard('admin')->user()->type=="vendor")
                         <li class="nav-item has-treeview @if(Session::get('page')=='update_personal_details' || Session::get('page')=='update_business_details'  || Session::get('page')=='update_bank_details')menu-open @endif">
                             <a href="#" class="nav-link ">
-                                <i class="nav-icon fa fa-cogs" ></i>
+                                <i class="nav-icon fa fa-cogs"></i>
                                 <p>
-                                  تنظیمات فروشندگان
+                                    تنظیمات فروشندگان
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview" @if(Session::get('page')=='update_personal_details' || Session::get('page')=='update_business_details'  || Session::get('page')=='update_bank_details')style="display: block;" @endif>
+                            <ul class="nav nav-treeview"
+                                @if(Session::get('page')=='update_personal_details' || Session::get('page')=='update_business_details'  || Session::get('page')=='update_bank_details')style="display: block;" @endif>
                                 <li class="nav-item">
-                                    <a href="{{url('admin/update-vendor-details/personal')}}" class="nav-link  @if(Session::get('page')=='update_personal_details')active @endif">
+                                    <a href="{{url('admin/update-vendor-details/personal')}}"
+                                       class="nav-link  @if(Session::get('page')=='update_personal_details')active @endif">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>اطلاعات شخصی</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('admin/update-vendor-details/business')}}" class="nav-link @if(Session::get('page')=='update_business_details')active @endif">
+                                    <a href="{{url('admin/update-vendor-details/business')}}"
+                                       class="nav-link @if(Session::get('page')=='update_business_details')active @endif">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>اطلاعات کاری</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('admin/update-vendor-details/bank')}}" class="nav-link @if(Session::get('page')=='update_bank_details')active @endif">
+                                    <a href="{{url('admin/update-vendor-details/bank')}}"
+                                       class="nav-link @if(Session::get('page')=='update_bank_details')active @endif">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>اطلاعات بانکی</p>
                                     </a>
@@ -64,91 +70,128 @@
                             </ul>
                         </li>
                     @else
-                    <li class="nav-item has-treeview @if(Session::get('page')=='update-admin-password' || Session::get('page')=='update-admin-details')menu-open @endif">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon fa fa-cogs" ></i>
-                            <p>
-                                تنظیمات
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview" @if(Session::get('page')=='update-admin-password' || Session::get('page')=='update-admin-details')style="display: block;" @endif>
-                            <li class="nav-item">
-                                <a href="{{url('admin/update-admin-password')}}" class="nav-link @if(Session::get('page')=='update-admin-password')active @endif" >
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>بروز رسانی کلمه عبور ادمین</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{url('admin/update-admin-details')}}" class="nav-link  @if(Session::get('page')=='update-admin-details')active @endif">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>بروز رسانی پروفایل ادمین</p>
-                                </a>
-                            </li>
+                        <li class="nav-item has-treeview @if(Session::get('page')=='update-admin-password' || Session::get('page')=='update-admin-details')menu-open @endif">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fa fa-cogs"></i>
+                                <p>
+                                    تنظیمات
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview"
+                                @if(Session::get('page')=='update-admin-password' || Session::get('page')=='update-admin-details')style="display: block;" @endif>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/update-admin-password')}}"
+                                       class="nav-link @if(Session::get('page')=='update-admin-password')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>بروز رسانی کلمه عبور ادمین</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/update-admin-details')}}"
+                                       class="nav-link  @if(Session::get('page')=='update-admin-details')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>بروز رسانی پروفایل ادمین</p>
+                                    </a>
+                                </li>
 
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
 
-                    <li class="nav-item has-treeview @if(Session::get('page')=='view_admins' || Session::get('page')=='view_subadmins'|| Session::get('page')=='view_vendors'|| Session::get('page')=='view_all')menu-open @endif">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon  fa fa-lock" ></i>
-                            <p>
-                                مدیرت ادمینها
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview" @if(Session::get('page')=='view_admins' || Session::get('page')=='view_subadmins'|| Session::get('page')=='view_vendors'|| Session::get('page')=='view_all')style="display: block;" @endif>
-                            <li class="nav-item">
-                                <a href="{{url('admin/admins/admin')}}" class="nav-link @if(Session::get('page')=='view_admins')active @endif" >
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>مدیران ارشد</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{url('admin/admins/subadmin')}}" class="nav-link @if(Session::get('page')=='view_subadmins')active @endif">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>مدیران</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{url('admin/admins/vendor')}}" class="nav-link @if(Session::get('page')=='view_vendors')active @endif">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>فروشندگان</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{url('admin/admins')}}" class="nav-link @if(Session::get('page')=='view_all')active @endif">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>کلیه مدیران</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <li class="nav-item has-treeview @if(Session::get('page')=='view_admins' || Session::get('page')=='view_subadmins'|| Session::get('page')=='view_vendors'|| Session::get('page')=='view_all')menu-open @endif">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon  fa fa-lock"></i>
+                                <p>
+                                    مدیرت ادمینها
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview"
+                                @if(Session::get('page')=='view_admins' || Session::get('page')=='view_subadmins'|| Session::get('page')=='view_vendors'|| Session::get('page')=='view_all')style="display: block;" @endif>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/admins/admin')}}"
+                                       class="nav-link @if(Session::get('page')=='view_admins')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>مدیران ارشد</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/admins/subadmin')}}"
+                                       class="nav-link @if(Session::get('page')=='view_subadmins')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>مدیران</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/admins/vendor')}}"
+                                       class="nav-link @if(Session::get('page')=='view_vendors')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>فروشندگان</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/admins')}}"
+                                       class="nav-link @if(Session::get('page')=='view_all')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>کلیه مدیران</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview @if(Session::get('page')=='sections' || Session::get('page')=='categories'|| Session::get('page')=='products')menu-open @endif">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon  fa fa-lock"></i>
+                                <p>
+                                    مدیرت فهرست ها
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview"
+                                @if(Session::get('page')=='sections' || Session::get('page')=='categories'|| Session::get('page')=='products')style="display: block;" @endif>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/sections')}}" class="nav-link @if(Session::get('page')=='sections')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p> بخش ها</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/categories')}}" class="nav-link @if(Session::get('page')=='categories')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>دسته بندی ها</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/products')}}" class="nav-link @if(Session::get('page')=='products')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>محصولات</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon  fa fa-lock"></i>
+                                <p>
+                                    مدیرت کاربران
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{url('admin/users')}}" class="nav-link">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p> کاربران</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/subscribers')}}" class="nav-link ">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>امضا کننده</p>
+                                    </a>
+                                </li>
 
-                    <li class="nav-item has-treeview ">
-                        <a href="#" class="nav-link ">
-                            <i class="nav-icon  fa fa-lock" ></i>
-                            <p>
-                                مدیرت کاربران
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{url('admin/users')}}" class="nav-link">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p> کاربران</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{url('admin/subscribers')}}" class="nav-link ">
-                                    <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>امضا کننده</p>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
                     @endif
 
                     <li class="nav-item">
@@ -419,7 +462,9 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{url('admin/logout')}}" class="nav-link">
-                            <button type="button" class="btn btn-block btn-warning"> <i class="fa fa-sign-out" style="font-size:24px"></i>خروج</button>
+                            <button type="button" class="btn btn-block btn-warning"><i class="fa fa-sign-out"
+                                                                                       style="font-size:24px"></i>خروج
+                            </button>
                         </a>
                     </li>
 

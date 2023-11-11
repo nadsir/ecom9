@@ -53,6 +53,10 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('/update-admin-status','AdminController@updateAdminStatus');
         //update vendor details
         Route::match(['get','post'],'update-vendor-details/{slug}','AdminController@updateVendorDetails');
+        //Sections
+        Route::get('sections','SectionController@sections');
+        //update section status
+        Route::post('/update-section-status','SectionController@updateSectionStatus');
     });
 
 });
