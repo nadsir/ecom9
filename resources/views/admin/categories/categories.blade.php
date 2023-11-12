@@ -26,7 +26,7 @@
                     <div class="col-md-10">
                         <!-- general form elements -->
                         <div class="card card-light">
-                            <a style="max-width: 200px;float: right;display: inline-block" href="{{url('admin/add-edit-section')}}" class="btn btn-block btn-primary">اضافه کردن دسته بندی</a>
+                            <a style="max-width: 200px;float: right;display: inline-block" href="{{url('admin/add-edit-category')}}" class="btn btn-block btn-primary">اضافه کردن دسته بندی</a>
 
                             @if(Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
