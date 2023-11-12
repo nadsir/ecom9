@@ -70,24 +70,26 @@
                                     <div class="form-group">
                                         <label for="category_name">نام دسته بندی</label>
                                         <input type="text" class="form-control" id="category_name" placeholder=""
-                                               @if(!empty($category['name'])) value="{{$category['name']}}" @else value="{{old('category_name')}}" @endif
+                                               @if(!empty($category['category_name'])) value="{{$category['category_name']}}" @else value="{{old('category_name')}}" @endif
                                                 name="category_name">
                                     </div>
                                     <div class="form-group">
                                         <label for="section_id">نام بخش</label>
-                                        <select name="section_id" id="section_id" class="form-control">
+                                        <select v-on:change="selectCategory('section_id')" name="section_id" id="section_id" class="form-control">
                                             <option value="">انتخاب بخش</option>
                                             @foreach($getSections as $section)
-                                                <option value="{{$section['id']}}">{{$section['name']}}</option>
+                                                <option
+                                                    @if(!empty($category['section']) && $category['section_id']==$section['id'])
+                                                        selected=""
+                                                    @endif
+                                                    value="{{$section['id']}}">{{$section['name']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="parent_id">انتخاب سطح دسته بندی</label>
-                                        <select name="parent_id" id="parent_id" class="form-control">
-                                            <option value="0">دسته بندی اصلی</option>
 
-                                        </select>
+                                    <div id="appendCategoriesLevel">
+                                        @include('admin.categories.append_categories_level')
+
                                     </div>
                                     <div class="form-group">
                                         <label for="admin-image">عکس دسته بندی</label>

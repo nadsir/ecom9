@@ -136,6 +136,20 @@ createApp({
                     window.location="/admin/delete-"+module+"/"+moduleid;
                 }
             });
+        },
+
+        selectCategory(item){
+            var section_id=document.getElementById(item).value;
+            axios.post('/admin/append-categories-level',{
+                section_id:section_id
+            }).then(function (response) {
+
+                var element = document.getElementById('appendCategoriesLevel');
+                element.innerHTML=response.data;
+
+            }).catch(function (error) {
+                    alert(error);
+                });
         }
 
     },

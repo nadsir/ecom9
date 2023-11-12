@@ -33,15 +33,21 @@ class CategoryController extends Controller
            //Add Category
            $title="Add Category";
            $category=new Category;
+           $getCategories=array();
            $message="دسته بندی با موفقیت اضافه شد";
        }else{
            //Edit Category
            $title="Edit Category";
-           $category=find($id);
+           $category=Category::find($id);
+           $getCategories=Category::with('subcategories')->where(['parent_id'=>0,'section_id'=>$category['section_id']])->get();
            $message="دسته بندی با موفقیت بروزرسانی شد";
        }
        if ($request->isMethod('post')){
            $data=$request->all();
+           if ($data['category_discount']==""){
+               $data['category_discount']==0;
+           }
+
            //Upload Category Image
            if ($request->hasFile('category_image')){
                $image_temp=$request->file('category_image');
@@ -79,7 +85,15 @@ class CategoryController extends Controller
        }
        //Get all sections
         $getSections=Section::get()->toArray();
-       return view('admin.categories.add_edit_category')->with(compact('title','category','getSections'));
+       return view('admin.categories.add_edit_category')->with(compact('title','category','getSections','getCategories'));
+
+    }
+    public function appendCategoriesLevel(Request $request){
+       $data=$request->all();
+
+       $getCategories=Category::with('subcategories')->where(['parent_id'=>0,'section_id'=>$data['section_id']])->get()->toArray();
+
+       return view('admin.categories.append_categories_level')->with(compact('getCategories'));
 
     }
 }
