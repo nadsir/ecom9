@@ -101,7 +101,15 @@
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="">Upload</span>
                                             </div>
+
                                         </div>
+                                        @if(!empty($category['category_image']))
+
+                                            <a target="_blank" href="{{url('front/images/category_images/'.$category['category_image'])}}"> نمای عکس</a>&nbsp;|&nbsp;
+                                            <a module="category-image" moduleid="{{$category['id']}}"  href="javascript:void(0)" title="category" id="delete-{{$category['id']}}" v-on:click="confirmDelete('delete-'+{{$category['id']}})" style="padding: 10px">
+                                                حذف</a>
+
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <label for="category_discount">تخفیف دسته بندی</label>

@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Session;
-
+use Image;
 class CategoryController extends Controller
 {
    public function categories(){
@@ -77,7 +77,7 @@ class CategoryController extends Controller
                    $extension=$image_temp->getClientOriginalExtension();
                    //Generate New Image Name
                    $imageName=rand(111,99999).'.'.$extension;
-                   $imagePath='admin/images/photos/'.$imageName;
+                   $imagePath='front/images/category_images/'.$imageName;
                    //Upload the Image
                    Image::make($image_temp)->save($imagePath);
                    $category->category_image=$imageName;
@@ -115,6 +115,30 @@ class CategoryController extends Controller
        $getCategories=Category::with('subcategories')->where(['parent_id'=>0,'section_id'=>$data['section_id']])->get()->toArray();
 
        return view('admin.categories.append_categories_level')->with(compact('getCategories'));
+
+    }
+    public function deleteCategory($id){
+
+       //Delete Category
+        Category::where('id',$id)->delete();
+        $message="دسته بندی با موفقیت حذف شد";
+        return redirect()->back()->with('success_message',$message);
+
+    }
+    public function deleteCategoryImage($id){
+        Session::put('page','categories');
+       //Get Category Image
+        $categoryImage=Category::select('category_image')->where('id',$id)->first();
+        //Get Category Image Path
+        $category_image_pat='front/images/category_images/';
+        //Delete Category Image from category_images folder if exist
+        if (file_exists($category_image_pat.$categoryImage->category_image)){
+            unlink($category_image_pat.$categoryImage->category_image);
+        }
+        //Delete Category image form categories folder
+        Category::where('id',$id)->update(['category_image'=>'']);
+        $message="بروزرسانی دسته عکس بندی با موفقیت انجام شد";
+        return redirect()->back()->with('success_message',$message);
 
     }
 }
