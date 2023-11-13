@@ -7,7 +7,7 @@
         @if(!empty($getCategories))
             @foreach($getCategories as $parentcategory)
                 <option value="{{$parentcategory['id']}}"
-                        @if(isset($parentcategory['parent_id'])&& $category['parent_id']==$parentcategory['id'])
+                        @if(isset($category['parent_id'])&& $category['parent_id']==$parentcategory['id'])
                         selected="" @endif>{{$parentcategory['category_name']}}</option>
                 @if(!empty($parentcategory['subcategories']))
                     @foreach($parentcategory['subcategories'] as $subcategory)

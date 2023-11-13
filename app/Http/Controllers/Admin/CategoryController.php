@@ -44,8 +44,29 @@ class CategoryController extends Controller
        }
        if ($request->isMethod('post')){
            $data=$request->all();
+
+           $rules=[
+               'category_name'=>'required|regex:/^[\pL\s\-]+$/u',
+               'section_id'=>'required',
+               'url'=>'required',
+           ];
+           $customMessages = [
+               'category_name.required' => 'فیلد نام دسته بندی اجباری می باشد',
+               'category_name.regex' => 'فیلد نام دسته بندی باید مجاز باشد',
+               'section_id.required' => 'فیلد بخش اجباری می باشد',
+               'url.required' => 'فیلد آدرس دسته بندی اجباری می باشد',
+
+
+
+
+           ];
+           $this->validate($request,$rules,$customMessages);
+
            if ($data['category_discount']==""){
-               $data['category_discount']==0;
+               $data['category_discount']=0;
+           }
+           if ($data['description']==""){
+               $data['description']=="";
            }
 
            //Upload Category Image
