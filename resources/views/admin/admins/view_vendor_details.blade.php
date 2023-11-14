@@ -46,8 +46,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="vendor_name">نام</label>
+<!--                                            <input type="text" class="form-control" id="vendor_name" placeholder=""
+                                                   value="{{Auth::guard('admin')->user()->name}}" name="vendor_name" readonly="">-->
                                             <input type="text" class="form-control" id="vendor_name" placeholder=""
-                                                   value="{{Auth::guard('admin')->user()->name}}" name="vendor_name" readonly="">
+                                                   value="{{$vendorDetails['vendor_personal']['name']}}" name="vendor_name" readonly="">
                                         </div>
                                         <div class="form-group">
                                             <label for="vendor_address">آدرس</label>
@@ -117,8 +119,10 @@
 
                                     <div class="form-group">
                                         <label for="vendor_name">نام محل کسب</label>
+<!--                                        <input type="text" class="form-control" id="vendor_name" placeholder=""
+                                               value="{{Auth::guard('admin')->user()->name}}" name="vendor_name" readonly="">-->
                                         <input type="text" class="form-control" id="vendor_name" placeholder=""
-                                               value="{{Auth::guard('admin')->user()->name}}" name="vendor_name" readonly="">
+                                               value="{{$vendorDetails['vendor_business']['shop_name']}}" name="vendor_name" readonly="">
                                     </div>
                                     <div class="form-group">
                                         <label for="vendor_address">آدرس محل کسب</label>

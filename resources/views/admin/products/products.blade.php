@@ -79,6 +79,9 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">  نام محصول</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">کد محصول</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">رنگ محصول</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">دسته بندی</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">بخش</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">اضافه شده توسط</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">وضعیت</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 117.017px;" aria-label="جزئیات: activate to sort column ascending">جزئیات</th>
                                                 </tr>
@@ -94,6 +97,16 @@
                                                         <td>{{$product['product_name']}}</td>
                                                         <td>{{$product['product_code']}}</td>
                                                         <td>{{$product['product_color']}}</td>
+                                                        <td>{{$product['category']['category_name']}}</td>
+                                                        <td>{{$product['section']['name']}}</td>
+                                                        <td>
+                                                            @if($product['admin_type']=="vendor")
+                                                                <a target="_blank" href="{{url('admin/view-vendor-details/'.$product['admin_id'])}}">{{ucfirst($product['admin_type'])}}</a>
+                                                            @else
+                                                                {{ucfirst($product['admin_type'])}}
+                                                            @endif
+
+                                                        </td>
 
                                                         <td>
                                                             @if($product['status'] ==1)
