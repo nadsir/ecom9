@@ -76,7 +76,6 @@ createApp({
                 });
         },
         //update category status
-
         changeCategoryStatus(item){
             console.log(item)
             var status=document.getElementById(item).getAttribute("status");
@@ -101,6 +100,32 @@ createApp({
                     alert(error);
                 });
         },
+        //update brand status
+        changeBrandStatus(item){
+            console.log(item)
+            var status=document.getElementById(item).getAttribute("status");
+            var brand_id=document.getElementById(item).getAttribute("brand-id");
+            axios.post('/admin/update-brand-status',{
+                status:status,brand_id:brand_id
+            }).then(function (response) {
+                var data=document.getElementById(item).className;
+                if (data=='fa fa-toggle-on'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-on");
+                    element.classList.add('fa-toggle-off');
+                    element.setAttribute("status", "Deactive");
+                } else if (data=='fa fa-toggle-off'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-off");
+                    element.classList.add('fa-toggle-on');
+                    element.setAttribute("status", "Active");
+                }
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
+        },
+
         //Confirm Delete
         /*confirmDelete(item){
             var title=document.getElementById(item).getAttribute("title");
