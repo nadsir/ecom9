@@ -125,7 +125,31 @@ createApp({
                     alert(error);
                 });
         },
-
+        //update product status changeProductStatus
+        changeProductStatus(item){
+            console.log(item)
+            var status=document.getElementById(item).getAttribute("status");
+            var product_id=document.getElementById(item).getAttribute("product-id");
+            axios.post('/admin/update-product-status',{
+                status:status,product_id:product_id
+            }).then(function (response) {
+                var data=document.getElementById(item).className;
+                if (data=='fa fa-toggle-on'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-on");
+                    element.classList.add('fa-toggle-off');
+                    element.setAttribute("status", "Deactive");
+                } else if (data=='fa fa-toggle-off'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-off");
+                    element.classList.add('fa-toggle-on');
+                    element.setAttribute("status", "Active");
+                }
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
+        },
         //Confirm Delete
         /*confirmDelete(item){
             var title=document.getElementById(item).getAttribute("title");
