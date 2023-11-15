@@ -112,7 +112,9 @@ class   AdminController extends Controller
 
                 }
                 else if (!empty($data['current_address_proof'])){$imageName=$data['current_address_proof'];}
-                else {$imageName='';}
+                else {
+                    $imageName='';
+                }
 
 
                 //Update in vendors_business_details table

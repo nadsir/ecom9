@@ -79,6 +79,7 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">  نام محصول</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">کد محصول</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">رنگ محصول</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">عکس محصول</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">دسته بندی</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">بخش</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">اضافه شده توسط</th>
@@ -97,6 +98,14 @@
                                                         <td>{{$product['product_name']}}</td>
                                                         <td>{{$product['product_code']}}</td>
                                                         <td>{{$product['product_color']}}</td>
+                                                        <td>
+                                                            @if(!empty($product['product_image']))
+                                                                <img class="rounded-circle" width="100" height="100" src="{{asset('front/images/product_images/small/'.$product['product_image'])}}" alt="">
+                                                            @else
+                                                                <img class="rounded-circle" width="100" height="100" src="{{asset('front/images/product_images/small/no-image.png')}}" alt="">
+
+                                                            @endif
+                                                        </td>
                                                         <td>{{$product['category']['category_name']}}</td>
                                                         <td>{{$product['section']['name']}}</td>
                                                         <td>

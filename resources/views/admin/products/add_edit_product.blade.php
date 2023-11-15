@@ -139,7 +139,7 @@
                                                name="product_weight">
                                     </div>
                                     <div class="form-group">
-                                        <label for="admin-image">عکس محصول</label>
+                                        <label for="product_image"> عکس محصول (سایز پیشنهادی 1000*1000 )</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="product_image" name="product_image">
@@ -159,7 +159,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label for="admin-image">ویدیو محصول</label>
+                                        <label for="admin-image">ویدیو محصول (سایز پیشنهادی کمتر از 2 مگابایت )</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="product_video" name="product_video">
