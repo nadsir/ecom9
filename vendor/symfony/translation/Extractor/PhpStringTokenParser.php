@@ -31,7 +31,7 @@ namespace Symfony\Component\Translation\Extractor;
  *       with the distribution.
  *
  *     * The names of the contributors may not be used to endorse or
- *       promote products derived from this software without specific
+ *       promote product_images derived from this software without specific
  *       prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
