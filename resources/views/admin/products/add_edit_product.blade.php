@@ -62,7 +62,7 @@
                         <!-- /.card-header -->
                             <!-- form start -->
                             <form role="form" @if(empty($product['id'])) action="{{url('admin/add-edit-product')}}"
-                                  @else action="{{url('admin/add-edit-cproduct/'.$product['id'])}}" @endif
+                                  @else action="{{url('admin/add-edit-product/'.$product['id'])}}" @endif
                                   method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
@@ -74,12 +74,12 @@
                                                 <optgroup label="{{$section['name']}}" style="background-color: #c5c5c5"></optgroup>
                                                 <hr>
                                                 @foreach($section['categories'] as $category)
-                                                    <option value="{{$category['category_name']}}" style="background-color: #e5e5e5">
+                                                    <option value="{{$category['id']}}" style="background-color: #e5e5e5">
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;
                                                         {{$category['category_name']}}
                                                     </option>
                                                     @foreach($category['subcategories'] as $subcategory)
-                                                        <option value="{{$subcategory['category_name']}}">
+                                                        <option value="{{$subcategory['id']}}">
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;
                                                             {{$subcategory['category_name']}}
@@ -94,17 +94,19 @@
                                         <label for="brand_id">انتخاب برند</label>
                                         <select  name="brand_id" id="brand_id" class="form-control">
                                             <option value="">انتخاب بخش</option>
-                                            @foreach($brands as $brand)
-                                                <options value="{{$brand['id']}}" style="background-color: #c5c5c5">{{$brand['name']}}</options>
+
+                                            @foreach($brandss as $brands)
+
+                                                <option value="{{$brands['id']}}" >{{$brands['name']}}</option>
                                             @endforeach
 
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="category_name">نام دسته بندی</label>
-                                        <input type="text" class="form-control" id="category_name" placeholder=""
+                                        <label for="category_name">نام محصول</label>
+                                        <input type="text" class="form-control" id="product_name" placeholder=""
                                                @if(!empty($product['product_name'])) value="{{$product['product_name']}}" @else value="{{old('product_name')}}" @endif
-                                               name="category_name">
+                                               name="product_name">
                                     </div>
                                     <div class="form-group">
                                         <label for="product_code">کد محصول</label>

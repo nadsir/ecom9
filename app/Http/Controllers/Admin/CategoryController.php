@@ -55,10 +55,6 @@ class CategoryController extends Controller
                'category_name.regex' => 'فیلد نام دسته بندی باید مجاز باشد',
                'section_id.required' => 'فیلد بخش اجباری می باشد',
                'url.required' => 'فیلد آدرس دسته بندی اجباری می باشد',
-
-
-
-
            ];
            $this->validate($request,$rules,$customMessages);
 

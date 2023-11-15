@@ -147,7 +147,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview"
-                                @if(Session::get('page')=='sections' || Session::get('page')=='categories'|| Session::get('page')=='product_images'|| Session::get('page')=='brands')style="display: block;" @endif>
+                                @if(Session::get('page')=='sections' || Session::get('page')=='categories'|| Session::get('page')=='products'|| Session::get('page')=='brands')style="display: block;" @endif>
                                 <li class="nav-item">
                                     <a href="{{url('admin/sections')}}" class="nav-link @if(Session::get('page')=='sections')active @endif">
                                         <i class="fa fa-circle-o nav-icon"></i>
@@ -167,7 +167,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{url('admin/product_images')}}" class="nav-link @if(Session::get('page')=='product_images')active @endif">
+                                    <a href="{{url('admin/products')}}" class="nav-link @if(Session::get('page')=='products')active @endif">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>محصولات</p>
                                     </a>
