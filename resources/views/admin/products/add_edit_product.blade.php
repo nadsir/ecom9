@@ -74,12 +74,12 @@
                                                 <optgroup label="{{$section['name']}}" style="background-color: #c5c5c5"></optgroup>
                                                 <hr>
                                                 @foreach($section['categories'] as $category)
-                                                    <option value="{{$category['id']}}" style="background-color: #e5e5e5">
+                                                    <option @if(!empty($product['category_id']) && $product['category_id']==$category['id']) selected="" @endif value="{{$category['id']}}" style="background-color: #e5e5e5">
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;
                                                         {{$category['category_name']}}
                                                     </option>
                                                     @foreach($category['subcategories'] as $subcategory)
-                                                        <option value="{{$subcategory['id']}}">
+                                                        <option @if(!empty($product['category_id']) && $product['category_id']==$subcategory['id']) selected="" @endif value="{{$subcategory['id']}}">
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;
                                                             {{$subcategory['category_name']}}
@@ -97,7 +97,7 @@
 
                                             @foreach($brandss as $brands)
 
-                                                <option value="{{$brands['id']}}" >{{$brands['name']}}</option>
+                                                <option @if(!empty($product['brand_id']) && $product['brand_id']==$brands['id']) selected="" @endif value="{{$brands['id']}}" >{{$brands['name']}}</option>
                                             @endforeach
 
                                         </select>
@@ -152,7 +152,7 @@
                                         </div>
                                         @if(!empty($product['product_image']))
 
-                                            <a target="_blank" href="{{url('front/images/product_images/'.$product['product_image'])}}"> نمای عکس</a>&nbsp;|&nbsp;
+                                            <a target="_blank" href="{{url('front/images/product_images/large/'.$product['product_image'])}}"> نمای عکس</a>&nbsp;|&nbsp;
                                             <a module="product-image" moduleid="{{$product['id']}}"  href="javascript:void(0)" title="product" id="delete-{{$product['id']}}" v-on:click="confirmDelete('delete-'+{{$product['id']}})" style="padding: 10px">
                                                 حذف</a>
 
@@ -172,7 +172,7 @@
                                         </div>
                                         @if(!empty($product['product_video']))
 
-                                            <a target="_blank" href="{{url('front/images/product_video/'.$product['product_video'])}}"> نمای ویدیو</a>&nbsp;|&nbsp;
+                                            <a target="_blank" href="{{url('front/videos/product_videos/'.$product['product_video'])}}"> نمای ویدیو</a>&nbsp;|&nbsp;
                                             <a module="product-video" moduleid="{{$product['id']}}"  href="javascript:void(0)" title="product" id="delete-{{$product['id']}}" v-on:click="confirmDelete('delete-'+{{$product['id']}})" style="padding: 10px">
                                                 حذف</a>
 
@@ -181,7 +181,9 @@
 
                                     <div class="form-group">
                                         <label for="description">توضیحات دسته بندی</label>
-                                        <textarea id="description" name="description" class="form-control" id="" cols="30" rows="3"></textarea>
+                                        <textarea id="description" name="description" class="form-control" id="" cols="30" rows="3"
+                                                  @if(!empty($product['description'])) value="{{$product['description']}}" @else value="{{old('description')}}" @endif
+                                        ></textarea>
                                     </div>
 
                                     <div class="form-group">

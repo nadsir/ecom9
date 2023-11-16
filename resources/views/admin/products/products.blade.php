@@ -83,8 +83,8 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">دسته بندی</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">بخش</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">اضافه شده توسط</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">وضعیت</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 117.017px;" aria-label="جزئیات: activate to sort column ascending">جزئیات</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="وضعیت: activate to sort column ascending">وضعیت</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="جزئیات: activate to sort column ascending">جزئیات</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -126,7 +126,6 @@
                                                         </td>
                                                         <td>
 
-                                                            <a href="">
 
                                                                 <a href="{{url('admin/add-edit-product/'.$product['id'])}}" style="padding: 10px">
                                                                     <i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i>
@@ -137,7 +136,6 @@
                                                                 <a module="product" moduleid="{{$product['id']}}"  href="javascript:void(0)" title="product" id="delete-{{$product['id']}}" v-on:click="confirmDelete('delete-'+{{$product['id']}})" style="padding: 10px">
                                                                     <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
                                                                 </a>
-                                                            </a>
 
                                                         </td>
 

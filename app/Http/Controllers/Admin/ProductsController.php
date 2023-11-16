@@ -56,7 +56,8 @@ class ProductsController extends Controller
 
         }else{
             $title="اصلاح محصول";
-
+            $product=Product::find($id);
+            $message='محصول مورد نظر با موفقیت بروز رسانی شد';
 
         }
         if ($request->isMethod('post')){
@@ -178,7 +179,48 @@ class ProductsController extends Controller
 
 
 
-        return view('admin.products.add_edit_product')->with(compact('title','categories','brandss'));
+        return view('admin.products.add_edit_product')->with(compact('title','categories','brandss','product'));
+
+
+    }
+    public function deleteProductImage($id){
+        //Get product image
+        $productImage=Product::select('product_image')->where('id',$id)->first();
+        //Get Product Image Path
+        $small_image_path='front/images/product_images/small/';
+        $medium_image_path='front/images/product_images/medium/';
+        $large_image_path='front/images/product_images/large/';
+        //Delete Product small image if exists in small folder
+        if (file_exists($small_image_path.$productImage->product_image)){
+            unlink($small_image_path.$productImage->product_image);
+        }
+        //Delete Product medium image if exists in medium folder
+        if (file_exists($medium_image_path.$productImage->product_image)){
+            unlink($medium_image_path.$productImage->product_image);
+        }
+        //Delete Product large image if exists in large folder
+        if (file_exists($large_image_path.$productImage->product_image)){
+            unlink($large_image_path.$productImage->product_image);
+        }
+        //Delete Product image from products table
+        Product::where('id',$id)->update(['product_image'=>'']);
+        $message=" عکس محصول با موفقیت حذف شد";
+        return redirect()->back()->with('success_message',$message);
+    }
+    public function deleteProductVideo($id){
+        //Get Product Video
+        $productVideo=Product::select('product_video')->where('id',$id)->first();
+        //Get Product video path
+        $product_video_path='front/videos/product_videos/';
+        //Delete Product Video from product_videos folder if exists
+        if (file_exists($product_video_path.$productVideo->product_video)){
+            unlink($product_video_path.$productVideo->product_video);
+
+        }
+        //Delete Prodcut video Image form products table
+        Product::where('id',$id)->update(['product_video'=>'']);
+        $message=" ویدیو محصول با موفقیت حذف شد";
+        return redirect()->back()->with('success_message',$message);
 
 
     }
