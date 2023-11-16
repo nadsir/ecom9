@@ -23,9 +23,7 @@ class ProductsController extends Controller
         },'category'=>function($query){
             $query->select('id','category_name');
         }])->get()->toArray();
-
         return view('admin.products.products')->with(compact('products'));
-
     }
     public function updateProductStatus(Request $request){
         Session::put('page','products');
@@ -44,7 +42,6 @@ class ProductsController extends Controller
         Product::where('id',$id)->delete();
         $message="محصول با موفقیت حذف شد";
         return redirect()->back()->with('success_message',$message);
-
     }
     public function addEditProduct(Request $request,$id=null){
         Session::put('page','products');
@@ -52,13 +49,10 @@ class ProductsController extends Controller
             $title="اضافه کردن محصول";
             $product=new Product;
             $message='محصول مورد نظر با موفقیت درج شد';
-
-
         }else{
             $title="اصلاح محصول";
             $product=Product::find($id);
             $message='محصول مورد نظر با موفقیت بروز رسانی شد';
-
         }
         if ($request->isMethod('post')){
             $data=$request->all();
@@ -69,7 +63,6 @@ class ProductsController extends Controller
                 'product_code'=>'required',
                 'product_price'=>'required|numeric',
                 'product_color'=>'required|regex:/^[\pL\s\-]+$/u',
-
             ];
             $customMessages = [
                 'category_id.required' => 'فیلد  دسته بندی اجباری می باشد',
@@ -81,14 +74,12 @@ class ProductsController extends Controller
                 'product_price.regex' => 'فیلد قیمت محصول باید مجاز باشد',
                 'product_color.required' => 'فیلد رنگ محصول اجباری باشد',
                 'product_color.regex' => 'فیلد رنگ محصول باید مجاز باشد',
-
             ];
             $this->validate($request,$rules,$customMessages);
             //Upload Product Image
             //small:250*250
             //medium:500*500
             //large:1000*1000
-
             if ($request->hasFile('product_image')){
                 $image_temp=$request->file('product_image');
                 if ($image_temp->isValid()){
@@ -163,25 +154,12 @@ class ProductsController extends Controller
             $product->status=1;
             $product->save();
             return redirect('admin/products')->with('success_message',$message);
-
-
-
-
         }
-
-
-
-
         //Get Sections with Categories and sub categories
         $categories=Section::with('categories')->get()->toArray();
         //Get All Brands
         $brandss=Brand::where('status',1)->get()->toArray();
-
-
-
         return view('admin.products.add_edit_product')->with(compact('title','categories','brandss','product'));
-
-
     }
     public function deleteProductImage($id){
         //Get product image
@@ -221,7 +199,5 @@ class ProductsController extends Controller
         Product::where('id',$id)->update(['product_video'=>'']);
         $message=" ویدیو محصول با موفقیت حذف شد";
         return redirect()->back()->with('success_message',$message);
-
-
     }
 }
