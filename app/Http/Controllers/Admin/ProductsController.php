@@ -200,4 +200,16 @@ class ProductsController extends Controller
         $message=" ویدیو محصول با موفقیت حذف شد";
         return redirect()->back()->with('success_message',$message);
     }
+    public function addAttibures(Request $request,$id){
+
+        $product=Product::find($id);
+        if ($request->isMethod('post')){
+            $data=$request->all();
+            dd($data);
+        }
+
+        return view('admin.attributes.add_edit_attributes')->with(compact('product'));
+
+    }
+
 }

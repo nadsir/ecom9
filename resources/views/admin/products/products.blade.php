@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-light">
                             <a style="max-width: 200px;float: right;display: inline-block" href="{{url('admin/add-edit-product')}}" class="btn btn-block btn-primary">اضافه کردن محصول</a>
@@ -136,6 +136,9 @@
                                                                 <a module="product" moduleid="{{$product['id']}}"  href="javascript:void(0)" title="product" id="delete-{{$product['id']}}" v-on:click="confirmDelete('delete-'+{{$product['id']}})" style="padding: 10px">
                                                                     <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
                                                                 </a>
+                                                            <a href="{{url('admin/add-attributes/'.$product['id'])}}" style="padding: 10px">
+                                                                <i class="fa fa-plus-circle" style="font-size:24px;color:darkslateblue"></i>
+                                                            </a>
 
                                                         </td>
 
