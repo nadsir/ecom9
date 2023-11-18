@@ -269,6 +269,20 @@ class ProductsController extends Controller
         }
 
     }
+    public function addImages(Request $request,$id){
+        Session::put('page','products');
+        $product=Product::select('id','product_name','product_code','product_color','product_price','product_image')->with('images')->find($id);
+        if($request->isMethod('post')){
+            if ($request->hasFile('images')){
+                $images=$request->file('images');
+
+            }
+
+        }
+
+        return view('admin.images.add_images')->with(compact('product'));
+
+    }
 
 }
 
