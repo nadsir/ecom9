@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\ProductsImage;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -275,14 +276,79 @@ class ProductsController extends Controller
         if($request->isMethod('post')){
             if ($request->hasFile('images')){
                 $images=$request->file('images');
+                foreach ($images as $key=>$image)
+                {
+                    //generate Temp Image
+                    $image_tmp=Image::make($image);
+                    //Get Image name
+                    $image_name=$image->getClientOriginalName();
+                    //Get Image Extension
+                    $extension=$image->getClientOriginalExtension();
+                    //Generate New Image Name
+                    $imageName=$image_name.rand(111,99999).'.'.$extension;
+                    $largeImagePath='front/images/product_images/large/'.$imageName;
+                    $mediumImagePath='front/images/product_images/medium/'.$imageName;
+                    $smallImagePath='front/images/product_images/small/'.$imageName;
+                    //Upload the Large,medium and small Image
+                    Image::make($image_tmp)->resize(1000,1000)->save($largeImagePath);
+                    Image::make($image_tmp)->resize(500,500)->save($mediumImagePath);
+                    Image::make($image_tmp)->resize(250,250)->save($smallImagePath);
+
+                    //Insert Image Name in product table
+                    $image=new ProductsImage();
+                    $image->image=$imageName;
+                    $image->product_id=$id;
+                    $image->status=1;
+                    $image->save();
+                }
+
 
             }
+            return  redirect()->back()->with('success_message','عکس های محصول با موقیت بروز رسانی شد');
 
         }
 
         return view('admin.images.add_images')->with(compact('product'));
 
     }
+    public function updateImageStatus(Request $request){
+        Session::put('page','products');
+        $data=$request->all();
+        if ($data['status']=='Active'){
+            $status=0;
+        }else{
+            $status=1;
+        }
+        ProductsImage::where('id',$data['image_id'])->update(['status'=>$status]);
+
+        return response()->json(['status'=>$status,'image_id',$data['image_id']]);
+    }
+    public function deleteImage($id){
+        Session::put('page','products');
+        //Get product image
+        $productImage=ProductsImage::select('image')->where('id',$id)->first();
+        //Get Product Image Path
+        $small_image_path='front/images/product_images/small/';
+        $medium_image_path='front/images/product_images/medium/';
+        $large_image_path='front/images/product_images/large/';
+        //Delete Product small image if exists in small folder
+        if (file_exists($small_image_path.$productImage->image)){
+            unlink($small_image_path.$productImage->image);
+        }
+        //Delete Product medium image if exists in medium folder
+        if (file_exists($medium_image_path.$productImage->image)){
+            unlink($medium_image_path.$productImage->image);
+        }
+        //Delete Product large image if exists in large folder
+        if (file_exists($large_image_path.$productImage->image)){
+            unlink($large_image_path.$productImage->image);
+        }
+        //Delete Product image from products_images table
+        ProductsImage::where('id',$id)->delete();
+        $message=" عکس محصول با موفقیت حذف شد";
+        return redirect()->back()->with('success_message',$message);
+    }
+
 
 }
 

@@ -136,8 +136,8 @@
                                                     <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 250.367px;" aria-sort="ascending" aria-label="کد ادمین: activate to sort column descending">ردیف</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">  کد محصول</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">  عکس محصول</th>
-
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="وضعیت: activate to sort column ascending">وضعیت</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="وضعیت: activate to sort column ascending">جزئیات</th>
 
                                                 </tr>
                                                 </thead>
@@ -151,29 +151,24 @@
                                                         <td>{{$i}}</td>
                                                         <td>{{$image['id']}}</td>
                                                         <td>
-                                                            <img src="{{url('front/images/product_images/small'.$image['image'])}}" alt="">
+                                                            <img style="width: 100px" src="{{url('front/images/product_images/small/'.$image['image'])}}" alt="">
                                                         </td>
 
-
+                                                        <td>
+                                                            @if($image['status'] ==1)
+                                                                <i status="Active" image-id="{{$image['id']}}" id="image-{{$image['id']}}"  ref="input" class=" fa" :class="activeClass" v-on:click="changeImageStatus('image-'+{{$image['id']}})" style="font-size:24px"></i>
+                                                            @else
+                                                                <i status="Deactive" image-id="{{$image['id']}}" id="image-{{$image['id']}}"  ref="input" class=" fa" :class="deactiveClass" v-on:click="changeImagetStatus('image-'+{{$image['id']}})" style="font-size:24px"></i>
+                                                            @endif
+                                                        </td>
 
                                                         <td>
 
 
-                                                            <a title="اضافه و بروز رسانی محصول" href="{{url('admin/add-edit-product/'.$product['id'])}}" style="padding: 10px">
-                                                                <i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i>
-                                                            </a>
-                                                        <!--                                                                    <a  href="{{url('admin/delete-section/'.$product['id'])}}" title="section" id="delete-{{$product['id']}}" v-on:click="confirmDelete('delete-'+{{$product['id']}})" style="padding: 10px">
-                                                                        <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
-                                                                    </a>-->
-                                                            <a module="product" moduleid="{{$product['id']}}"  href="javascript:void(0)" title="product" id="delete-{{$product['id']}}" v-on:click="confirmDelete('delete-'+{{$product['id']}})" style="padding: 10px">
+                                                            <a module="image" moduleid="{{$image['id']}}"  href="javascript:void(0)" title="image" id="delete-{{$image['id']}}" v-on:click="confirmDelete('delete-'+{{$image['id']}})" style="padding: 10px">
                                                                 <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
                                                             </a>
-                                                            <a title="اضافه کدن ویژگی ها" href="{{url('admin/add-attributes/'.$product['id'])}}" style="padding: 10px">
-                                                                <i class="fa fa-plus-circle" style="font-size:24px;color:darkslateblue"></i>
-                                                            </a>
-                                                            <a title="اضافه کردن عکس های اضافه" href="{{url('admin/add-images/'.$product['id'])}}" style="padding: 10px">
-                                                                <i class="fa fa-file-picture-o" style="font-size:24px;color:#6a5a8c"></i>
-                                                            </a>
+
                                                         </td>
 
 
