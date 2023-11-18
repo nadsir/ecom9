@@ -163,6 +163,7 @@ class ProductsController extends Controller
         return view('admin.products.add_edit_product')->with(compact('title','categories','brandss','product'));
     }
     public function deleteProductImage($id){
+        Session::put('page','products');
         //Get product image
         $productImage=Product::select('product_image')->where('id',$id)->first();
         //Get Product Image Path
@@ -187,6 +188,7 @@ class ProductsController extends Controller
         return redirect()->back()->with('success_message',$message);
     }
     public function deleteProductVideo($id){
+        Session::put('page','products');
         //Get Product Video
         $productVideo=Product::select('product_video')->where('id',$id)->first();
         //Get Product video path
@@ -202,7 +204,7 @@ class ProductsController extends Controller
         return redirect()->back()->with('success_message',$message);
     }
     public function addAttibures(Request $request,$id){
-
+        Session::put('page','products');
         $product=Product::select('id','product_name','product_code','product_color','product_price','product_image')->with('attributes')->find($id);
 
         if ($request->isMethod('post')){
@@ -240,5 +242,33 @@ class ProductsController extends Controller
         return view('admin.attributes.add_edit_attributes')->with(compact('product'));
 
     }
+    public function updateAttributeStatus(Request $request){
+        Session::put('page','products');
+        $data=$request->all();
+        if ($data['status']=='Active'){
+            $status=0;
+        }else{
+            $status=1;
+        }
+        ProductAttribute::where('id',$data['attribute_id'])->update(['status'=>$status]);
+        return response()->json(['status'=>$status,'attribute_id',$data['attribute_id']]);
+    }
+    public function editAttributes(Request $request){
+        Session::put('page','products');
+        if ($request->isMethod('post')){
+            $data=$request->all();
+            foreach ($data['attributeId'] as  $key=>$attribute){
+                if (!empty($attribute)){
+                    ProductAttribute::where(['id'=>$data['attributeId'][$key]])->update(
+                        ['price'=>$data['price'][$key],'stock'=>$data['stock'][$key]]
+                    );
+                }
+            }
+            return  redirect()->back()->with('success_message','ویژگی های محصول با موقیت بروز رسانی شد');
+
+        }
+
+    }
 
 }
+

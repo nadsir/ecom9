@@ -80,6 +80,9 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 
         //Attributes
         Route::match(['post','get'],'add-attributes/{id}','ProductsController@addAttibures');
+        Route::post('/update-attribute-status','ProductsController@updateAttributeStatus');
+        Route::get('delete-attribute/{id}','ProductsController@deleteAttribute');
+        Route::match(['get','post'],'edit-attributes/{id}','ProductsController@editAttributes');
 
 
     });

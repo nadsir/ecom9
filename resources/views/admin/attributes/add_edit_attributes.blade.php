@@ -130,7 +130,11 @@
                                         <label for="product_image"> ویژگی های محصول </label>
 
 
-                                        <div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid">
+                                        <div class="col-sm-12">
+                                            <form action="{{url('admin/edit-attributes/'.$product['id'])}}" method="post">
+                                            <table id="example1" class="table table-bordered table-striped dataTable" role="grid">
+
+                                                @csrf
                                                 <thead>
                                                 <tr role="row">
                                                     <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 250.367px;" aria-sort="ascending" aria-label="کد ادمین: activate to sort column descending">ردیف</th>
@@ -146,6 +150,8 @@
                                                 <tbody>
                                                 @php($i=1)
                                                 @foreach($product['attributes'] as $attribute)
+                                                    <input style="display:none;" type="text" name="attributeId[]" value="{{$attribute['id']}}" required style="width: 100px">
+
 
                                                     <tr>
 
@@ -153,16 +159,20 @@
                                                         <td>{{$attribute['id']}}</td>
                                                         <td>{{$attribute['size']}}</td>
                                                         <td>{{$attribute['sku']}}</td>
-                                                        <td>{{$attribute['price']}}</td>
-                                                        <td>{{$attribute['stock']}}</td>
+                                                        <td>
+                                                            <input type="text" name="price[]" value="{{$attribute['price']}}" required style="width: 100px">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="stock[]" value="{{$attribute['stock']}}" required style="width: 100px">
+                                                        </td>
 
 
 
                                                         <td>
                                                             @if($attribute['status'] ==1)
-                                                                <i status="Active" attribute-id="{{$attribute['id']}}" id="attribute-{{$attribute['id']}}"  ref="input" class=" fa" :class="activeClass" v-on:click="changeAttributeStatus('product-'+{{$attribute['id']}})" style="font-size:24px"></i>
+                                                                <i status="Active" attribute-id="{{$attribute['id']}}" id="attribute-{{$attribute['id']}}"  ref="input" class=" fa" :class="activeClass" v-on:click="changeAttributeStatus('attribute-'+{{$attribute['id']}})" style="font-size:24px"></i>
                                                             @else
-                                                                <i status="Deactive" attribute-id="{{$attribute['id']}}" id="attribute-{{$attribute['id']}}"  ref="input" class=" fa" :class="deactiveClass" v-on:click="changeAttributeStatus('product-'+{{$attribute['id']}})" style="font-size:24px"></i>
+                                                                <i status="Deactive" attribute-id="{{$attribute['id']}}" id="attribute-{{$attribute['id']}}"  ref="input" class=" fa" :class="deactiveClass" v-on:click="changeAttributeStatus('attribute-'+{{$attribute['id']}})" style="font-size:24px"></i>
                                                             @endif
                                                         </td>
 
@@ -197,7 +207,12 @@
 
                                                                                                     </tr>-->
                                                 </tfoot>
+
+
                                             </table>
+
+                                            <button type="submit" class="btn btn-primary"> بروزرسانی</button>
+                                            </form>
                                         </div>
                                     </div>
 
