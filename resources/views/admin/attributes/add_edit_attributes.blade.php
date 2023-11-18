@@ -103,7 +103,7 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <label for="product_image"> ویژگی های محصول </label>
+
                                         <div class="field_wrapper">
                                             <div class="form-group">
                                                 <input  type="text" name="size[]" placeholder="سایز" style="width: 120px;" required/>&nbsp;
@@ -123,6 +123,95 @@
                                     <button type="submit" class="btn btn-primary">ارسال</button>
                                 </div>
                             </form>
+                            <div class="card-body">
+                                <div id="example1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+
+                                    <div class="row">
+                                        <label for="product_image"> ویژگی های محصول </label>
+
+
+                                        <div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid">
+                                                <thead>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 250.367px;" aria-sort="ascending" aria-label="کد ادمین: activate to sort column descending">ردیف</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">  کد محصول</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">  سایز محصول</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">کد محصول</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">قیمت محصول</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">تعداد محصول</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="وضعیت: activate to sort column ascending">وضعیت</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @php($i=1)
+                                                @foreach($product['attributes'] as $attribute)
+
+                                                    <tr>
+
+                                                        <td>{{$i}}</td>
+                                                        <td>{{$attribute['id']}}</td>
+                                                        <td>{{$attribute['size']}}</td>
+                                                        <td>{{$attribute['sku']}}</td>
+                                                        <td>{{$attribute['price']}}</td>
+                                                        <td>{{$attribute['stock']}}</td>
+
+
+
+                                                        <td>
+                                                            @if($attribute['status'] ==1)
+                                                                <i status="Active" attribute-id="{{$attribute['id']}}" id="attribute-{{$attribute['id']}}"  ref="input" class=" fa" :class="activeClass" v-on:click="changeAttributeStatus('product-'+{{$attribute['id']}})" style="font-size:24px"></i>
+                                                            @else
+                                                                <i status="Deactive" attribute-id="{{$attribute['id']}}" id="attribute-{{$attribute['id']}}"  ref="input" class=" fa" :class="deactiveClass" v-on:click="changeAttributeStatus('product-'+{{$attribute['id']}})" style="font-size:24px"></i>
+                                                            @endif
+                                                        </td>
+
+<!--                                                        <td>
+
+
+                                                            <a href="{{url('admin/add-edit-product/'.$product['id'])}}" style="padding: 10px">
+                                                                <i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i>
+                                                            </a>
+                                                        &lt;!&ndash;                                                                    <a  href="{{url('admin/delete-section/'.$product['id'])}}" title="section" id="delete-{{$product['id']}}" v-on:click="confirmDelete('delete-'+{{$product['id']}})" style="padding: 10px">
+                                                                        <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
+                                                                    </a>&ndash;&gt;
+                                                            <a module="product" moduleid="{{$product['id']}}"  href="javascript:void(0)" title="product" id="delete-{{$product['id']}}" v-on:click="confirmDelete('delete-'+{{$product['id']}})" style="padding: 10px">
+                                                                <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>
+                                                            </a>
+                                                            <a href="{{url('admin/add-attributes/'.$product['id'])}}" style="padding: 10px">
+                                                                <i class="fa fa-plus-circle" style="font-size:24px;color:darkslateblue"></i>
+                                                            </a>
+
+                                                        </td>-->
+
+                                                    </tr>
+                                                    @php($i++)
+                                                @endforeach
+                                                </tbody>
+                                                <tfoot>
+                                                <!--                                                    <tr>
+                                                                                                        <th rowspan="1" colspan="1">موتور رندر</th>
+                                                                                                        <th rowspan="1" colspan="1">مرورگر</th>
+                                                                                                        <th rowspan="1" colspan="1">سیستم عامل</th>
+                                                                                                        <th rowspan="1" colspan="1">ورژن</th>
+
+                                                                                                    </tr>-->
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- /.card-body -->
+
+
+
+                                <!-- /.card -->
+
+
+                                <!-- /.card -->
+
+                            </div>
                         </div>
                         <!-- /.card -->
 
@@ -136,6 +225,7 @@
 
                     <!--/.col (right) -->
                 </div>
+
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
