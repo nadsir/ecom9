@@ -86,7 +86,7 @@
                                                 <tbody>
                                                 @php($i=1)
                                                 @foreach($categories as $category)
-                                                    @if(isset($category['parentcategory']['category_name'] )&& !empty($category['parentcategory']['category_name'])))
+                                                    @if(isset($category['parentcategory']['category_name'] )&& !empty($category['parentcategory']['category_name']))
                                                     @php($parent_category=$category['parentcategory']['category_name'])
                                                     @else
                                                         @php( $parent_category="Root")
