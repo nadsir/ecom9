@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Session;
@@ -64,4 +65,5 @@ class BrandController extends Controller
         return view('admin.brands.add_edit_brand')->with(compact('title','brand'));
 
     }
+
 }
