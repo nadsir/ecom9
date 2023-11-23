@@ -212,7 +212,7 @@
                                 <li class="nav-item">
                                     <a href="{{url('admin/banners')}}" class="nav-link @if(Session::get('page')=='banner')active @endif" >
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p> اسلایدر</p>
+                                        <p> اسلایدر صفحه اصلی</p>
                                     </a>
                                 </li>
 

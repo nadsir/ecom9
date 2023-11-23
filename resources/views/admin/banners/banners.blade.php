@@ -26,7 +26,7 @@
                     <div class="col-md-10">
                         <!-- general form elements -->
                         <div class="card card-light">
-                            <a style="max-width: 200px;float: right;display: inline-block" href="{{url('admin/add-edit-banner')}}" class="btn btn-block btn-primary">اضافه کردن اسلایدر</a>
+                            <a style="max-width: 200px;float: right;display: inline-block" href="{{url('admin/add-edit-banner')}}" class="btn btn-block btn-primary">اضافه کردن اسلایدر صفحه اصلی</a>
 
                             @if(Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -76,6 +76,8 @@
                                                 <tr role="row">
                                                     <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 250.367px;" aria-sort="ascending" aria-label="کد ادمین: activate to sort column descending">ردیف</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">عکس</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">نوع</th>
+
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">لینک</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">تیتر</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">Alt </th>
@@ -91,6 +93,7 @@
 
                                                         <td>{{$i}}</td>
                                                         <td><img width="200" src="{{asset('front/images/banner_images/'.$banner['image'])}}" alt=""></td>
+                                                        <td>{{$banner['type']}}</td>
                                                         <td>{{$banner['link']}}</td>
                                                         <td>{{$banner['title']}}</td>
                                                         <td>{{$banner['alt']}}</td>

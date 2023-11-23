@@ -67,7 +67,14 @@
                                 @csrf
                                 <div class="card-body">
 
-
+                                    <div class="form-group">
+                                        <label for="link">نوع اسلاید</label>
+                                        <select name="type" id="type" class="form-control">
+                                            <option value="">select</option>
+                                            <option @if(!empty($banner['type']) && $banner['type']=="Slider") selected @endif value="Slider">اسلایدر</option>
+                                            <option @if(!empty($banner['type']) && $banner['type']=="Fix") selected @endif value="Fix">ثابت</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         <label for="image">عکس دسته بندی</label>
                                         <div class="input-group">
