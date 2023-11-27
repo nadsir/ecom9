@@ -207,7 +207,13 @@
                                     <div class="form-group">
                                         <label for="meta_keywords">محصولات آینده</label>
                                         <input type="checkbox" class="form-control" id="is_featured" placeholder="" name="is_featured" value="Yes"
-                                               @if(!empty($product['is_feature']) && $product['is_feature']=='Yes') checked="" @endif>
+                                               @if(!empty($product['is_featured']) && $product['is_featured']=='Yes') checked="" @endif>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="is_bestseller">بیشترین فروش</label>
+                                        <input type="checkbox" class="form-control" id="is_bestseller" placeholder="" name="is_bestseller" value="Yes"
+                                               @if(!empty($product['is_bestseller']) && $product['is_bestseller']=='Yes') checked="" @endif>
 
                                     </div>
                                 </div>

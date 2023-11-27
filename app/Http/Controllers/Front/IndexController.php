@@ -13,6 +13,7 @@ class IndexController extends Controller
         $sliderBanner=Banner::where('type','Slider')->where('status',1)->get()->toArray();
         $fixBanner=Banner::where('type','Fix')->where('status',1)->get()->toArray();
         $newProducts=Product::orderBY('id','Desc')->where('status',1)->limit(4)->get()->toArray();
-        return view('front.index')->with(compact('sliderBanner','fixBanner','newProducts'));
+        $bestSeller=Product::where(['is_bestseller'=>'Yes','status'=>1])->inRandomOrder()->get()->toArray();
+        return view('front.index')->with(compact('sliderBanner','fixBanner','newProducts','bestSeller'));
     }
 }
