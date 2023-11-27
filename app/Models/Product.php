@@ -17,6 +17,9 @@ class Product extends Model
     public function attributes(){
         return $this->hasMany('App\Models\ProductAttribute','product_id');
     }
+    public function brand(){
+        return $this->belongsTo('App\Models\Brand','brand_id');
+    }
     public function images(){
         return $this->hasMany('App\Models\ProductsImage');
     }
