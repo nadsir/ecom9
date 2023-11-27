@@ -157,51 +157,25 @@ use App\Models\Product;
                                         </div>
                                     @endif
                                 </div>
+                                <?php $isProductNew=Product::isProductNew($product['id']); ?>
+                                @if($isProductNew=="Yes")
                                 <div class="tag new">
                                     <span>NEW</span>
                                 </div>
+                                @endif
                             </div>
 
                         </div>
                         @endforeach
                     </div>
+                    <div class="mt-3 mb-3" >{{$categoryProducts->links()}}</div>
                     <div>{{$categoryDetails['categoryDetails']['description']}}</div>
                     <!-- Row-of-Product-Container /- -->
                 </div>
                 <!-- Shop-Right-Wrapper /- -->
 
                 <!-- Shop-Pagination -->
-                <div class="pagination-area">
-                    <div class="pagination-number">
-                        <ul>
-                            <li style="display: none">
-                                <a href="shop-v1-root-category.html" title="Previous">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                            </li>
-                            <li class="active">
-                                <a href="shop-v1-root-category.html">1</a>
-                            </li>
-                            <li>
-                                <a href="shop-v1-root-category.html">2</a>
-                            </li>
-                            <li>
-                                <a href="shop-v1-root-category.html">3</a>
-                            </li>
-                            <li>
-                                <a href="shop-v1-root-category.html">...</a>
-                            </li>
-                            <li>
-                                <a href="shop-v1-root-category.html">10</a>
-                            </li>
-                            <li>
-                                <a href="shop-v1-root-category.html" title="Next">
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
                 <!-- Shop-Pagination /- -->
             </div>
         </div>
