@@ -138,10 +138,10 @@ class ProductsController extends Controller
             }else{
                 $product->vendor_id=0;
             }
-            if (!empty($data['product_discount'])){
+            if (empty($data['product_discount'])){
                 $data['product_discount']=0;
             }
-            if (!empty($data['product_weight'])){
+            if (empty($data['product_weight'])){
                 $data['product_weight']=0;
             }
             $product->product_name=$data['product_name'];
