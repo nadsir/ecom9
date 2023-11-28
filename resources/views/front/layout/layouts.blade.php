@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{csrf_token()}}"/>
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Laravel Multi Vendor E-commerce Template - By Stack Developers Youtube Channel</title>
@@ -80,6 +81,7 @@
         }
     </style>
 </noscript>
+
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 <script>
     window.ga = function () {
@@ -119,5 +121,7 @@
 <script type="text/javascript" src="{{url('front/js/owl.carousel.min.js')}}"></script>
 <!-- Main -->
 <script type="text/javascript" src="{{url('front/js/app.js')}}"></script>
+
+<script type="text/javascript" src="{{url('front/js/custom.js')}}"></script>
 </body>
 </html>
