@@ -42,7 +42,7 @@ use App\Models\Product;
         <div class="sec-maker-header text-center">
             <h3 class="sec-maker-h3">TOP COLLECTION</h3>
             <ul class="nav tab-nav-style-1-a justify-content-center">
-                <li class="nav-item" v-on:click="test">
+                <li class="nav-item" >
                     <a class="nav-link active" data-toggle="tab" href="#men-latest-products">محصولات جدید</a>
                 </li>
                 <li class="nav-item">
