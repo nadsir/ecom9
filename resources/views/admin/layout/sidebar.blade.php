@@ -140,7 +140,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview @if(Session::get('page')=='sections' || Session::get('page')=='categories'|| Session::get('page')=='product_images')menu-open @endif">
+                        <li class="nav-item has-treeview @if(Session::get('page')=='sections' || Session::get('page')=='categories'|| Session::get('page')=='product_images'|| Session::get('page')=='filters')menu-open @endif">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon  fa fa-lock"></i>
                                 <p>
@@ -172,6 +172,12 @@
                                     <a href="{{url('admin/products')}}" class="nav-link @if(Session::get('page')=='products')active @endif">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>محصولات</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/filters')}}" class="nav-link @if(Session::get('page')=='filters')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>فیلترها</p>
                                     </a>
                                 </li>
                             </ul>

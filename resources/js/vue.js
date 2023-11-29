@@ -225,6 +225,59 @@ createApp({
                     alert(error);
                 });
         },
+
+        //Update Filter status
+        changeFilterStatus(item){
+
+            var status=document.getElementById(item).getAttribute("status");
+            var filter_id=document.getElementById(item).getAttribute("filter-id");
+            axios.post('/admin/update-filter-status',{
+                status:status,filter_id:filter_id
+            }).then(function (response) {
+                var data=document.getElementById(item).className;
+                if (data=='fa fa-toggle-on'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-on");
+                    element.classList.add('fa-toggle-off');
+                    element.setAttribute("status", "Deactive");
+                } else if (data=='fa fa-toggle-off'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-off");
+                    element.classList.add('fa-toggle-on');
+                    element.setAttribute("status", "Active");
+                }
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
+        },
+        //Update Filter Value Status
+        changeFilterValueStatus(item){
+
+            var status=document.getElementById(item).getAttribute("status");
+
+            var filter_id=document.getElementById(item).getAttribute("filter-id");
+
+            axios.post('/admin/update-filter-value-status',{
+                status:status,filter_id:filter_id
+            }).then(function (response) {
+                var data=document.getElementById(item).className;
+                if (data=='fa fa-toggle-on'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-on");
+                    element.classList.add('fa-toggle-off');
+                    element.setAttribute("status", "Deactive");
+                } else if (data=='fa fa-toggle-off'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-off");
+                    element.classList.add('fa-toggle-on');
+                    element.setAttribute("status", "Active");
+                }
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
+        },
         //Confirm Delete
         /*confirmDelete(item){
             var title=document.getElementById(item).getAttribute("title");
