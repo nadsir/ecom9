@@ -88,6 +88,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('filters-values','FilterController@filtersValues');
         Route::post('/update-filter-status','FilterController@updateFilterStatus');
         Route::post('/update-filter-value-status','FilterController@updateFilterValueStatus');
+        Route::match(['post','get'],'add-edit-filter/{id?}','FilterController@addEditFilter');
 
         //Images
         Route::match(['get','post'],'add-images/{id}','ProductsController@addImages');

@@ -29,7 +29,7 @@ use App\Models\Category;
                     <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-light">
-                            <a style="max-width: 150px;float: right;" href="{{url('admin/add-edit-filter-value')}}" class="btn btn-block btn-primary mt-3 mb-3">اضافه کردن فیلتر</a>
+                            <a style="max-width: 150px;float: right;" href="{{url('admin/add-edit-filter')}}" class="btn btn-block btn-primary mt-3 mb-3">اضافه کردن فیلتر</a>
                             <a style="max-width: 250px;float: left;" href="{{url('admin/filters-values')}}" class="btn btn-block btn-primary  mt-3 mb-3">نمایش  مقدار فیلتر</a>
 
                             @if(Session::has('error_message'))
@@ -99,7 +99,7 @@ use App\Models\Category;
                                                             $catIds=explode(",",$filter['cat_ids']);
                                                             foreach ($catIds as $key=>$catId){
                                                                  $category_name=Category::getCategoryName($catId);
-                                                                echo $category_name. " ";
+                                                                echo $category_name. " | ";
                                                             }
                                                         ?>
 
