@@ -27,7 +27,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">اضافه کردن فیلتر</h3>
+                                <h3 class="card-title">اضافه کردن محصول</h3>
                             </div>
                             @if(Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -61,46 +61,29 @@
                         @endif
                         <!-- /.card-header -->
                             <!-- form start -->
-                            <form role="form" @if(empty($filter['id'])) action="{{url('admin/add-edit-filter')}}"
-                                  @else action="{{url('admin/add-edit-filter/'.$filter['id'])}}" @endif
+                            <form role="form" @if(empty($filter['id'])) action="{{url('admin/add-edit-filter-value')}}"
+                                  @else action="{{url('admin/add-edit-filter-value/'.$filter['id'])}}" @endif
                                   method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="cat_ids">انتخاب دسته بندی</label>
-                                        <select  name="cat_ids[]" id="cat_ids" class="form-control" multiple="">
-                                            <option value="">انتخاب بخش</option>
-                                            @foreach($categories as $section)
-                                                <optgroup label="{{$section['name']}}" style="background-color: #c5c5c5"></optgroup>
-                                                <hr>
-                                                @foreach($section['categories'] as $category)
-                                                    <option @if(!empty($filter['category_id']) && $filter['category_id']==$category['id']) selected="" @endif value="{{$category['id']}}" style="background-color: #e5e5e5">
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;
-                                                        {{$category['category_name']}}
-                                                    </option>
-                                                    @foreach($category['subcategories'] as $subcategory)
-                                                        <option @if(!empty($filter['category_id']) && $filter['category_id']==$subcategory['id']) selected="" @endif value="{{$subcategory['id']}}">
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;
-                                                            {{$subcategory['category_name']}}
+                                        <label for="filter_id">انتخاب فیلتر</label>
+                                        <select  name="filter_id" id="filter_id" class="form-control" >
+
+
+                                                    @foreach($filters as $filter)
+                                                        <option value="{{$filter['id']}}">
+                                                            {{$filter['filter_name']}}
                                                         </option>
                                                     @endforeach
-                                                @endforeach
-                                            @endforeach
+
 
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="category_name">نام فیلتر</label>
-                                        <input type="text" class="form-control" id="filter_name" placeholder=""
-                                               @if(!empty($filter['filter_name'])) value="{{$filter['filter_name']}}" @else value="{{old('filter_name')}}" @endif
-                                               name="filter_name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="filter_column">ستون فیلتر</label>
-                                        <input type="text" class="form-control" id="filter_column" placeholder=""
-                                               @if(!empty($filter['filter_column'])) value="{{$filter['filter_column']}}" @else value="{{old('filter_column')}}" @endif
-                                               name="filter_column">
+                                        <label for="filter_value">نام مقدار فیلتر</label>
+                                        <input type="text" class="form-control" id="filter_value" placeholder=""
+                                               name="filter_value">
                                     </div>
 
                                 </div>

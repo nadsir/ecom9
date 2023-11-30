@@ -29,7 +29,7 @@ use App\Models\ProductsFilter;
                     <div class="col-md-8">
                         <!-- general form elements -->
                         <div class="card card-light">
-                            <a style="max-width: 250px;float: right;display: inline-block" href="{{url('admin/add-edit-filter')}}" class="btn btn-block btn-primary">اضافه کردن مقدار فیلتر</a>
+                            <a style="max-width: 250px;float: right;display: inline-block" href="{{url('admin/add-edit-filter-value')}}" class="btn btn-block btn-primary">اضافه کردن مقدار فیلتر</a>
                             <a style="max-width: 150px;float: left;display: inline-block" href="{{url('admin/filters')}}" class="btn btn-block btn-primary">نمایش فیلتر</a>
 
                             @if(Session::has('error_message'))
