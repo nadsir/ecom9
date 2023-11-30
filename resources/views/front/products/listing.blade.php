@@ -32,6 +32,7 @@ use App\Models\Product;
                     </li>
                    <?php
                    echo $categoryDetails['breadcrumb'];
+
                    ?>
                 </ul>
             </div>
