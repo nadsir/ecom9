@@ -90,6 +90,10 @@
 
                                         </select>
                                     </div>
+                                    <div class="loadFilters">
+                                        @include('admin.filters.category_filters')
+
+                                    </div>
                                     <div class="form-group">
                                         <label for="brand_id">انتخاب برند</label>
                                         <select  name="brand_id" id="brand_id" class="form-control">
@@ -243,8 +247,5 @@
     </div>
 @endsection
 <script>
-    import Options from "../../../../public/admin/plugins/chart.js/docs/general/options.html";
-    export default {
-        components: {Options}
-    }
+
 </script>

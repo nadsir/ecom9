@@ -30,4 +30,19 @@
     $(this).parent('div').remove(); //Remove field html
     x--; //Decrease field counter
 });
+    //Show Filters on selection of category
+        $("#category_id").on('change',function (){
+           var category_id=$(this).val();
+           /*alert(category_id);*/
+            $.ajax({
+
+               type:'post',
+               url:'category-filters',
+                data:{category_id:category_id},
+                    success:function (resp){
+                       $(".loadFilters").html(resp.view);
+                    }
+
+            });
+        });
 });
