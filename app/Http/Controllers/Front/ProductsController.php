@@ -53,7 +53,11 @@ class ProductsController extends Controller
                     $productIds=ProductAttribute::select('product_id')->whereIn('size',$data['size'])->pluck('product_id')->toArray();
                     $categoryProducts->whereIn('products.id',$productIds);
                 }
-
+                //checking for color
+                if (isset($data['color']) && !empty($data['color'])) {
+                    $productIds=Product::select('id')->whereIn('product_color',$data['color'])->pluck('id')->toArray();
+                    $categoryProducts->whereIn('products.id',$productIds);
+                }
                 $categoryProducts=$categoryProducts->paginate(30);
 
                 return view('front.products.ajax_products_listing')->with(compact('categoryDetails','categoryProducts','url'));
