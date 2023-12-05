@@ -245,7 +245,7 @@ class ProductsController extends Controller
                         return  redirect()->back()->with('error_message','کد مورد نظر قبلا درج شده کد جدید وارد کنید');
                     }
                     //Size duplicate check
-                    $sizeCount=ProductAttribute::where(['product_id'=>$id,'size',$data['size'][$key]])->count();
+                    $sizeCount=ProductAttribute::where(['product_id'=>$id,'size'=>$data['size'][$key]])->count();
                     if ($skuCount>0){
                         return  redirect()->back()->with('error_message','کد مورد نظر قبلا درج شده کد جدید وارد کنید');
                     }
