@@ -117,6 +117,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     }
     //Vendor Login/Register
     Route::get('/vendor/login-register','VendorController@LoginRegister');
+    //Vendor Register
+    Route::post('vendor/register','VendorController@VendorRegister');
 
 });
 require __DIR__.'/auth.php';

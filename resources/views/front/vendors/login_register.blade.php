@@ -1,4 +1,3 @@
-
 @extends('front.layout.layouts')
 @section('content')
     <!-- Page Introduction Wrapper -->
@@ -22,8 +21,37 @@
     <!-- Account-Page -->
     <div class="page-account u-s-p-t-80">
         <div class="container">
+            @if(Session::has('error_message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>پیام خطا !</strong>
+                    {{Session::get('error_message')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            @if(Session::has('success_message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>پیام پذیرش !</strong>
+                    {{Session::get('success_message')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            @if($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>پیام خطا !</strong>
+                    <?php echo implode('', $errors->all('<div>:message</div>')) ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="row">
-                <!-- Login -->
+
+
+            <!-- Login -->
                 <div class="col-lg-6">
                     <div class="login-wrapper">
                         <h2 class="account-h2 u-s-m-b-20">Login</h2>
@@ -33,7 +61,8 @@
                                 <label for="user-name-email">Username or Email
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-name-email" class="text-field" placeholder="Username / Email">
+                                <input type="text" id="user-name-email" class="text-field"
+                                       placeholder="Username / Email">
                             </div>
                             <div class="u-s-m-b-30">
                                 <label for="login-password">Password
@@ -64,29 +93,41 @@
                 <div class="col-lg-6">
                     <div class="reg-wrapper">
                         <h2 class="account-h2 u-s-m-b-20">Register</h2>
-                        <h6 class="account-h6 u-s-m-b-30">Registering for this site allows you to access your order status and history.</h6>
-                        <form>
+                        <h6 class="account-h6 u-s-m-b-30">Registering for this site allows you to access your order
+                            status and history.</h6>
+                        <form id="vendorForm" action="{{url('/vendor/register')}}" method="post">
+                            @csrf
                             <div class="u-s-m-b-30">
-                                <label for="user-name">Username
+                                <label for="vendorname">نام :
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-name" class="text-field" placeholder="Username">
+                                <input type="text" id="vendorname" name="name" class="text-field"
+                                       placeholder="Vendor Name">
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="email">Email
+                                <label for="vendormobile"> موبایل :
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="email" class="text-field" placeholder="Email">
+                                <input type="text" id="vendormobile" name="mobile" class="text-field"
+                                       placeholder="Vendor Mobile">
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="password">Password
+                                <label for="vendoremail">Email
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="password" class="text-field" placeholder="Password">
+                                <input type="text" id="vendoremail" name="email" class="text-field"
+                                       placeholder="Vendor Email">
+                            </div>
+                            <div class="u-s-m-b-30">
+                                <label for="vendorpassword">Password
+                                    <span class="astk">*</span>
+                                </label>
+                                <input type="text" id="vendorpassword" name="password" class="text-field"
+                                       placeholder="Vendor Password">
                             </div>
                             <div class="u-s-m-b-30">
                                 <input type="checkbox" class="check-box" id="accept">
-                                <label class="label-text no-color" for="accept">I’ve read and accept the
+                                <label class="label-text no-color" for="accept" name="accept">I’ve read and accept the
                                     <a href="terms-and-conditions.html" class="u-c-brand">terms & conditions</a>
                                 </label>
                             </div>
