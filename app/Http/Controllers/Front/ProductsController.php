@@ -61,13 +61,19 @@ class ProductsController extends Controller
                 //checking for price
 
                 if (isset($data['price']) && !empty($data['price'])) {
-                    $imploadePrices=implode('-',$data['price']);
-                    $exploadePrices=explode('-',$imploadePrices);
-                    $min=reset($exploadePrices);
-                    $max=end($exploadePrices);
-                    $productIds=Product::select('id')->whereBetween('product_price',[$min,$max])->pluck('id')->toArray();
+                    foreach ($data['price'] as $key=>$price){
+                        $priceArr=explode("-",$price);
+                        $productIds[]=Product::select('id')->whereBetween('product_price',[$priceArr[0],$priceArr[1]])->pluck('id')->toArray();
+
+                    }
+                    $productIds=call_user_func_array('array_merge',$productIds);
                     $categoryProducts->whereIn('products.id',$productIds);
 
+                }
+                //checking for brand
+                if (isset($data['brand']) && !empty($data['brand'])) {
+                    $productIds=Product::select('id')->whereIn('brand_id',$data['brand'])->pluck('id')->toArray();
+                    $categoryProducts->whereIn('products.id',$productIds);
                 }
 
 

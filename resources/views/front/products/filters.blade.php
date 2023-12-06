@@ -86,6 +86,23 @@ $productFilters = ProductsFilter::productFilters();
             </div>
         </form>
     </div>
+    <?php
+    $getBrands = ProductsFilter::getBrands($url);
+    ?>
+    <div class="facet-filter-associates">
+        <h3 class="title-name">Brand</h3>
+        <form class="facet-form" action="#" method="post">
+            <div class="associate-wrapper">
+                @foreach($getBrands as $key=>$brand)
+                <input type="checkbox" class="check-box brand" name="brand[]" id="brand{{$key}}" value="{{$brand['id']}}">
+                <label class="label-text" for="brand{{$key}}">{{$brand['name']}}
+<!--                    <span class="total-fetch-items">(0)</span>-->
+                </label>
+                @endforeach
+
+            </div>
+        </form>
+    </div>
     <!-- Filter-price/- -->
     <div class="facet-filter-associates">
         <h3 class="title-name">قیمت</h3>
