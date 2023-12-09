@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Front;
 
 use App\Models\Admin;
+
 use App\Models\Vendor;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -76,9 +78,18 @@ class VendorController extends Controller
             $admin->created_at=date("Y-m-d H:i:s");
             $admin->updated_at=date("Y-m-d H:i:s");
             $admin->save();
-
-            DB::commit();
             //send confirmation email to the vendor
+            $email=$data['email'];
+            $messageData=[
+                'email'=>$data['email'],
+                'name'=>$data['name'],
+                'code'=>base64_encode($data['email'])
+            ];
+            Mail::send('emails.vendor_confirmation',$messageData,function($message)use($email){
+                $message->to($email)->subject('confirm your vendor Account');
+            });
+            DB::commit();
+
 
 
             //Redirect back vendor with success message
@@ -91,6 +102,46 @@ class VendorController extends Controller
 
         }
 
+
+    }
+    public function confirmVendor($email){
+        //Decode Vendor Email
+        $email=base64_decode($email);
+        //Check vendor Email exists
+        $vendorCount=Vendor::where('email',$email)->count();
+        if ($vendorCount>0){
+            //Vendor Email is already activated or not
+            $vendorDetails=Vendor::where('email',$email)->first();
+            if ($vendorDetails->confirm == "Yes"){
+                $message="حساب کاربری شما ساخته شده می توانید لاگین کنید.";
+                return redirect('vendor/login-register')->with('error_message',$message);
+            }else{
+                //Update confirm column to Yes in both admins / vendor tables to activate
+                Admin::where('email',$email)->update(['confirm'=>'Yes']);
+                Vendor::where('email',$email)->update(['confirm'=>'Yes']);
+
+                //Send Register Email
+
+                $messageData=[
+                    'email'=>$email,
+                    'name'=>$vendorDetails->name,
+                    'mobile'=>$vendorDetails->mobile
+                ];
+                Mail::send('emails.vendor_confirmed',$messageData,function($message)use($email){
+                    $message->to($email)->subject('حساب کاربری فروش شما فعال گردید');
+
+                });
+
+
+
+                //Redirect to Vendor Login/Register page with Success message
+                $message="ایمیل فروش شما فعال گردید . شما میتوانید وارد شده و اطلاعات خود را تکمیل کنید";
+                return redirect('vendor/login-register')->with('success_message',$message);
+            }
+
+        }else{
+            abort(404);
+        }
 
     }
 }

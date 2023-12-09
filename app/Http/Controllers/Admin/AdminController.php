@@ -265,9 +265,22 @@ class   AdminController extends Controller
             ];
             $this->validate($request, $rule, $customMessages);
 
-            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1])) {
+           /* if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 1])) {
                 return redirect('admin/dashboard');
 
+            } else {
+                return redirect()->back()->with('error_message', 'نام کاربری یا کلمه عبور اشتباه است');
+            }*/
+            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+                if (Auth::guard('admin')->user()->type=="vendor" && Auth::guard('admin')->user()->confirm=="No"){
+                    return  redirect()->back()->with('error_message','لطفا ایمیل خود را تائید کنید که حساب فروش شما فعال شود');
+                }elseif (Auth::guard('admin')->user()->type!="vendor" && Auth::guard('admin')->user()->status=="0") {
+                    return  redirect()->back()->with('error_message',' اکانت ادمین شما فعال نمی باشد');
+
+                }else{
+                    return redirect('admin/dashboard');
+                }
+                return redirect('admin/dashboard');
             } else {
                 return redirect()->back()->with('error_message', 'نام کاربری یا کلمه عبور اشتباه است');
             }

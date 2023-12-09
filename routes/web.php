@@ -120,6 +120,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     //Vendor Register
     Route::post('vendor/register','VendorController@VendorRegister');
 
+    //Confirm Vendor Account
+    Route::get('vendor/confirm/{code}','VendorController@confirmVendor');
+
 });
 require __DIR__.'/auth.php';
 
