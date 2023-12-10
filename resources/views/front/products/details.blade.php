@@ -106,12 +106,22 @@ use App\Models\Product;
                                 <span>{{$productDetails['product_color']}}</span>
                             </div>
                             <div class="left">
-                                <span>Only:</span>
-                                <span>50 left</span>
+                                <span>موجودی محصول:</span>
+                                @if($totalStock>0)
+                                <span>موجود است</span>
+                                @else
+                                    <span style="color: red">موجود نیست</span>
+                                @endif
                             </div>
+                            @if($totalStock>0)
+                            <div class="left">
+                                <span>تعداد:</span>
+                                <span>{{$totalStock}}</span>
+                            </div>
+                            @endif
                         </div>
                         <div class="section-5-product-variants u-s-p-y-14">
-                            <h6 class="information-heading u-s-m-b-8">Product Variants:</h6>
+<!--                            <h6 class="information-heading u-s-m-b-8">Product Variants:</h6>
                             <div class="color u-s-m-b-11">
                                 <span>Available Color:</span>
                                 <div class="color-variant select-box-wrapper">
@@ -121,26 +131,16 @@ use App\Models\Product;
                                         <option value="5">White</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="sizes u-s-m-b-11">
-                                <span>Available Size:</span>
+                                <span>سایز های موجود :</span>
                                 <div class="size-variant select-box-wrapper">
                                     <select class="select-box product-size">
-                                        <option value="">Male 2XL</option>
-                                        <option value="">Male 3XL</option>
-                                        <option value="">Kids 4</option>
-                                        <option value="">Kids 6</option>
-                                        <option value="">Kids 8</option>
-                                        <option value="">Kids 10</option>
-                                        <option value="">Kids 12</option>
-                                        <option value="">Female Small</option>
-                                        <option value="">Male Small</option>
-                                        <option value="">Female Medium</option>
-                                        <option value="">Male Medium</option>
-                                        <option value="">Female Large</option>
-                                        <option value="">Male Large</option>
-                                        <option value="">Female XL</option>
-                                        <option value="">Male XL</option>
+                                        <options value="">انتخاب سایز</options>
+                                        @foreach($productDetails['attributes'] as $attributes)
+                                        <option value="{{$attributes['size']}}">{{$attributes['size']}}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                             </div>
@@ -178,11 +178,12 @@ use App\Models\Product;
                                     </ul>
                                 </div>
                                 <div class="quantity-wrapper u-s-m-b-22">
-                                    <span>Quantity:</span>
+                                    <span>تعداد :</span>
                                     <div class="quantity">
-                                        <input type="text" class="quantity-text-field" value="1">
+<!--                                        <input type="text" class="quantity-text-field" value="1">
                                         <a class="plus-a" data-max="1000">&#43;</a>
-                                        <a class="minus-a" data-min="1">&#45;</a>
+                                        <a class="minus-a" data-min="1">&#45;</a>-->
+                                        <input type="number" class="quantity-text-field" name="quantity" value="1">
                                     </div>
                                 </div>
                                 <div>
@@ -204,7 +205,7 @@ use App\Models\Product;
                         <div class="detail-nav-wrapper u-s-m-b-30">
                             <ul class="nav single-product-nav justify-content-center">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#description">Description</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#video">ویدیو محصول</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#specification">Specifications</a>
@@ -216,9 +217,18 @@ use App\Models\Product;
                         </div>
                         <div class="tab-content">
                             <!-- Description-Tab -->
-                            <div class="tab-pane fade active show" id="description">
+                            <div class="tab-pane fade active show" id="video">
                                 <div class="description-whole-container">
-                                    <p class="desc-p u-s-m-b-26">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                    @if($productDetails['product_video'])
+                                        <video controls>
+                                        <source src="{{url('front/videos/product_videos/'.$productDetails['product_video'])}}" type="video/mp4">
+                                        </video>
+
+                                    @else
+                                        محصول موردنظر ویدیو ندارد
+
+                                    @endif
+                                    <p class="desc-p u-s-m-b-26">
                                     </p>
                                 </div>
                             </div>
@@ -776,3 +786,9 @@ use App\Models\Product;
     <!-- Single-Product-Full-Width-Page /- -->
 
 @endsection
+<script>
+    import Options from "../../../../public/admin/dist/js/plugins/chartjs2/docs/general/options.html";
+    export default {
+        components: {Options}
+    }
+</script>

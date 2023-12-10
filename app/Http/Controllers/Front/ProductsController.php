@@ -123,10 +123,14 @@ class ProductsController extends Controller
 
     }
     public function details($id){
-        $productDetails=Product::with('section','category','brand','attributes','images')->find($id)->toArray();
+        $productDetails=Product::with( ['section','category','brand','attributes'=>function($query){
+            $query->where('stock','>',0)->where('status',1);
+
+        },'images'])->find($id)->toArray();
 
         $categoryDetails=Category::categoryDetails($productDetails['category']['url']);
-        return view('front.products.details')->with(compact('productDetails','categoryDetails'));
+        $totalStock=ProductAttribute::where('product_id',$id)->sum('stock');
+        return view('front.products.details')->with(compact('productDetails','categoryDetails','totalStock'));
 
     }
 }
