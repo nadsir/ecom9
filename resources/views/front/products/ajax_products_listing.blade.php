@@ -7,7 +7,7 @@ use App\Models\Product;
 
             <div class="item">
                 <div class="image-container">
-                    <a class="item-img-wrapper-link" href="single-product.html">
+                    <a class="item-img-wrapper-link" href="{{url('product/'.$product['id'])}}">
                         @php($product_image_path='front/images/product_images/small/'.$product['product_image'])
                         @if(!empty($product['product_image']) && file_exists($product_image_path))
                             <img class="img-fluid" src="{{$product_image_path}}" alt="Product">
