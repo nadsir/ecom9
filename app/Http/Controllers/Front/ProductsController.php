@@ -123,7 +123,10 @@ class ProductsController extends Controller
 
     }
     public function details($id){
-        return view('front.products.details');
+        $productDetails=Product::with('section','category','brand','attributes','images')->find($id)->toArray();
+
+        $categoryDetails=Category::categoryDetails($productDetails['category']['url']);
+        return view('front.products.details')->with(compact('productDetails','categoryDetails'));
 
     }
 }

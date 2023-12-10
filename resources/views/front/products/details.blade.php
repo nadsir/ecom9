@@ -1,4 +1,6 @@
-
+<?php
+use App\Models\Product;
+?>
 @extends('front.layout.layouts')
 @section('content')
     <!-- Page Introduction Wrapper -->
@@ -9,10 +11,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="index.html">Home</a>
+                        <a href="{{url('/')}}">Home</a>
                     </li>
                     <li class="is-marked">
-                        <a href="single-product.html">Detail</a>
+                        <a href="javascript:;">Detail</a>
                     </li>
                 </ul>
             </div>
@@ -27,26 +29,14 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <!-- Product-zoom-area -->
                     <div class="zoom-area">
-                        <img id="zoom-pro" class="img-fluid" src="{{url('front/images/product/product@4x.jpg')}}" data-zoom-image="{{url('front/images/product/product@4x.jpg')}}" alt="Zoom Image">
+                        <img id="zoom-pro" class="img-fluid" src="{{asset('front/images/product_images/large/'.$productDetails['product_image'])}}" data-zoom-image="{{asset('front/images/product_images/large/'.$productDetails['product_image'])}}" alt="Zoom Image">
                         <div id="gallery" class="u-s-m-t-10">
-                            <a class="active" data-image="images/product/product@4x.jpg" data-zoom-image="{{url('front/images/product/product@4x.jpg')}}">
-                                <img src="{{url('front/images/product/product@2x.jpg')}}" alt="Product">
+                            @foreach($productDetails['images'] as $image)
+                            <a class="active" data-image="{{asset('front/images/product_images/large/'.$image['image'])}}" data-zoom-image="{{asset('front/images/product_images/large/'.$image['image'])}}">
+                                <img src="{{asset('front/images/product_images/large/'.$image['image'])}}" alt="Product">
                             </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="{{url('front/images/product/product@4x.jpg')}}">
-                                <img src="{{url('front/images/product/product@2x.jpg')}}" alt="Product">
-                            </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="{{url('front/images/product/product@4x.jpg')}}">
-                                <img src="{{url('front/images/product/product@2x.jpg')}}" alt="Product">
-                            </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="{{url('front/images/product/product@4x.jpg')}}">
-                                <img src="{{url('front/images/product/product@2x.jpg')}}" alt="Product">
-                            </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="{{url('front/images/product/product@4x.jpg')}}">
-                                <img src="{{url('front/images/product/product@2x.jpg')}}" alt="Product">
-                            </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="{{url('front/images/product/product@4x.jpg')}}">
-                                <img src="{{url('front/images/product/product@2x.jpg')}}" alt="Product">
-                            </a>
+                            @endforeach
+
                         </div>
                     </div>
                     <!-- Product-zoom-area /- -->
@@ -57,22 +47,18 @@
                         <div class="section-1-title-breadcrumb-rating">
                             <div class="product-title">
                                 <h1>
-                                    <a href="single-product.html">Product Name</a>
+                                    <a href="javascript:;">{{$productDetails['product_name']}}</a>
                                 </h1>
                             </div>
                             <ul class="bread-crumb">
                                 <li class="has-separator">
-                                    <a href="index.html">Home</a>
+                                    <a href="{{url('/')}}">Home</a>
                                 </li>
                                 <li class="has-separator">
-                                    <a href="shop-v1-root-category.html">Men Clothing </a>
+                                    <a href="javascript:;">{{$productDetails['section']['name']}}</a>
                                 </li>
-                                <li class="has-separator">
-                                    <a href="listing.html">Tops</a>
-                                </li>
-                                <li class="is-marked">
-                                    <a href="shop-v3-sub-sub-category.html">Hoodies</a>
-                                </li>
+                                <?php echo $categoryDetails['breadcrumb'];?>
+
                             </ul>
                             <div class="product-rating">
                                 <div class='star' title="4.5 out of 5 - based on 23 Reviews">
@@ -83,31 +69,41 @@
                         </div>
                         <div class="section-2-short-description u-s-p-y-14">
                             <h6 class="information-heading u-s-m-b-8">Description:</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            </p>
+                            <p>{{$productDetails['description']}}</p>
                         </div>
                         <div class="section-3-price-original-discount u-s-p-y-14">
+                            @php($getDiscoutnPrice=Product::getDiscountPrice($productDetails['id']))
+                            @if($getDiscoutnPrice>0)
                             <div class="price">
-                                <h4>$100.00</h4>
+                                <h4> :تومان {{$getDiscoutnPrice}}</h4>
                             </div>
                             <div class="original-price">
                                 <span>Original Price:</span>
-                                <span>$120.00</span>
+                                <span> :تومان {{$productDetails['product_price']}}</span>
                             </div>
-                            <div class="discount-price">
+                            @else
+                                <div class="price">
+                                    <h4> :تومان {{$productDetails['product_price']}}</h4>
+                                </div>
+                            @endif
+                        {{--    <div class="discount-price">
                                 <span>Discount:</span>
                                 <span>15%</span>
                             </div>
                             <div class="total-save">
                                 <span>Save:</span>
                                 <span>$20</span>
-                            </div>
+                            </div>--}}
                         </div>
                         <div class="section-4-sku-information u-s-p-y-14">
                             <h6 class="information-heading u-s-m-b-8">Sku Information:</h6>
-                            <div class="availability">
-                                <span>Availability:</span>
-                                <span>In Stock</span>
+                            <div class="left">
+                                <span>کد محصول:</span>
+                                <span>{{$productDetails['product_code']}}</span>
+                            </div>
+                            <div class="left">
+                                <span>رنگ محصول:</span>
+                                <span>{{$productDetails['product_color']}}</span>
                             </div>
                             <div class="left">
                                 <span>Only:</span>
@@ -224,8 +220,6 @@
                                 <div class="description-whole-container">
                                     <p class="desc-p u-s-m-b-26">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                                     </p>
-                                    <img class="desc-img img-fluid u-s-m-b-26" src="{{url('front/images/product/product@3x.jpg" alt="Product')}}">
-                                    <iframe class="desc-iframe u-s-m-b-45" width="710" height="400" src="{{url('front/images/product/iframe-youtube.jpg')}}" allowfullscreen></iframe>
                                 </div>
                             </div>
                             <!-- Description-Tab /- -->
