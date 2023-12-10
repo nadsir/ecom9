@@ -71,6 +71,26 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview @if(Session::get('page')=='products')menu-open @endif">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon  fa fa-lock"></i>
+                                <p>
+                                    مدیرت فهرست ها
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview"
+                                @if(Session::get('page')=='products')style="display: block;" @endif>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/products')}}" class="nav-link @if(Session::get('page')=='products')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>محصولات</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
                     @else
                         <li class="nav-item has-treeview @if(Session::get('page')=='update-admin-password' || Session::get('page')=='update-admin-details')menu-open @endif">
                             <a href="#" class="nav-link ">

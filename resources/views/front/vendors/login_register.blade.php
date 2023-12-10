@@ -52,38 +52,27 @@
 
 
             <!-- Login -->
-                <div class="col-lg-6">
+                <div class="col-lg-6" >
                     <div class="login-wrapper">
-                        <h2 class="account-h2 u-s-m-b-20">Login</h2>
-                        <h6 class="account-h6 u-s-m-b-30">Welcome back! Sign in to your account.</h6>
-                        <form>
-                            <div class="u-s-m-b-30">
-                                <label for="user-name-email">Username or Email
+                        <h2 class="account-h2 u-s-m-b-20" style="text-align: right;direction: rtl"> ورود: </h2>
+                        <h6 class="account-h6 u-s-m-b-30" style="text-align: right;direction: rtl">  باسلام به حساب کاربری خود وارد شوید. </h6>
+                        <form action="{{url('admin/login')}}" method="post">
+                            @csrf
+                            <div class="u-s-m-b-30" style="text-align: right;direction: rtl">
+                                <label for="user-name-email" >ایمیل :
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-name-email" class="text-field"
-                                       placeholder="Username / Email">
+                                <input type="email" name="email" id="email" id="vendor-email" class="text-field"
+                                       placeholder="ایمیل">
                             </div>
-                            <div class="u-s-m-b-30">
-                                <label for="login-password">Password
+                            <div class="u-s-m-b-30" style="text-align: right;direction: rtl">
+                                <label for="login-password">رمز عبور :
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="login-password" class="text-field" placeholder="Password">
-                            </div>
-                            <div class="group-inline u-s-m-b-30">
-                                <div class="group-1">
-                                    <input type="checkbox" class="check-box" id="remember-me-token">
-                                    <label class="label-text" for="remember-me-token">Remember me</label>
-                                </div>
-                                <div class="group-2 text-right">
-                                    <div class="page-anchor">
-                                        <a href="lost-password.html">
-                                            <i class="fas fa-circle-o-notch u-s-m-r-9"></i>Lost your password?</a>
-                                    </div>
-                                </div>
+                                <input type="password" name="password" id="password" id="vendor-password" class="text-field" placeholder="Password">
                             </div>
                             <div class="m-b-45">
-                                <button class="button button-outline-secondary w-100">Login</button>
+                                <button class="button button-outline-secondary w-100">ورود</button>
                             </div>
                         </form>
                     </div>
@@ -95,7 +84,7 @@
                         <h2 class="account-h2 u-s-m-b-20">Register</h2>
                         <h6 class="account-h6 u-s-m-b-30">Registering for this site allows you to access your order
                             status and history.</h6>
-                        <form id="vendorForm" action="{{url('/vendor/register')}}" method="post">
+                        <form id="vendorForm" action="{{url('/admin/register')}}" method="post">
                             @csrf
                             <div class="u-s-m-b-30">
                                 <label for="vendorname">نام :

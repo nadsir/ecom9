@@ -212,22 +212,22 @@
                                         <div class="form-group">
                                             <label for="shop_name">نام</label>
                                             <input type="text" class="form-control" id="shop_name" placeholder=""
-                                                   value="{{$vendorDetails['shop_name']}}" name="shop_name">
+                                               @if(isset($vendorDetails['shop_name']))    value="{{$vendorDetails['shop_name']}}" @endif name="shop_name">
                                         </div>
                                         <div class="form-group">
                                             <label for="shop_address">آدرس محل کسب</label>
                                             <input type="text" class="form-control" id="shop_address" placeholder=""
-                                                   value="{{$vendorDetails['shop_address']}}" name="shop_address">
+                                                   @if(isset($vendorDetails['shop_address']))     value="{{$vendorDetails['shop_address']}}" @endif name="shop_address">
                                         </div>
                                         <div class="form-group">
                                             <label for="shop_city"> شهر محل کسب</label>
                                             <input type="text" class="form-control" id="shop_city" placeholder=""
-                                                   value="{{$vendorDetails['shop_city']}}" name="shop_city">
+                                                   @if(isset($vendorDetails['shop_city']))   value="{{$vendorDetails['shop_city']}}"@endif name="shop_city">
                                         </div>
                                         <div class="form-group">
                                             <label for="shop_state">استان محل کسب</label>
                                             <input type="text" class="form-control" id="shop_state" placeholder=""
-                                                   value="{{$vendorDetails['shop_state']}}" name="shop_state">
+                                                   @if(isset($vendorDetails['shop_state']))   value="{{$vendorDetails['shop_state']}}"@endif name="shop_state">
                                         </div>
                                         <div class="form-group">
                                             <label for="shop_country">کشور محل کسب</label>
@@ -235,7 +235,7 @@
                                                 <option value="">Select Country</option>
                                                 @foreach($countries as $country)
                                                     <option value="{{$country['country_name']}} "
-                                                            @if($country['country_name']==$vendorDetails['shop_country'])selected @endif
+                                                            @if(isset($country['shop_country']) && $country['country_name']==$vendorDetails['shop_country'])selected @endif
 
                                                     >{{$country['country_name']}}</option>
 
@@ -245,36 +245,36 @@
                                         <div class="form-group">
                                             <label for="shop_pincode">پین کد کسب وکار</label>
                                             <input type="text" class="form-control" id="shop_pincode" placeholder=""
-                                                   value="{{$vendorDetails['shop_pincode']}}" name="shop_pincode">
+                                                   @if(isset($vendorDetails['shop_pincode']))  value="{{$vendorDetails['shop_pincode']}}"@endif name="shop_pincode">
                                         </div>
                                         <div class="form-group">
                                             <label for="shop_mobile">موبایل مربوط به کسب و کار</label>
                                             <input type="text" class="form-control" id="shop_mobile" placeholder=""
-                                                   value="{{$vendorDetails['shop_mobile']}}" name="shop_mobile" maxlength="12" minlength="10">
+                                                   @if(isset($vendorDetails['shop_mobile']))  value="{{$vendorDetails['shop_mobile']}}"@endif name="shop_mobile" maxlength="12" minlength="10">
                                         </div>
                                         <div class="form-group">
                                             <label for="business_license_number">کد گواهی شغلی</label>
                                             <input type="text" class="form-control" id="business_license_number" placeholder=""
-                                                   value="{{$vendorDetails['business_license_number']}}" name="business_license_number">
+                                                   @if(isset($vendorDetails['business_license_number']))  value="{{$vendorDetails['business_license_number']}}"@endif name="business_license_number">
                                         </div>
                                         <div class="form-group">
                                             <label for="gst_number">Gst Number</label>
                                             <input type="text" class="form-control" id="gst_number" placeholder=""
-                                                   value="{{$vendorDetails['gst_number']}}" name="gst_number">
+                                                   @if(isset($vendorDetails['gst_number']))   value="{{$vendorDetails['gst_number']}}"@endif name="gst_number">
                                         </div>
                                         <div class="form-group">
                                             <label for="pan_number">Pan Number</label>
                                             <input type="text" class="form-control" id="pan_number" placeholder=""
-                                                   value="{{$vendorDetails['pan_number']}}" name="pan_number">
+                                                   @if(isset($vendorDetails['pan_number']))   value="{{$vendorDetails['pan_number']}}"@endif name="pan_number">
                                         </div>
                                         <div class="form-group">
                                             <label for="address_proof">نوع احراز هویت</label>
                                             <select class="form-control" name="address_proof" id="address_proof">
-                                                <option value="passport" @if($vendorDetails['address_proof']=='passport') selected @endif>پاسپورت</option>
-                                                <option value="Meli Card" @if($vendorDetails['address_proof']=='Meli Card') selected @endif>کارت ملی</option>
-                                                <option value="PAN" @if($vendorDetails['address_proof']=='PAN') selected @endif>شناسنامه</option>
-                                                <option value="Driving License" @if($vendorDetails['address_proof']=='Driving License') selected @endif>گواهینامه رانندگی</option>
-                                                <option value="Military service" @if($vendorDetails['address_proof']=='Military service') selected @endif>کارت پایان خدمت</option>
+                                                <option value="passport" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=='passport') selected @endif>پاسپورت</option>
+                                                <option value="Meli Card" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=='Meli Card') selected @endif>کارت ملی</option>
+                                                <option value="PAN" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=='PAN') selected @endif>شناسنامه</option>
+                                                <option value="Driving License" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=='Driving License') selected @endif>گواهینامه رانندگی</option>
+                                                <option value="Military service" @if(isset($vendorDetails['address_proof']) && $vendorDetails['address_proof']=='Military service') selected @endif>کارت پایان خدمت</option>
 
                                             </select>
                                         </div>
@@ -374,22 +374,22 @@
                                         <div class="form-group">
                                             <label for="account_holder_name">نام داردنده حساب</label>
                                             <input type="text" class="form-control" id="account_holder_name" placeholder=""
-                                                   value="{{$vendorDetails['account_holder_name']}}" name="account_holder_name">
+                                                   @if(isset($vendorDetails['account_holder_name']))      value="{{$vendorDetails['account_holder_name']}}"@endif name="account_holder_name">
                                         </div>
                                         <div class="form-group">
                                             <label for="bank_name">نام بانک</label>
                                             <input type="text" class="form-control" id="bank_name" placeholder=""
-                                                   value="{{$vendorDetails['bank_name']}}" name="bank_name">
+                                                   @if(isset($vendorDetails['bank_name']))  value="{{$vendorDetails['bank_name']}}"@endif  name="bank_name">
                                         </div>
                                         <div class="form-group">
                                             <label for="account_number">شماره حساب</label>
                                             <input type="text" class="form-control" id="account_number" placeholder=""
-                                                   value="{{$vendorDetails['account_number']}}" name="account_number">
+                                                   @if(isset($vendorDetails['account_number']))   value="{{$vendorDetails['account_number']}}"@endif  name="account_number">
                                         </div>
                                         <div class="form-group">
                                             <label for="bank_ifcs_code">کد بانک</label>
                                             <input type="text" class="form-control" id="bank_ifcs_code" placeholder=""
-                                                   value="{{$vendorDetails['bank_ifcs_code']}}" name="bank_ifcs_code">
+                                                   @if(isset($vendorDetails['bank_ifcs_code']))   value="{{$vendorDetails['bank_ifcs_code']}}"@endif  name="bank_ifcs_code">
                                         </div>
 
 
