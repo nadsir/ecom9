@@ -240,12 +240,14 @@ $sections=Section::sections();
                                                 <div class="col-lg-4">
                                                     <ul class="v-level-2">
                                                         <li>
-                                                            <?php echo $category['url']; ?>
-                                                            <a href="{{$category['url']}}">{{$category['category_name']}}</a>
+
+                                                            <a href="/{{$category['url']}}">{{$category['category_name']}}</a>
+
                                                             <ul>
                                                                 @foreach($category['subcategories'] as $subcategories)
                                                                 <li>
-                                                                    <a href="{{$subcategories['url']}}">{{$subcategories['category_name']}}</a>
+                                                                    <a href="/{{$subcategories['url']}}">{{$subcategories['category_name']}}</a>
+
                                                                 </li>
                                                                 @endforeach
                                                             </ul>
