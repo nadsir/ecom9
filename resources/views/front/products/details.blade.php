@@ -130,6 +130,16 @@ $productFilters = ProductsFilter::productFilters();
                             </div>
                             @endif
                         </div>
+                        <div>
+                            @if(isset($productDetails['vendor']))
+                                <div>  فروش توسط :{{$productDetails['vendor']['vendorbussinesdetails']['shop_name']}}</div>
+                            @endif
+
+
+
+
+                        </div>
+
                         <div class="section-5-product-variants u-s-p-y-14">
 <!--                            <h6 class="information-heading u-s-m-b-8">Product Variants:</h6>
                             <div class="color u-s-m-b-11">
