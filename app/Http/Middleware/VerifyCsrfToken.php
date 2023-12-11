@@ -20,6 +20,7 @@ class VerifyCsrfToken extends Middleware
         "/admin/update-attribute-status",
         "/admin/update-banner-status",
         "/admin/category-filters",
+        "get-product-price"
 
     ];
 }

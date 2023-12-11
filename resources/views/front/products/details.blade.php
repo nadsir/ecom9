@@ -73,6 +73,7 @@ use App\Models\Product;
                         </div>
                         <div class="section-3-price-original-discount u-s-p-y-14">
                             @php($getDiscoutnPrice=Product::getDiscountPrice($productDetails['id']))
+                            <span class="getAttributePrice">
                             @if($getDiscoutnPrice>0)
                             <div class="price">
                                 <h4> :تومان {{$getDiscoutnPrice}}</h4>
@@ -86,6 +87,7 @@ use App\Models\Product;
                                     <h4> :تومان {{$productDetails['product_price']}}</h4>
                                 </div>
                             @endif
+                            </span>
                         {{--    <div class="discount-price">
                                 <span>Discount:</span>
                                 <span>15%</span>
@@ -135,7 +137,7 @@ use App\Models\Product;
                             <div class="sizes u-s-m-b-11">
                                 <span>سایز های موجود :</span>
                                 <div class="size-variant select-box-wrapper">
-                                    <select class="select-box product-size">
+                                    <select name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="select-box product-size">
                                         <options value="">انتخاب سایز</options>
                                         @foreach($productDetails['attributes'] as $attributes)
                                         <option value="{{$attributes['size']}}">{{$attributes['size']}}</option>

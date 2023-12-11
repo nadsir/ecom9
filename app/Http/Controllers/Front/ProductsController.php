@@ -128,9 +128,18 @@ class ProductsController extends Controller
 
         },'images'])->find($id)->toArray();
 
+
         $categoryDetails=Category::categoryDetails($productDetails['category']['url']);
         $totalStock=ProductAttribute::where('product_id',$id)->sum('stock');
         return view('front.products.details')->with(compact('productDetails','categoryDetails','totalStock'));
 
+    }
+    public function getProductPrice(Request $request){
+        if ($request->ajax()){
+            $data=$request->all();
+           /* echo "<pre>";print_r($data); die;*/
+            $getDiscountAttributePrice=Product::getDiscountAttributePrice($data['product_id'],$data['size']);
+            return $getDiscountAttributePrice;
+        }
     }
 }

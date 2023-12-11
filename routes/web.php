@@ -117,6 +117,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     }
     //Product Details Page
     Route::get('product/{id}','ProductsController@details');
+    //Get Product Attribute Price
+    Route::post('get-product-price','ProductsController@getProductPrice');
+
     //Vendor Login/Register
     Route::get('/vendor/login-register','VendorController@LoginRegister');
     //Vendor Register
@@ -124,6 +127,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
 
     //Confirm Vendor Account
     Route::get('vendor/confirm/{code}','VendorController@confirmVendor');
+
 
 });
 require __DIR__.'/auth.php';
