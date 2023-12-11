@@ -30,16 +30,22 @@ $productFilters = ProductsFilter::productFilters();
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <!-- Product-zoom-area -->
-                    <div class="zoom-area">
-                        <img id="zoom-pro" class="img-fluid" src="{{asset('front/images/product_images/large/'.$productDetails['product_image'])}}" data-zoom-image="{{asset('front/images/product_images/large/'.$productDetails['product_image'])}}" alt="Zoom Image">
-                        <div id="gallery" class="u-s-m-t-10">
-                            @foreach($productDetails['images'] as $image)
-                            <a class="active" data-image="{{asset('front/images/product_images/large/'.$image['image'])}}" data-zoom-image="{{asset('front/images/product_images/large/'.$image['image'])}}">
-                                <img src="{{asset('front/images/product_images/large/'.$image['image'])}}" alt="Product">
-                            </a>
-                            @endforeach
+                    <div class="easyzoom easyzoom--overlay easyzoom--with-thumbnails">
+                        <a href="{{asset('front/images/product_images/large/'.$productDetails['product_image'])}}">
+                            <img src="{{asset('front/images/product_images/large/'.$productDetails['product_image'])}}" alt="" width="500" height="500" />
+                        </a>
 
-                        </div>
+                    </div>
+                    <div class="thumbnails" style="margin-top: 30px">
+                        <a href="{{asset('front/images/product_images/large/'.$productDetails['product_image'])}}" data-standard="{{asset('front/images/product_images/small/'.$productDetails['product_image'])}}">
+                            <img  width="120" height="120" src="{{asset('front/images/product_images/small/'.$productDetails['product_image'])}}" alt="" />
+                        </a>
+                        @foreach($productDetails['images'] as $image)
+                            <a href="{{asset('front/images/product_images/large/'.$image['image'])}}" data-standard="{{asset('front/images/product_images/small/'.$image['image'])}}">
+                                <img width="120" height="120"  src="{{asset('front/images/product_images/small/'.$image['image'])}}" alt="" />
+                            </a>
+                        @endforeach
+
                     </div>
                     <!-- Product-zoom-area /- -->
                 </div>
