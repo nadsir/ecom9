@@ -142,25 +142,16 @@ $productFilters = ProductsFilter::productFilters();
 
 
                         </div>
-
+                        <form action="{{url('cart/add')}}" class="post-form" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{$productDetails['id']}}">
                         <div class="section-5-product-variants u-s-p-y-14">
-<!--                            <h6 class="information-heading u-s-m-b-8">Product Variants:</h6>
-                            <div class="color u-s-m-b-11">
-                                <span>Available Color:</span>
-                                <div class="color-variant select-box-wrapper">
-                                    <select class="select-box product-color">
-                                        <option value="1">Heather Grey</option>
-                                        <option value="3">Black</option>
-                                        <option value="5">White</option>
-                                    </select>
-                                </div>
-                            </div>-->
                             <div class="sizes u-s-m-b-11">
                                 <span>سایز های موجود :</span>
                                 <div class="size-variant select-box-wrapper">
-                                    <select name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="select-box product-size">
+                                    <select name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="select-box product-size" required>
                                         <option value="">انتخاب سایز</option>
-                                        @foreach($productDetails['attributes'] as $attributes)
+                                               @foreach($productDetails['attributes'] as $attributes)
                                         <option value="{{$attributes['size']}}">{{$attributes['size']}}</option>
                                         @endforeach
 
@@ -184,7 +175,7 @@ $productFilters = ProductsFilter::productFilters();
                             <div class="size u-s-m-b-11" style="margin-top: 10px"></div>
                         </div>
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
-                            <form action="#" class="post-form">
+
                                 <div class="quick-social-media-wrapper u-s-m-b-22">
                                     <span>Share:</span>
                                     <ul class="social-media-list">
@@ -229,8 +220,9 @@ $productFilters = ProductsFilter::productFilters();
                                     <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                 </div>
-                            </form>
+
                         </div>
+                        </form>
                     </div>
                     <!-- Product-details /- -->
                 </div>
