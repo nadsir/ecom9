@@ -132,7 +132,10 @@ $productFilters = ProductsFilter::productFilters();
                         </div>
                         <div>
                             @if(isset($productDetails['vendor']))
-                                <div>  فروش توسط :{{$productDetails['vendor']['vendorbussinesdetails']['shop_name']}}</div>
+                                <div>
+                                    فروش توسط :
+
+                                    <a href="/products/{{$productDetails['vendor']['id']}}">{{$productDetails['vendor']['vendorbussinesdetails']['shop_name']}}</a></div>
                             @endif
 
 

@@ -115,6 +115,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     foreach ($catUrls as $key => $url){
         Route::match(['get','post'],'/'.$url,'ProductsController@listing');
     }
+    // Vendor Products
+    Route::get('/products/{vendorid}','ProductsController@vendorListing');
     //Product Details Page
     Route::get('product/{id}','ProductsController@details');
     //Get Product Attribute Price

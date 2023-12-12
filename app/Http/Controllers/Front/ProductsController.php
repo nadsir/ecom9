@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use App\Models\ProductsFilter;
 
@@ -120,6 +121,15 @@ class ProductsController extends Controller
             }
         }
 
+
+    }
+    public function vendorListing($vendorid){
+        //Get Vendor Shop name
+        $getVendorShop=Vendor::getVendorShop($vendorid);
+        //Get Vendor Products
+        $vendorProducts=Product::with('brand')->where('vendor_id',$vendorid)->where('status',1);
+        $vendorProducts=$vendorProducts->paginate(30);
+       return view('front.products.vendor_listing')->with(compact('getVendorShop','vendorProducts'));
 
     }
     public function details($id){
