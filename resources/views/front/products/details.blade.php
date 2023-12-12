@@ -167,6 +167,21 @@ $productFilters = ProductsFilter::productFilters();
                                     </select>
                                 </div>
                             </div>
+                            @if(count($groupProducts)>0)
+                            <div >
+                                <div><strong>رنگ محصول</strong></div>
+                                <div style="margin-top: 10px">
+                                    @foreach($groupProducts as $product)
+                                        <a href="{{url('product/'.$product['id'])}}">
+                                            <img style="width: 70px" src="{{asset('front/images/product_images/small/'.$product['product_image'])}}" alt="">
+                                        </a>
+
+                                    @endforeach
+                                </div>
+
+                            </div>
+                            @endif
+                            <div class="size u-s-m-b-11" style="margin-top: 10px"></div>
                         </div>
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
                             <form action="#" class="post-form">

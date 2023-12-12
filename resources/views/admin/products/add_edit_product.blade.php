@@ -143,6 +143,12 @@
                                                name="product_weight">
                                     </div>
                                     <div class="form-group">
+                                        <label for="group_code">کد گروه</label>
+                                        <input type="text" class="form-control" id="group_code" placeholder=""
+                                               @if(!empty($product['group_code'])) value="{{$product['group_code']}}" @else value="{{old('group_code')}}" @endif
+                                               name="group_code">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="product_image"> عکس محصول (سایز پیشنهادی 1000*1000 )</label>
                                         <div class="input-group">
                                             <div class="custom-file">

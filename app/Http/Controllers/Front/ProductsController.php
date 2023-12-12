@@ -165,11 +165,15 @@ class ProductsController extends Controller
         //Get Recently Viewed Products
         $recentlyViewedProducts=Product::with('brand')->whereIn('id',$recentProductsId)->where('id','!=',$id)->limit(6)->inRandomOrder()->get()->toArray();
 
-        //Set Session for recently viewed products
+        //Get Group Products (products color)
+        $groupProducts=array();
+        if (!empty($productDetails['group_code'])){
+            $groupProducts=Product::select('id','product_image')->where('id','!=',$id)->where(['group_code'=>$productDetails['group_code'],'status'=>1])->get()->toArray();
+        }
 
 
         $totalStock=ProductAttribute::where('product_id',$id)->sum('stock');
-        return view('front.products.details')->with(compact('productDetails','categoryDetails','totalStock','similarProducts','recentlyViewedProducts'));
+        return view('front.products.details')->with(compact('productDetails','categoryDetails','totalStock','similarProducts','recentlyViewedProducts','groupProducts'));
 
     }
     public function getProductPrice(Request $request){
