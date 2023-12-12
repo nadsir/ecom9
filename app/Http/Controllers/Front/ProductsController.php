@@ -9,8 +9,9 @@ use App\Models\ProductAttribute;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use App\Models\ProductsFilter;
-
+use Session;
 use Illuminate\Support\Facades\Route;
+use DB;
 
 class ProductsController extends Controller
 {
@@ -142,9 +143,33 @@ class ProductsController extends Controller
 
         //Get Similar Products
         $similarProducts=Product::with('brand')->where('category_id',$productDetails['category']['id'])->where('id','!=',$id)->limit(6)->inRandomOrder()->get()->toArray();
+        //Set Session for recently viewed products
+        if (empty(Session::get('session_id'))){
+            $session_id=md5(uniqid(rand(),true));
+
+
+        }else{
+            $session_id=Session::get('session_id');
+        }
+        Session::put('session_id',$session_id);
+
+        //insert product in table if not already exists
+        $countRecentlyViewedProducts=DB::table('recently_viewed_products')->where(['product_id'=>$id,'session_id'=>$session_id])->count();
+        if ($countRecentlyViewedProducts==0){
+            DB::table('recently_viewed_products')->insert(['product_id'=>$id,'session_id'=>$session_id]);
+        }
+        //Get Recently Viewed Products Ids
+        $recentProductsId=DB::table('recently_viewed_products')->select('product_id')->where('product_id','!=',$id)
+            ->where('session_id',$session_id)->inRandomOrder()->get()->take(4)->pluck('product_id');
+
+        //Get Recently Viewed Products
+        $recentlyViewedProducts=Product::with('brand')->whereIn('id',$recentProductsId)->where('id','!=',$id)->limit(6)->inRandomOrder()->get()->toArray();
+
+        //Set Session for recently viewed products
+
 
         $totalStock=ProductAttribute::where('product_id',$id)->sum('stock');
-        return view('front.products.details')->with(compact('productDetails','categoryDetails','totalStock','similarProducts'));
+        return view('front.products.details')->with(compact('productDetails','categoryDetails','totalStock','similarProducts','recentlyViewedProducts'));
 
     }
     public function getProductPrice(Request $request){
