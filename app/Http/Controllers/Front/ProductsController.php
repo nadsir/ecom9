@@ -9,6 +9,7 @@ use App\Models\ProductAttribute;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use App\Models\ProductsFilter;
+use App\Models\Cart;
 use Session;
 use Illuminate\Support\Facades\Route;
 use DB;
@@ -188,7 +189,27 @@ class ProductsController extends Controller
     public function cartAdd(Request $request){
         if ($request->isMethod('post')){
             $data=$request->all();
-            echo "<pre>";print_r($data);die;
+           /* echo "<pre>";print_r($data);die;*/
+            //Check Products Stock is available or not
+            $getProductStock=ProductAttribute::getProductStock($data['product_id'],$data['size']);
+            if ($getProductStock<$data['quantity']){
+                return redirect()->back()->with('error_message','تعداد مورد نظر موجود نمی باشد');
+            }
+            //Generate Session Id if not exists
+            $session_id=Session::get('session_id');
+            if (empty($session_id)){
+                $session_id=Session::getId();
+                Session::put('session_id',$session_id);
+            }
+            //Save Product in carts table
+            $item=new Cart;
+            $item->session_id=$session_id;
+            $item->product_id=$data['product_id'];
+            $item->size=$data['size'];
+            $item->quantity=$data['quantity'];
+            $item->save();
+            return redirect()->back()->with('success_message','محصول با موفقیت به کارت اضافه شد.');
+
         }
 
     }
