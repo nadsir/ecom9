@@ -16,9 +16,9 @@ class Admin extends Authenticatable
         return $this->belongsTo('App\Models\Vendor','vendor_id');
     }
     public function vendorBusiness(){
-        return $this->belongsTo('App\Models\VendorsBusinessDetail','vendor_id');
+        return $this->belongsTo('App\Models\VendorsBusinessDetail','vendor_id','vendor_id');
     }
     public function vendorBank(){
-        return $this->belongsTo('App\Models\VendorsBankDetail','vendor_id');
+        return $this->belongsTo('App\Models\VendorsBankDetail','vendor_id','vendor_id');
     }
 }

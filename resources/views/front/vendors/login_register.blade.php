@@ -84,7 +84,7 @@
                         <h2 class="account-h2 u-s-m-b-20">Register</h2>
                         <h6 class="account-h6 u-s-m-b-30">Registering for this site allows you to access your order
                             status and history.</h6>
-                        <form id="vendorForm" action="{{url('/admin/register')}}" method="post">
+                        <form id="vendorForm" action="{{url('/vendor/register')}}" method="post">
                             @csrf
                             <div class="u-s-m-b-30">
                                 <label for="vendorname">نام :

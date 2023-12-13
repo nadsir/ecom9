@@ -118,6 +118,7 @@ class   AdminController extends Controller
                 }
                 $vendorCount =VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->count();
                 if ($vendorCount>0){
+
                     //Update in vendors_business_details table
                     VendorsBusinessDetail::where('vendor_id',Auth::guard('admin')->user()->vendor_id)->update(
                         ['shop_name' => $data['shop_name'],'shop_address' => $data['shop_address'],'shop_city' => $data['shop_city'],'shop_state' => $data['shop_state']
@@ -129,6 +130,7 @@ class   AdminController extends Controller
 
                 }else{
                     //Update in vendors_business_details table
+
                     VendorsBusinessDetail::insert(['vendor_id'=>Auth::guard('admin')->user()->vendor_id,
                         'shop_name' => $data['shop_name'],'shop_address' => $data['shop_address'],'shop_city' => $data['shop_city'],'shop_state' => $data['shop_state']
                             ,'shop_country' => $data['shop_country'],'shop_pincode' => $data['shop_pincode'],'shop_mobile' => $data['shop_mobile'],
@@ -137,6 +139,7 @@ class   AdminController extends Controller
                             'shop_mobile' => $data['shop_mobile']
                         ]);
                 }
+
 
 
 
@@ -346,6 +349,7 @@ class   AdminController extends Controller
         $vendorDetails=Admin::with('vendorPersonal','vendorBusiness','vendorBank')->where('id',$id)->first();
         $vendorDetails=json_decode(json_encode($vendorDetails),true);
 
+
         return view('admin.admins.view_vendor_details')->with(compact('vendorDetails'));
 
     }
@@ -361,6 +365,7 @@ class   AdminController extends Controller
             Admin::where('id',$data['admin_id'])->update(['status'=>$status]);
             $adminDetails=Admin::where('id',$data['admin_id'])->first()->toArray();
            if ($adminDetails['type']=="vendor" && $status==1){
+               Vendor::where('id',$adminDetails['vendor_id'])->update(['status'=>$status]);
                //send Approval Email
                $email=$adminDetails['email'];
                $messageData=[

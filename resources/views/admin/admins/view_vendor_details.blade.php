@@ -122,7 +122,7 @@
 <!--                                        <input type="text" class="form-control" id="vendor_name" placeholder=""
                                                value="{{Auth::guard('admin')->user()->name}}" name="vendor_name" readonly="">-->
                                         <input type="text" class="form-control" id="vendor_name" placeholder=""
-                                               @if(isset($vendorDetails['shop_name'])) value="{{$vendorDetails['shop_name']}}" @endif    name="vendor_name" readonly="">
+                                               @if(isset($vendorDetails['vendor_business']['shop_name'])) value="{{$vendorDetails['vendor_business']['shop_name']}}" @endif    name="vendor_name" readonly="">
                                     </div>
                                     <div class="form-group">
                                         <label for="vendor_address">آدرس محل کسب</label>
@@ -225,22 +225,22 @@
                                 <div class="form-group">
                                     <label for="vendor_email">نام داردنده حساب</label>
                                     <input type="vendor_email" class="form-control" id="vendor_email" placeholder=""
-                                           @if(isset($vendorDetails['vendor_business']['account_holder_name'])) value="{{$vendorDetails['vendor_business']['account_holder_name']}}" @endif     name="vendor_email" disabled>
+                                           @if(isset($vendorDetails['vendor_bank']['account_holder_name'])) value="{{$vendorDetails['vendor_bank']['account_holder_name']}}" @endif     name="vendor_email" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="vendor_name">نام بانک</label>
                                     <input type="text" class="form-control" id="vendor_name" placeholder=""
-                                           @if(isset($vendorDetails['vendor_business']['bank_name'])) value="{{$vendorDetails['vendor_business']['bank_name']}}" @endif     name="vendor_name" readonly="">
+                                           @if(isset($vendorDetails['vendor_bank']['bank_name'])) value="{{$vendorDetails['vendor_bank']['bank_name']}}" @endif     name="vendor_name" readonly="">
                                 </div>
                                 <div class="form-group">
                                     <label for="vendor_address">شماره حساب</label>
                                     <input type="text" class="form-control" id="vendor_address" placeholder=""
-                                           @if(isset($vendorDetails['vendor_business']['account_number'])) value="{{$vendorDetails['vendor_business']['account_number']}}" @endif     name="vendor_address" readonly="">
+                                           @if(isset($vendorDetails['vendor_bank']['account_number'])) value="{{$vendorDetails['vendor_bank']['account_number']}}" @endif     name="vendor_address" readonly="">
                                 </div>
                                 <div class="form-group">
                                     <label for="vendor_city">کد بانک</label>
                                     <input type="text" class="form-control" id="vendor_city" placeholder=""
-                                           @if(isset($vendorDetails['vendor_business']['bank_ifcs_code'])) value="{{$vendorDetails['vendor_business']['bank_ifcs_code']}}" @endif     name="vendor_city" readonly="">
+                                           @if(isset($vendorDetails['vendor_bank']['bank_ifcs_code'])) value="{{$vendorDetails['vendor_bank']['bank_ifcs_code']}}" @endif     name="vendor_city" readonly="">
                                 </div>
 
 

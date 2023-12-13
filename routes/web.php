@@ -131,6 +131,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::get('vendor/confirm/{code}','VendorController@confirmVendor');
     //Add to Cart Route
     Route::post('cart/add','ProductsController@cartAdd');
+    //Cart Route
+    Route::get('/cart','ProductsController@cart');
 
 
 });
