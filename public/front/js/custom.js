@@ -22,6 +22,29 @@ $(document).ready(function (){
 
 
    });
+   //Update Cart Items Qty
+    $(document).on('click','.updateCartItem',function (){
+        if ($(this).hasClass('plus-a')){
+            //Get Qty
+            var quantity=$(this).data('qty');
+            // increase the qty by 1
+            new_qty=parseInt(quantity)+1;
+            alert(new_qty);
+        }
+        if ($(this).hasClass('minus-a')){
+            //Get Qty
+            var quantity=$(this).data('qty');
+            //check Qty is atleast 1
+            if (quantity<=1){
+                alert('تعداد محصول باید یک یا بیشتر باشد');
+                return false;
+            }
+            // increase the qty by 1
+            new_qty=parseInt(quantity)-1;
+            alert(new_qty);
+        }
+
+    });
 });
 
 function get_filter(class_name){
