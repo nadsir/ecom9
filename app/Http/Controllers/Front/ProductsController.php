@@ -220,13 +220,17 @@ class ProductsController extends Controller
             $item->size=$data['size'];
             $item->quantity=$data['quantity'];
             $item->save();
-            return redirect()->back()->with('success_message','محصول با موفقیت به کارت اضافه شد.');
+            return redirect()->back()->with('success_message','محصول با موفقیت به کارت اضافه شد.<a style="text-decoration: underline" href="/cart">نمایش سبد خرید</a>');
 
         }
 
     }
     public function cart(){
-        return view('front.products.cart');
+        $getCartItems=Cart::getCartItems();
+
+
+
+        return view('front.products.cart')->with(compact('getCartItems'));
 
     }
 }
