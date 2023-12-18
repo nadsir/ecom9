@@ -235,6 +235,25 @@ class ProductsController extends Controller
         if ($request->ajax()){
             $data=$request->all();
             /*echo "<pre>"; print_r($data); die;*/
+
+            //Get Cart Details
+            $cartDetails=Cart::find($data['cartid']);
+            //Get Available Product Stock
+            $availableStock=ProductAttribute::select('stock')->where(['product_id'=>$cartDetails['product_id'],'size'=>$cartDetails['size']])->first()->toArray();
+            if ($data['qty'] > $availableStock['stock']){
+                $getCartItems =Cart::getCartItems();
+                return response()->json(['status'=>false,'message'=>'تعداد موردنظر موجود نمی باشد','view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')) ]);
+            }
+
+            //Check if product size is available
+            $availableSize=ProductAttribute::where(['product_id'=>$cartDetails['product_id'],'size'=>$cartDetails['size'],'status'=>1])->count();
+            if ($availableSize==0){
+                $getCartItems =Cart::getCartItems();
+                return response()->json(['status'=>false,'message'=>' سایز موردنظر موجود نمی باشد . لطفا محصول مورد نظر را پاک و محصول دیگری انتخاب کنید','view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')) ]);
+            }
+
+
+           //update the Qty
             Cart::where('id',$data['cartid'])->update(['quantity'=>$data['qty']]);
             $getCartItems =Cart::getCartItems();
             return response()->json(['status'=>true,'view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')) ]);

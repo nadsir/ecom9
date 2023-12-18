@@ -29,7 +29,7 @@ $(document).ready(function (){
             var quantity=$(this).data('qty');
             // increase the qty by 1
             new_qty=parseInt(quantity)+1;
-            alert(new_qty);
+
         }
         if ($(this).hasClass('minus-a')){
             //Get Qty
@@ -48,6 +48,9 @@ $(document).ready(function (){
             url:'/cart/update',
             type:'post',
             success:function (resp){
+                if (resp.status==false){
+                    alert(resp.message);
+                }
                 $("#appendCartItems").html(resp.view);
 
             },error:function (){
