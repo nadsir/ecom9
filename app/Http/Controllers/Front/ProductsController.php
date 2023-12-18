@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
@@ -227,10 +228,18 @@ class ProductsController extends Controller
     }
     public function cart(){
         $getCartItems=Cart::getCartItems();
-
-
-
         return view('front.products.cart')->with(compact('getCartItems'));
+
+    }
+    public function cartUpdate(Request $request){
+        if ($request->ajax()){
+            $data=$request->all();
+            /*echo "<pre>"; print_r($data); die;*/
+            Cart::where('id',$data['cartid'])->update(['quantity'=>$data['qty']]);
+            $getCartItems =Cart::getCartItems();
+            return response()->json(['status'=>true,'view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')) ]);
+
+        }
 
     }
 }

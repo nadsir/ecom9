@@ -41,8 +41,19 @@ $(document).ready(function (){
             }
             // increase the qty by 1
             new_qty=parseInt(quantity)-1;
-            alert(new_qty);
         }
+        var cartid=$(this).data('cartid');
+        $.ajax({
+            data:{cartid:cartid,qty:new_qty},
+            url:'/cart/update',
+            type:'post',
+            success:function (resp){
+                $("#appendCartItems").html(resp.view);
+
+            },error:function (){
+                alert("Error");
+            }
+        });
 
     });
 });

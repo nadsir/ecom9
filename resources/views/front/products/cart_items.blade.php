@@ -15,7 +15,8 @@ use App\Models\Product;
             </tr>
             </thead>
             <tbody>
-            @php $total_price=0 @endphp
+            @php $total_price=0; @endphp
+
             @foreach($getCartItems as $item)
                 <?php $getDiscountAttibutePrice=Product::getDiscountAttributePrice($item['product_id'],$item['size']);
 
