@@ -81,6 +81,23 @@ $(document).ready(function (){
 
 
     });
+
+    //Register Form Validation
+    $("#registerForm").submit(function (){
+       var formdata=$(this).serialize();
+       $.ajax({
+           url:"/user/register",
+           type:"POST",
+           data:formdata,
+           success:function (resp){
+               window.location.href=resp.url;
+
+           },error:function (){
+               alert("Error");
+           }
+
+       })
+    });
 });
 
 function get_filter(class_name){

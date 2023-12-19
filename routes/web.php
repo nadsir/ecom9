@@ -139,6 +139,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::post('/cart/delete','ProductsController@cartDelete');
     //User Login/Register
     Route::get('/user/login-register','UserController@LoginRegister');
+    //User Register
+    Route::post('/user/register','UserController@userRegister');
 
 });
 require __DIR__.'/auth.php';

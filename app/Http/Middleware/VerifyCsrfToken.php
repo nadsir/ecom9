@@ -23,6 +23,7 @@ class VerifyCsrfToken extends Middleware
         "get-product-price",
         "/cart/update",
         "/cart/delete",
+        "/user/register",
 
     ];
 }
