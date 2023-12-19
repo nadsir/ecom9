@@ -59,6 +59,28 @@ $(document).ready(function (){
         });
 
     });
+    //Delete Cart Items
+    $(document).on('click','.deleteCartItem',function (){
+        var cartid=$(this).data('cartid');
+        var result=confirm("از حذف محصول اطمینان دارید ؟")
+        if (result){
+            $.ajax({
+
+                data:{cartid:cartid},
+                url:'/cart/delete',
+                type:'post',
+                success:function (resp){
+                    $("#appendCartItems").html(resp.view);
+
+                },error:function (){
+                    alert("Error")
+                }
+            })
+        }
+
+
+
+    });
 });
 
 function get_filter(class_name){

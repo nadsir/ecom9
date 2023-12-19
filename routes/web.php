@@ -135,7 +135,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::get('/cart','ProductsController@cart');
     //Update cart Item Quantity
     Route::post('/cart/update','ProductsController@cartUpdate');
-
+    //Delete cart Item
+    Route::post('/cart/delete','ProductsController@cartDelete');
 
 });
 require __DIR__.'/auth.php';
