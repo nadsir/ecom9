@@ -141,6 +141,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::get('/user/login-register','UserController@LoginRegister');
     //User Register
     Route::post('/user/register','UserController@userRegister');
+    //User logout
+    Route::get('user/logout','UserController@userLogout');
 
 });
 require __DIR__.'/auth.php';
