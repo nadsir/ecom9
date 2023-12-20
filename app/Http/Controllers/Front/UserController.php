@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Validator;
+
 
 class UserController extends Controller
 {
@@ -39,6 +41,14 @@ class UserController extends Controller
                 $user->password=bcrypt($data['password']);
                 $user->status=1;
                 $user->save();
+                //Send Register Email
+                $email=$data['email'];
+                $messageData=['name'=>$data['name'],'mobile'=>$data['mobile'],'email'=>$data['email']];
+                Mail::send('emails.register',$messageData,function ($message)use($email){
+                    $message->to($email)->subject('به فروشگاه x خوش آمدید');
+
+                });
+
                 if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                     $redirectTo=url('cart');
                     return response()->json(['type'=>'success','url'=>$redirectTo]);
