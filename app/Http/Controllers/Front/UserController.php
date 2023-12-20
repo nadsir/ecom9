@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Sms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -22,7 +23,7 @@ class UserController extends Controller
 
             $validadtor=Validator::make($request->all(),[
                'name'=>'required|string|max:100',
-                'mobile'=>'required|numeric|digits:10',
+                'mobile'=>'required|numeric',
                 'email'=>'required|email|max:150|unique:users',
                 'password'=>'required|min:6',
                 'accept'=>'required'
@@ -48,6 +49,12 @@ class UserController extends Controller
                     $message->to($email)->subject('به فروشگاه x خوش آمدید');
 
                 });
+                //Send Register Sms
+                $message="کاربر گرامی شما با موفقیت ثبت نام شدید";
+                $mobile=$data['mobile'];
+                Sms::sendSms($message,$mobile);
+
+
 
                 if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                     $redirectTo=url('cart');
