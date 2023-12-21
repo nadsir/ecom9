@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Cart;
 use App\Models\Sms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Validator;
+use Session;
 
 
 class UserController extends Controller
@@ -30,9 +32,7 @@ class UserController extends Controller
             ],
             [
                 'accept.required'=>'Please accept our Terms & Conditions'
-            ]
-
-            );
+            ]);
             if ($validadtor->passes()){
                 //Register the User
                 $user=new User;
@@ -58,6 +58,12 @@ class UserController extends Controller
 
                 if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                     $redirectTo=url('cart');
+                    //Update User Cart with user id
+                    if (!empty(Session::get('session_id'))){
+                        $user_id=Auth::user()->id;
+                        $session_id=Session::get('session_id');
+                        Cart::where('session_id',$session_id)->update(['user_id'=>$user_id]);
+                    }
                     return response()->json(['type'=>'success','url'=>$redirectTo]);
                 }
 
@@ -66,6 +72,43 @@ class UserController extends Controller
                 return response()->json(['type'=>'error','errors'=>$validadtor->messages()]);
             }
 
+
+        }
+    }
+    public function userLogin(Request $request){
+        if ($request->ajax()){
+            $data=$request->all();
+            $validadtor=Validator::make($request->all(),[
+
+                'email'=>'required|email|max:150|exists:users',
+                'password'=>'required|min:6',
+
+            ],
+                [
+                    'email.required'=>'پر کردن فیلد ایمیل اجباری است.',
+                    'email.email'=>'فرمت ایمیل نا معتبر می باشد.',
+                ]);
+            if ($validadtor->passes()) {
+                if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
+                    if (Auth::user()->status==0){
+                        Auth::logout();
+                        return response()->json(['type'=>'inactive','message'=>'اکانت شما توسط ادمین غیر فعال شده .']);
+
+                    }
+                    //Update User Cart with user id
+                    if (!empty(Session::get('session_id'))){
+                        $user_id=Auth::user()->id;
+                        $session_id=Session::get('session_id');
+                        Cart::where('session_id',$session_id)->update(['user_id'=>$user_id]);
+                    }
+                    $redirectTo=url('cart');
+                    return response()->json(['type'=>'success','url'=>$redirectTo]);
+                }else{
+                    return response()->json(['type'=>'incorrect','message'=>'نام کاربری یا رمز عبور اشتباه می باشد.']);
+                }
+            }else{
+                return response()->json(['type'=>'error','errors'=>$validadtor->messages()]);
+            }
 
         }
     }
