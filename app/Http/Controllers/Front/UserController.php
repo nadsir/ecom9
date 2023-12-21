@@ -129,5 +129,28 @@ class UserController extends Controller
         return redirect('/');
 
     }
+    public function confirmAccount($code){
+        $email=base64_decode($code);
+        $userCount=User::where('email',$email)->count();
+        if ($userCount>0){
+            $userDetails=User::where('email',$email)->first();
+            if ($userDetails->status==1){
+                //Redirect the user to Login/Register Page with error message
+                return redirect('user/login-register')->with('error_message','اکانت شما در حال حاضر فعال می باشد.');
+            }else{
+                User::where('email',$email)->update(['status'=>1]);
+                //Send Welcome Email
+                $messageData=['name'=>$userDetails->name,'mobile'=>$userDetails->mobile,'email'=>$email];
+                Mail::send('emails.register',$messageData,function ($message)use($email) {
+                    $message->to($email)->subject('به فروشگاه x خوش آمدید');
+                });
+                return redirect('user/login-register')->with('success_message','اکانت شما فعال می باشد شما میتوانید لاگین کنید.');
+
+
+            }
+        }else{
+            abort(404);
+        }
+    }
 }
 

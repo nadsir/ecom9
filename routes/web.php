@@ -145,6 +145,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::post('/user/login','UserController@userLogin');
     //User logout
     Route::get('user/logout','UserController@userLogout');
+    //Confirm User Account
+    Route::get('/user/confirm/{code}','UserController@confirmAccount');
 
 });
 require __DIR__.'/auth.php';
