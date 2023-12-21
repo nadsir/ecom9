@@ -101,7 +101,8 @@ $(document).ready(function (){
                    });
 
                }else if (resp.type=="success"){
-                   window.location.href=resp.url;
+                   alert(resp.message);
+
                }
 
 
