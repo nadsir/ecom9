@@ -51,13 +51,14 @@
             <div class="row">
 
 
-            <!-- Login -->
+                <!-- Forgot  -->
                 <div class="col-lg-6" >
                     <div class="login-wrapper">
-                        <h2 class="account-h2 u-s-m-b-20" style="text-align: right;direction: rtl"> ورود: </h2>
+                        <h2 class="account-h2 u-s-m-b-20" style="text-align: right;direction: rtl">فراموشی پسورد : </h2>
                         <h6 class="account-h6 u-s-m-b-30" style="text-align: right;direction: rtl">  باسلام به حساب کاربری خود وارد شوید. </h6>
-                        <p id="login-error"></p>
-                        <form id="loginForm" action="javascript:;" method="post">
+                        <p id="forgot-error"></p>
+                        <p id="forgot-success"></p>
+                        <form id="forgotForm" action="javascript:;" method="post">
                             @csrf
                             <div class="u-s-m-b-30" style="text-align: right;direction: rtl">
                                 <label for="user-name-email" >ایمیل :
@@ -65,34 +66,28 @@
                                 </label>
                                 <input type="email" name="email" id="users-email" id="user-email" class="text-field"
                                        placeholder="ایمیل">
-                                <p id="login-email"></p>
+                                <p id="forgot-email"></p>
                             </div>
-                            <div class="u-s-m-b-30" style="text-align: right;direction: rtl">
-                                <label for="login-password">رمز عبور :
-                                    <span class="astk">*</span>
-                                </label>
-                                <input type="password" name="password" id="users-password" id="user-password" class="text-field" placeholder="Password">
-                                <p id="login-password"></p>
-                            </div>
+
                             <div class="group-inline u-s-m-b-30">
-<!--                                <div class="group-1">
-                                    <input type="checkbox" class="check-box" id="remember-me-token">
-                                    <label class="label-text" for="remember-me-token">Remember me</label>
-                                </div>-->
+                                <!--                                <div class="group-1">
+                                                                    <input type="checkbox" class="check-box" id="remember-me-token">
+                                                                    <label class="label-text" for="remember-me-token">Remember me</label>
+                                                                </div>-->
                                 <div class="group-2 text-right">
                                     <div class="page-anchor">
-                                        <a href="{{url('user/forgot-password')}}">
-                                            <i class="fas fa-circle-o-notch u-s-m-r-9"></i>Lost your password?</a>
+                                        <a href="{{url('user/login-register')}}">
+                                            <i class="fas fa-circle-o-notch u-s-m-r-9"></i>بازگشت به صفحه ورود .</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="m-b-45">
-                                <button class="button button-outline-secondary w-100">ورود</button>
+                                <button class="button button-outline-secondary w-100">ثبت</button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <!-- Login /- -->
+                <!-- Forgot /- -->
                 <!-- Register -->
                 <div class="col-lg-6">
                     <div class="reg-wrapper">

@@ -153,6 +153,43 @@ $(document).ready(function (){
 
         })
     });
+
+    //Forgot Form Validation
+    $("#forgotForm").submit(function (){
+        $(".loader").show();
+        var formdata=$(this).serialize();
+        $.ajax({
+            url:"/user/forgot-password",
+            type:"POST",
+            data:formdata,
+            success:function (resp){
+                if (resp.type=="error"){
+                    $(".loader").hide();
+                    $.each(resp.errors,function (i,error){
+                        $("#forgot-"+i).attr('style','color:red');
+                        $("#forgot-"+i).html(error);
+
+                        setTimeout(function (){
+                            $("#forgot-"+i).css({'display':'none'});
+                        },3000);
+                    });
+
+                }else if (resp.type=="success"){
+
+                    $(".loader").hide();
+                    $("#forgot-success" ).attr('style', 'color:green');
+                    $("#forgot-success" ).html(resp.message);
+
+
+                }
+
+
+            },error:function (){
+                alert("Error");
+            }
+
+        })
+    });
 });
 
 function get_filter(class_name){

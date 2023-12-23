@@ -143,6 +143,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::post('/user/register','UserController@userRegister');
     //User Login
     Route::post('/user/login','UserController@userLogin');
+    //User Forgot Password
+    Route::match(['get','post'],'user/forgot-password','UserController@forgotPassword');
     //User logout
     Route::get('user/logout','UserController@userLogout');
     //Confirm User Account

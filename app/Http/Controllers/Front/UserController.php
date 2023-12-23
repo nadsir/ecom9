@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Validator;
 use Session;
 
@@ -87,6 +88,41 @@ class UserController extends Controller
 
 
         }
+    }
+    public function forgotPassword(Request $request){
+        if ($request->ajax()){
+            $data=$request->all();
+            $validadtor=Validator::make($request->all(),[
+                'email'=>'required|email|max:150|exists:users',
+            ],
+                [
+                    'email.exists'=>'ایمیل وجود ندارد .'
+                ]);
+            if($validadtor->passes()){
+                //Generate New Password
+                 $new_password=Str::random(16);
+                 //Update New Password
+                 User::where('email',$data['email'])->update(['password'=>bcrypt($new_password)]);
+                 //Get User Details
+                $userDetails=User::where('email',$data['email'])->first()->toArray();
+                 //Send Email to User
+                $email=$data['email'];
+                $messageData=['name'=>$userDetails['name'],'email'=>$userDetails['email'],'password'=>$new_password];
+                Mail::send('emails.user_forgot_password',$messageData,function ($message) use($email){
+                    $message->to($email)->subject('پسورد جدید سایت x');
+                });
+                //Show Success Message
+                return response()->json(['type'=>'success','message'=>'پسورد جدید به ایمیل شما ارسال شد.']);
+
+
+            }else{
+                return response()->json(['type'=>'error','errors'=>$validadtor->messages()]);
+            }
+
+        }else{
+            return view('front.users.forgot_password');
+        }
+
     }
     public function userLogin(Request $request){
         if ($request->ajax()){
