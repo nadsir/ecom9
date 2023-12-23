@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 
 use App\Models\Cart;
+use App\Models\Country;
 use App\Models\Sms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,7 @@ class UserController extends Controller
     public function LoginRegister(){
         return view('front.users.login_register');
     }
+
     public function userRegister(Request $request){
         if ($request->ajax()){
             $data=$request->all();
@@ -88,6 +90,50 @@ class UserController extends Controller
 
 
         }
+    }
+    public function userAccount(Request $request){
+        if ($request->ajax()){
+            $data=$request->all();
+            /*echo "<pre>";print_r($data);die;*/
+            $validadtor=Validator::make($request->all(),[
+                'name'=>'required|string|max:100',
+                'city'=>'required|string|max:100',
+                'state'=>'required|string|max:100',
+                'address'=>'required|string|max:100',
+                'country'=>'required|string|max:100',
+                'mobile'=>'required|numeric',
+                'pincode'=>'required|numeric',
+
+            ],
+                [
+                    'name.required'=>'Please accept our Terms & Conditions'
+                ]);
+            if ($validadtor->passes()){
+                //Update User Details
+                User::where('id',Auth::user()->id)->update([
+                   'name'=>$data['name'],
+                    'mobile'=>$data['mobile'],
+                    'city'=>$data['city'],
+                    'state'=>$data['state'],
+                    'country'=>$data['country'],
+                    'pincode'=>$data['pincode'],
+                    'address'=>$data['address']
+                ]);
+                //Redirect back user with success message
+                return response()->json(['type'=>'success','message'=>'اطلاعات ناحیه کاربری شما با موفقیت بروزرسانی شد .']);
+
+
+            }else{
+                return response()->json(['type'=>'error','errors'=>$validadtor->messages()]);
+            }
+
+
+        }else{
+            $countries=Country::where('status',1)->get()->toArray();
+            return view('front.users.user_account')->with(compact('countries'));
+        }
+
+
     }
     public function forgotPassword(Request $request){
         if ($request->ajax()){
