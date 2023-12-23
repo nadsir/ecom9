@@ -35,9 +35,14 @@
     <link rel="stylesheet" href="{{url('front/css/bundle.css')}}">
     <!--zoom-->
     <link rel="stylesheet" href="{{url('front/css/easyzoom.css')}}">
+    <!--custom-->
+    <link rel="stylesheet" href="{{url('front/css/custom.css')}}">
 </head>
 
 <body>
+<div class="loader">
+    <img width="50px" src="{{asset('front/images/loaders/loader.gif')}}" alt="loading...." />
+</div>
 
 <!-- app -->
 <div id="app">

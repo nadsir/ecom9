@@ -1,5 +1,6 @@
 
 $(document).ready(function (){
+
    $("#getPrice").change(function (){
       var size=$(this).val();
       var product_id=$(this).attr("product-id");
@@ -84,6 +85,7 @@ $(document).ready(function (){
 
     //Register Form Validation
     $("#registerForm").submit(function (){
+        $(".loader").show();
        var formdata=$(this).serialize();
        $.ajax({
            url:"/user/register",
@@ -91,6 +93,7 @@ $(document).ready(function (){
            data:formdata,
            success:function (resp){
                if (resp.type=="error"){
+                   $(".loader").hide();
                    $.each(resp.errors,function (i,error){
                        $("#register-"+i).attr('style','color:red');
                        $("#register-"+i).html(error);
@@ -101,7 +104,11 @@ $(document).ready(function (){
                    });
 
                }else if (resp.type=="success"){
-                   alert(resp.message);
+
+                   $(".loader").hide();
+                   $("#register-success" ).attr('style', 'color:green');
+                   $("#register-success" ).html(resp.message);
+
 
                }
 

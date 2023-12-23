@@ -48,9 +48,10 @@ class UserController extends Controller
                 Mail::send('emails.confirmation',$messageData,function ($message)use($email){
                     $message->to($email)->subject('تایید اکانت شما در فروشگاه X');
                 });
+                $redirectTo=url('cart');
                 //Redirect back user with success message
                 /*$redirectTo=url('user/login-register');*/
-                return response()->json(['type'=>'success','message'=>'لطفا ایمیل ارسال شده توسط ما را تایید کنید .']);
+                return response()->json(['type'=>'success','message'=>'لطفا ایمیل ارسال شده توسط ما را تایید کنید .','url'=>$redirectTo]);
 
 
                 /*Activate the user  straight way without sending any confirmation email*/
