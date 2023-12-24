@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="{{url('front/css/easyzoom.css')}}">
     <!--custom-->
     <link rel="stylesheet" href="{{url('front/css/custom.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

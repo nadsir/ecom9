@@ -139,6 +139,10 @@ $(document).ready(function (){
                         setTimeout(function (){
                             $("#account-"+i).css({'display':'none'});
                         },3000);
+                        Swal.fire({
+                            icon: "error",
+                            title: error,
+                        });
                     });
 
                 }else if (resp.type=="success"){
@@ -147,6 +151,10 @@ $(document).ready(function (){
                     $("#account-success" ).attr('style', 'color:green');
                     $("#account-success" ).html(resp.message);
                     setTimeout(function (){$("#account-success").css({'display':'none'});},3000);
+                    Swal.fire({
+                        icon: "success",
+                        title: "بروزرسانی با موفقیت انجام شد",
+                    });
 
                 }
 

@@ -106,7 +106,7 @@ class UserController extends Controller
 
             ],
                 [
-                    'name.required'=>'Please accept our Terms & Conditions'
+                    'name.required'=>'فیلد نام خالی می باشد '
                 ]);
             if ($validadtor->passes()){
                 //Update User Details
