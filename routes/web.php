@@ -138,13 +138,19 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     //Delete cart Item
     Route::post('/cart/delete','ProductsController@cartDelete');
     //User Login/Register
-    Route::get('/user/login-register','UserController@LoginRegister');
+    Route::get('user/login-register',['as'=>'login','uses'=>'UserController@LoginRegister']);
     //User Register
     Route::post('/user/register','UserController@userRegister');
-    //User Account
-    Route::match(['get','post'],'user/account','UserController@userAccount');
-    //User Update Password
-    Route::post('user/update-password','UserController@userUpdatePassword');
+
+    Route::group(['middleware'=>['auth']],function (){
+        //User Account
+        Route::match(['get','post'],'user/account','UserController@userAccount');
+        //User Update Password
+        Route::post('user/update-password','UserController@userUpdatePassword');
+    });
+
+
+
     //User Login
     Route::post('/user/login','UserController@userLogin');
     //User Forgot Password
@@ -155,6 +161,6 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::get('/user/confirm/{code}','UserController@confirmAccount');
 
 });
-require __DIR__.'/auth.php';
+
 
 
