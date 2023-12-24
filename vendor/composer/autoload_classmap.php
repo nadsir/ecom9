@@ -57,6 +57,7 @@ return array(
     'App\\Models\\ProductsFiltersValue' => $baseDir . '/app/Models/ProductsFiltersValue.php',
     'App\\Models\\ProductsImage' => $baseDir . '/app/Models/ProductsImage.php',
     'App\\Models\\Section' => $baseDir . '/app/Models/Section.php',
+    'App\\Models\\Sms' => $baseDir . '/app/Models/Sms.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\Vendor' => $baseDir . '/app/Models/Vendor.php',
     'App\\Models\\VendorsBankDetail' => $baseDir . '/app/Models/VendorsBankDetail.php',
