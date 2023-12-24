@@ -10,6 +10,7 @@ use App\Models\Sms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Validator;
@@ -119,6 +120,53 @@ class UserController extends Controller
                     'pincode'=>$data['pincode'],
                     'address'=>$data['address']
                 ]);
+                //Redirect back user with success message
+                return response()->json(['type'=>'success','message'=>'اطلاعات ناحیه کاربری شما با موفقیت بروزرسانی شد .']);
+
+
+            }else{
+                return response()->json(['type'=>'error','errors'=>$validadtor->messages()]);
+            }
+
+
+        }else{
+            $countries=Country::where('status',1)->get()->toArray();
+            return view('front.users.user_account')->with(compact('countries'));
+        }
+
+
+    }
+    public function userUpdatePassword(Request $request){
+        if ($request->ajax()){
+            $data=$request->all();
+
+            $validadtor=Validator::make($request->all(),[
+                'current_password'=>'required',
+                'new_password'=>'required|string|min:6',
+                'confirm_password'=>'required|min:6|same:new_password',
+
+
+            ],
+                [
+                    'current_password.required'=>'فیلد نام خالی می باشد '
+                ]);
+            if ($validadtor->passes()){
+                $current_password=$data['current_password'];
+                $checkPassword=User::where('id',Auth::user()->id)->first();
+                if (Hash::check($current_password,$checkPassword->password)){
+                    //Update User Current Password
+                    $user=User::find(Auth::user()->id);
+                    $user->password=bcrypt($data['new_password']);
+                    $user->save();
+                    return response()->json(['type'=>'success','message'=>'رمز عبور شما با موفقیت بروزرسانی شد .']);
+
+                }else{
+                    //Redirect back user with success message
+                    return response()->json(['type'=>'incorrect','message'=>'رمز عبور فعلی شما نا معتبر می باشد .']);
+                }
+
+
+
                 //Redirect back user with success message
                 return response()->json(['type'=>'success','message'=>'اطلاعات ناحیه کاربری شما با موفقیت بروزرسانی شد .']);
 

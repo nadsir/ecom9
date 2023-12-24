@@ -213,6 +213,10 @@ class ProductsController extends Controller
                 $user_id=0;
                 $countProducts=Cart::where(['product_id'=>$data['product_id'],'size'=>$data['size'],'session_id'=>$session_id])->count();
             }
+            if($countProducts>0){
+                return  redirect()->back()->with('error_message','محصول مورد نظر هم اکنون در کارت شما موجود می باشد.');
+            }
+
             //Save Product in carts table
             $item=new Cart;
             $item->session_id=$session_id;

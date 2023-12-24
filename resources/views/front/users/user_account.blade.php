@@ -143,36 +143,37 @@
                     </div>
                 </div>
                 <!-- Login /- -->
-                <!-- Register -->
+                <!-- Update password -->
                 <div class="col-lg-6">
                     <div class="reg-wrapper">
                         <h2 class="account-h2 u-s-m-b-20">بروزرسانی رمز عبور :</h2>
-                        <p id="register-success"></p>
-                        <form id="registerForm" action="javascript:;" method="POST">
+                        <p id="password-success"></p>
+                        <p id="password-error"></p>
+                        <form id="passwordForm" action="javascript:;" method="POST">
                             @csrf
                             <div class="u-s-m-b-30">
-                                <label for="username">پسورد فعلی :
+                                <label for="current-password">پسورد فعلی :
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-name" name="name" class="text-field"
-                                       placeholder="user Name">
-                                <p id="register-name"></p>
+                                <input type="password" id="current-password" name="current_password" class="text-field"
+                                       placeholder="پسورد فعلی">
+                                <p id="current-password"></p>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="usermobile"> پسورد جدید :
+                                <label for="new-password"> پسورد جدید :
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-mobile" name="mobile" class="text-field"
-                                       placeholder="user Mobile">
-                                <p id="register-mobile"></p>
+                                <input type="password" id="new-password" name="new_password" class="text-field"
+                                       placeholder="پسورد جدید ">
+                                <p id="new-password"></p>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="useremail">تکرار پسورد جدید :
+                                <label for="confirm-password">تکرار پسورد جدید :
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-email" name="email" class="text-field"
-                                       placeholder="user Email">
-                                <p id="register-email"></p>
+                                <input type="password" id="confirm-password" name="confirm_password" class="text-field"
+                                       placeholder="تکرار پسورد جدید">
+                                <p id="confirm-password"></p>
                             </div>
 
                             <div class="u-s-m-b-45">

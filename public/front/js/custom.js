@@ -82,7 +82,6 @@ $(document).ready(function (){
 
 
     });
-
     //Register Form Validation
     $("#registerForm").submit(function (){
         $(".loader").show();
@@ -119,8 +118,6 @@ $(document).ready(function (){
 
        })
     });
-
-
     //Account Form Validation
     $("#accountForm").submit(function (){
         $(".loader").show();
@@ -151,6 +148,65 @@ $(document).ready(function (){
                     $("#account-success" ).attr('style', 'color:green');
                     $("#account-success" ).html(resp.message);
                     setTimeout(function (){$("#account-success").css({'display':'none'});},3000);
+                    Swal.fire({
+                        icon: "success",
+                        title: "بروزرسانی با موفقیت انجام شد",
+                    });
+
+                }
+
+
+            },error:function (){
+                alert("Error");
+            }
+
+        })
+    });
+    //Password Form Validation
+    $("#passwordForm").submit(function (){
+        $(".loader").show();
+        var formdata=$(this).serialize();
+        $.ajax({
+            url:"/user/update-password",
+            type:"POST",
+            data:formdata,
+            success:function (resp){
+                if (resp.type=="error"){
+                    $(".loader").hide();
+                    $.each(resp.errors,function (i,error){
+                        $("#password-"+i).attr('style','color:red');
+                        $("#password-"+i).html(error);
+
+                        setTimeout(function (){
+                            $("#password-"+i).css({'display':'none'});
+                        },3000);
+                        Swal.fire({
+                            icon: "error",
+                            title: error,
+                        });
+                    });
+
+                }else if (resp.type=="incorrect"){
+                    $(".loader").hide();
+
+                        $("#password-error").attr('style','color:red');
+                        $("#password-error").html(resp.message);
+
+                        setTimeout(function (){
+                            $("#password-error").css({'display':'none'});
+                        },3000);
+                        Swal.fire({
+                            icon: "error",
+                            title: resp.message,
+                        });
+
+
+                }else if (resp.type=="success"){
+
+                    $(".loader").hide();
+                    $("#password-success" ).attr('style', 'color:green');
+                    $("#password-success" ).html(resp.message);
+                    setTimeout(function (){$("#password-success").css({'display':'none'});},3000);
                     Swal.fire({
                         icon: "success",
                         title: "بروزرسانی با موفقیت انجام شد",
@@ -198,7 +254,6 @@ $(document).ready(function (){
 
         })
     });
-
     //Forgot Form Validation
     $("#forgotForm").submit(function (){
         $(".loader").show();
