@@ -246,14 +246,14 @@ class ProductsController extends Controller
             $availableStock=ProductAttribute::select('stock')->where(['product_id'=>$cartDetails['product_id'],'size'=>$cartDetails['size']])->first()->toArray();
             if ($data['qty'] > $availableStock['stock']){
                 $getCartItems =Cart::getCartItems();
-                return response()->json(['status'=>false,'message'=>'تعداد موردنظر موجود نمی باشد','view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')) ]);
+                return response()->json(['status'=>false,'message'=>'تعداد موردنظر موجود نمی باشد','view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')),'headerview'=>(string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
             }
 
             //Check if product size is available
             $availableSize=ProductAttribute::where(['product_id'=>$cartDetails['product_id'],'size'=>$cartDetails['size'],'status'=>1])->count();
             if ($availableSize==0){
                 $getCartItems =Cart::getCartItems();
-                return response()->json(['status'=>false,'message'=>' سایز موردنظر موجود نمی باشد . لطفا محصول مورد نظر را پاک و محصول دیگری انتخاب کنید','view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')) ]);
+                return response()->json(['status'=>false,'message'=>' سایز موردنظر موجود نمی باشد . لطفا محصول مورد نظر را پاک و محصول دیگری انتخاب کنید','view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')),'headerview'=>(string)View::make('front.layout.header_cart_items')->with(compact('getCartItems')) ]);
             }
 
 
@@ -262,7 +262,8 @@ class ProductsController extends Controller
             $getCartItems =Cart::getCartItems();
             $totalCartItems=totalCartItems();
 
-            return response()->json(['status'=>true,'totalCartItems'=>$totalCartItems,'view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')) ]);
+            return response()->json(['status'=>true,'totalCartItems'=>$totalCartItems,'view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                'headerview'=>(string)View::make('front.layout.header_cart_items')->with(compact('getCartItems')) ]);
 
         }
 
@@ -273,7 +274,8 @@ class ProductsController extends Controller
             Cart::where('id',$data['cartid'])->delete();
             $getCartItems =Cart::getCartItems();
             $totalCartItems=totalCartItems();
-            return response()->json(['totalCartItems'=>$totalCartItems,'view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')) ]);
+            return response()->json(['totalCartItems'=>$totalCartItems,'view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+            'headerview'=>(string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
         }
     }
 }
