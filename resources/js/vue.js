@@ -389,5 +389,7 @@ $(document).ready(function (){
     $("#ManualCoupon").click(function (){
         $("#couponField").hide();
     });
+    $('.js-example-basic-multiple').select2();
+
 });
 

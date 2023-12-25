@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{url('admin/dist/css/bootstrap-rtl.min.css')}}">
     <!-- template rtl version -->
     <link rel="stylesheet" href="{{url('admin/dist/css/custom-style.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @vite('resources/css/app.css')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -83,6 +84,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(function () {
         $("#example1").DataTable({

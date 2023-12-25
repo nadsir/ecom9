@@ -71,8 +71,8 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="coupon_option">انتخاب کوپن</label><br>
-                                        <span><input id="AutomaticCoupon" type="radio" name="coupon_option" value="Automatic" > &nbsp;Automatic &nbsp;&nbsp;</span>
-                                        <span><input id="ManualCoupon" type="radio" name="coupon_option" value="Manual" checked=""> &nbsp;Manual &nbsp;&nbsp;</span>
+                                        <span><input id="AutomaticCoupon" type="radio" name="coupon_option" value="Automatic" checked=""> &nbsp; Manual&nbsp;&nbsp;</span>
+                                        <span><input id="ManualCoupon" type="radio" name="coupon_option" value="Manual" > &nbsp; Automatic&nbsp;&nbsp;</span>
                                     </div>
 
                                     <div class="form-group" style="display: none" id="couponField">
@@ -90,16 +90,17 @@
                                     <div class="form-group">
                                         <label for="amount_type">نوع تخفیف کوپن</label><br>
                                         <span><input  type="radio" name="amount_type" value="Percentage" > &nbsp;درصد &nbsp;&nbsp;</span>
-                                        <span><input  type="radio" name="amount_type" value="ّّFixed" checked=""> &nbsp;به تومان &nbsp;&nbsp;</span>
+                                        <span><input  type="radio" name="amount_type" value="Fixed" checked=""> &nbsp;به تومان &nbsp;&nbsp;</span>
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label for="category_name">مقدار</label>
-                                        <input type="text" class="form-control" id="coupon_name" placeholder="" name="coupon_name">
+                                        <input type="text" class="form-control" id="coupon_name" placeholder="" name="amount">
                                     </div>
+
                                     <div class="form-group">
                                         <label for="category_id">انتخاب دسته بندی</label>
-                                        <select  name="category_id[]"  class="form-control" multiple>
+                                        <select  name="categories[]"  class="form-control js-example-basic-multiple" multiple="multiple">
                                             @foreach($categories as $section)
                                                 <optgroup label="{{$section['name']}}" style="background-color: #c5c5c5"></optgroup>
                                                 <hr>
@@ -122,9 +123,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="brand">انتخاب برند</label>
-                                        <select  name="brand[]"  class="form-control" multiple>
-                                            <option value="">انتخاب بخش</option>
+                                        <label for="brands">انتخاب برند</label>
+                                        <select  name="brands[]"  class="form-control js-example-basic-multiple" multiple>
                                             @foreach($brandss as $brands)
                                                 <option value="{{$brands['id']}}">{{$brands['name']}}</option>
                                             @endforeach
@@ -132,10 +132,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="users">انتخاب کاربر</label>
-                                        <select  name="users[]" class="form-control" multiple>
-                                            <option value="">انتخاب بخش</option>
+                                        <select  name="users[]" class="form-control js-example-basic-multiple" multiple>
                                             @foreach($users as $user)
-                                                <option value="{{$user['email']}}}">{{$user['email']}}</option>
+                                                <option value="{{$user['email']}}">{{$user['email']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -170,6 +169,4 @@
         <!-- /.content -->
     </div>
 @endsection
-<script>
 
-</script>
