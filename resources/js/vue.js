@@ -150,6 +150,31 @@ createApp({
                     alert(error);
                 });
         },
+        //update Coupon status changeProductStatus
+        changecouponStatus(item){
+            console.log(item)
+            var status=document.getElementById(item).getAttribute("status");
+            var coupon_id=document.getElementById(item).getAttribute("coupon-id");
+            axios.post('/admin/update-coupon-status',{
+                status:status,coupon_id:coupon_id
+            }).then(function (response) {
+                var data=document.getElementById(item).className;
+                if (data=='fa fa-toggle-on'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-on");
+                    element.classList.add('fa-toggle-off');
+                    element.setAttribute("status", "Deactive");
+                } else if (data=='fa fa-toggle-off'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-off");
+                    element.classList.add('fa-toggle-on');
+                    element.setAttribute("status", "Active");
+                }
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
+        },
         //update attributes status
         changeAttributeStatus(item){
 
