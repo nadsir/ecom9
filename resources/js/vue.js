@@ -381,3 +381,13 @@ createApp({
 }).mount('#app');
 
 
+$(document).ready(function (){
+    //Show/Hide coupon field for Manual/Automatic
+    $("#AutomaticCoupon").click(function (){
+        $("#couponField").show();
+    });
+    $("#ManualCoupon").click(function (){
+        $("#couponField").hide();
+    });
+});
+
