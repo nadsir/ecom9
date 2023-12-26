@@ -26,6 +26,7 @@ class VerifyCsrfToken extends Middleware
         "/user/register",
         "/user/account",
         "/user/update-password",
+        "/apply-coupon",
 
     ];
 }

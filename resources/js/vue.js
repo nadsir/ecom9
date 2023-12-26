@@ -250,7 +250,6 @@ createApp({
                     alert(error);
                 });
         },
-
         //Update Filter status
         changeFilterStatus(item){
 
@@ -390,6 +389,7 @@ $(document).ready(function (){
         $("#couponField").hide();
     });
     $('.js-example-basic-multiple').select2();
+
 
 });
 

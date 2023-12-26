@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Product;
@@ -277,5 +278,24 @@ class ProductsController extends Controller
             return response()->json(['totalCartItems'=>$totalCartItems,'view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')),
             'headerview'=>(string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
         }
+    }
+    public function applyCoupon(Request $request){
+        if ($request->ajax()){
+            $data=$request->all();
+            /*echo "<pre>";print_r($data);die;*/
+            $getCartItems =Cart::getCartItems();
+            $totalCartItems=totalCartItems();
+            $couponCount=Coupon::where('coupon_code',$data['code'])->count();
+            if ($couponCount==0){
+                return response()->json(['status'=>'false','message'=>'کوپن مجاز نمی باشد','totalCartItems'=>$totalCartItems,'view'=>(string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                    'headerview'=>(string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
+            }else{
+                //Check for other coupon conditions
+                echo "check for other colition";die;
+            }
+
+
+        }
+
     }
 }

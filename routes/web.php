@@ -151,6 +151,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
         Route::match(['get','post'],'user/account','UserController@userAccount');
         //User Update Password
         Route::post('user/update-password','UserController@userUpdatePassword');
+        //Apply Coupon
+        Route::post('/apply-coupon','ProductsController@applyCoupon');
     });
 
 
