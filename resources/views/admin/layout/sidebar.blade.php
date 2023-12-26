@@ -80,11 +80,17 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview"
-                                @if(Session::get('page')=='products')style="display: block;" @endif>
+                                @if(Session::get('page')=='products' || Session::get('page')=='coupon')style="display: block;" @endif>
                                 <li class="nav-item">
                                     <a href="{{url('admin/products')}}" class="nav-link @if(Session::get('page')=='products')active @endif">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p>محصولات</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/coupons')}}" class="nav-link @if(Session::get('page')=='coupon')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>کوپن ها</p>
                                     </a>
                                 </li>
 

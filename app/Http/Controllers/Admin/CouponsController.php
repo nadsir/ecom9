@@ -15,8 +15,20 @@ class CouponsController extends Controller
 {
     public function coupons(){
         Session::put('page','coupon');
-        $coupons=Coupon::get()->toArray();
-       return view('admin.coupons.coupons')->with(compact('coupons'));
+        $adminType=Auth::guard('admin')->user()->type;
+        $vendor_id=Auth::guard('admin')->user()->vendor_id;
+        if ($adminType=='vendor'){
+            $vendorStatus=Auth::guard('admin')->user()->status;
+            if ($vendorStatus==0){
+                return redirect('admin/update-vendor-details/personal')->with('error_message',' تاکنون حساب کاربری شما توسط ادمین تایید نشده . از صحت تکمیل اطلاعات شغلی و شخصی خود اطمینان حاصل فرمایید. ');
+            }
+            $coupons=Coupon::where('vendor_id',$vendor_id)->get()->toArray();
+        }else{
+            $coupons=Coupon::get()->toArray();
+        }
+
+        return view('admin.coupons.coupons')->with(compact('coupons'));
+
     }
     public function updateCouponStatus(Request $request){
         Session::put('page','coupon');
