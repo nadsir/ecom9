@@ -41,11 +41,17 @@ class CouponsController extends Controller
             //Add Coupon
             $title="اضافه کردن کوپن";
             $coupon=new Coupon;
+            $selCats=array();
+            $selBrands=array();
+            $selUsers=array();
             $message="کوپن با موفقیت اضافه شد";
         }else{
             //Update Coupon
             $title="بروزرسانی کوپن";
             $coupon=Coupon::find($id);
+            $selCats=explode(',',$coupon['categories']);
+            $selBrands=explode(',',$coupon['brands']);
+            $selUsers=explode(',',$coupon['users']);
             $message="کوپن با موفقیت بروزرسانی شد";
 
         }
@@ -87,8 +93,6 @@ class CouponsController extends Controller
             }
             if ($data['coupon_option']=="Automatic"){
                 $coupon_code=str_random(8);
-
-
             }else{
                 $coupon_code=$data['coupon_code'];
             }
@@ -118,6 +122,7 @@ class CouponsController extends Controller
         //Get All Users
         $users=User::select('email')->where('status',1)->get();
 
-        return view('admin.coupons.add_edit_coupon')->with(compact('title','message','categories','brandss','users'));
+
+        return view('admin.coupons.add_edit_coupon')->with(compact('title','message','categories','brandss','users','selCats','selBrands','selUsers','coupon'));
     }
 }

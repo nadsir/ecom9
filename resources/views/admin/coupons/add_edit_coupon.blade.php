@@ -69,33 +69,40 @@
 
 
                                 <div class="card-body">
+                                    @if(empty($coupon['coupon_code']))
                                     <div class="form-group">
                                         <label for="coupon_option">انتخاب کوپن</label><br>
                                         <span><input id="AutomaticCoupon" type="radio" name="coupon_option" value="Automatic" checked=""> &nbsp; Manual&nbsp;&nbsp;</span>
                                         <span><input id="ManualCoupon" type="radio" name="coupon_option" value="Manual" > &nbsp; Automatic&nbsp;&nbsp;</span>
                                     </div>
-
                                     <div class="form-group" style="display: none" id="couponField">
-                                        <label for="coupon_code">کد کوپن</label>
-
+                                        <label for="coupon_code"> کد کوپن :</label>
                                         <input type="text" class="form-control" id="coupon_code" placeholder="" name="coupon_code">
                                     </div>
+                                    @else
+                                        <input type="hidden" name="coupon_option" value="{{$coupon['coupon_option']}}">
+                                        <input type="hidden" name="coupon_code" value="{{$coupon['coupon_code']}}">
+                                        <div class="form-group">
+                                            <label for="coupon_code">کد کوپن :</label>
+                                            <span>{{$coupon['coupon_code']}}</span>
+                                        </div>
+                                    @endif
                                     <br>
                                     <div class="form-group">
                                         <label for="coupon_type">نوع کوپن</label><br>
-                                        <span><input  type="radio" name="coupon_type" value="Multiple Times" > &nbsp;اعمال چند بار &nbsp;&nbsp;</span>
-                                        <span><input  type="radio" name="coupon_type" value="Single Times" checked=""> &nbsp;اعمال یکبار &nbsp;&nbsp;</span>
+                                        <span><input  type="radio" name="coupon_type" value="Multiple Times" @if(isset($coupon['coupon_type']) && $coupon['coupon_type']=="Multiple Times") checked="" @endif> &nbsp;اعمال چند بار &nbsp;&nbsp;</span>
+                                        <span><input  type="radio" name="coupon_type" value="Single Times"  @if(isset($coupon['coupon_type']) && $coupon['coupon_type']=="Single Times") checked="" @endif> &nbsp;اعمال یکبار &nbsp;&nbsp;</span>
                                     </div>
                                     <br>
                                     <div class="form-group">
                                         <label for="amount_type">نوع تخفیف کوپن</label><br>
-                                        <span><input  type="radio" name="amount_type" value="Percentage" > &nbsp;درصد &nbsp;&nbsp;</span>
-                                        <span><input  type="radio" name="amount_type" value="Fixed" checked=""> &nbsp;به تومان &nbsp;&nbsp;</span>
+                                        <span><input  type="radio" name="amount_type" value="Percentage" @if(isset($coupon['amount_type']) && $coupon['amount_type']=="Percentage") checked="" @endif> &nbsp;درصد &nbsp;&nbsp;</span>
+                                        <span><input  type="radio" name="amount_type" value="Fixed" @if(isset($coupon['amount_type']) && $coupon['amount_type']=="Fixed") checked="" @endif> &nbsp;به تومان &nbsp;&nbsp;</span>
                                     </div>
                                     <br>
                                     <div class="form-group">
-                                        <label for="category_name">مقدار</label>
-                                        <input type="text" class="form-control" id="coupon_name" placeholder="" name="amount">
+                                        <label for="amount">مقدار</label>
+                                        <input type="text" class="form-control" id="amount" placeholder="" name="amount" @if(isset($coupon['amount'])) value="{{$coupon['amount']}}" @else value="{{old('amount')}}" @endif>
                                     </div>
 
                                     <div class="form-group">
@@ -105,12 +112,12 @@
                                                 <optgroup label="{{$section['name']}}" style="background-color: #c5c5c5"></optgroup>
                                                 <hr>
                                                 @foreach($section['categories'] as $category)
-                                                    <option value="{{$category['id']}}">
+                                                    <option value="{{$category['id']}}" @if(in_array($category['id'],$selCats)) selected="" @endif>
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;&nbsp;
                                                         {{$category['category_name']}}
                                                     </option>
                                                     @foreach($category['subcategories'] as $subcategory)
-                                                        <option value="{{$subcategory['id']}}">
+                                                        <option value="{{$subcategory['id']}}" @if(in_array($subcategory['id'],$selCats)) selected="" @endif>
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;
                                                             {{$subcategory['category_name']}}
@@ -126,7 +133,7 @@
                                         <label for="brands">انتخاب برند</label>
                                         <select  name="brands[]"  class="form-control js-example-basic-multiple" multiple>
                                             @foreach($brandss as $brands)
-                                                <option value="{{$brands['id']}}">{{$brands['name']}}</option>
+                                                <option value="{{$brands['id']}}" @if(in_array($brands['id'],$selBrands)) selected="" @endif>{{$brands['name']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -134,13 +141,13 @@
                                         <label for="users">انتخاب کاربر</label>
                                         <select  name="users[]" class="form-control js-example-basic-multiple" multiple>
                                             @foreach($users as $user)
-                                                <option value="{{$user['email']}}">{{$user['email']}}</option>
+                                                <option value="{{$user['email']}}" @if(in_array($user['email'],$selUsers)) selected="" @endif>{{$user['email']}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="expire_date">تاریخ انقضا</label>
-                                        <input type="date" class="form-control" id="expire_date" placeholder="" name="expire_date">
+                                        <input type="date" class="form-control" id="expire_date" placeholder="" name="expire_date" @if(isset($coupon['expire_date'])) value="{{$coupon['expire_date']}}" @else value="{{old('expire_date')}}" @endif>
                                     </div>
 
                                 </div>
