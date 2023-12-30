@@ -132,6 +132,7 @@
                                     <div class="form-group">
                                         <label for="brands">انتخاب برند</label>
                                         <select  name="brands[]"  class="form-control js-example-basic-multiple" multiple>
+
                                             @foreach($brandss as $brands)
                                                 <option value="{{$brands['id']}}" @if(in_array($brands['id'],$selBrands)) selected="" @endif>{{$brands['name']}}</option>
                                             @endforeach
@@ -177,3 +178,9 @@
     </div>
 @endsection
 
+<script>
+    import Options from "../../../../public/admin/dist/js/plugins/chartjs2/docs/general/options.html";
+    export default {
+        components: {Options}
+    }
+</script>

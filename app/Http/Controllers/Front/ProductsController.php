@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use App\Models\DeliveryAddress;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
@@ -407,6 +408,12 @@ class ProductsController extends Controller
 
 
         }
+
+    }
+    public function checkout(){
+        $deliveryAddresses=DeliveryAddress::deliveryAddresses();
+
+        return view('front.products.checkout')->with(compact('deliveryAddresses'));
 
     }
 }
