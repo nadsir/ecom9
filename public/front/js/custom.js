@@ -310,9 +310,19 @@ $(document).ready(function (){
                 if (resp.message!=""){
                     alert(resp.message);
                 }
+
                 $(".totalCartItems").html(resp.totalCartItems);
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerview);
+                if(resp.couponAmount>0){
+                    $(".couponAmount").text("تومان"+resp.couponAmount)
+                }else {
+                    $(".couponAmount").text("0 تومان")
+                }
+                if(resp.grand_total>0){
+                    $(".grand_total").text("تومان"+resp.grand_total)
+
+                }
             },error:function (){
                 alert('Error')
             }

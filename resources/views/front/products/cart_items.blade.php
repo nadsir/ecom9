@@ -129,7 +129,13 @@ use App\Models\Product;
                     <h3 class="calc-h3 u-s-m-b-0">Coupon Discount</h3>
                 </td>
                 <td>
-                    <span class="calc-text">$222.00</span>
+                    <span class="calc-text couponAmount">
+                        @if(Session::has('couponAmount'))
+                            تومان{{Session::get('couponAmount')}}
+                        @else
+                            0 تومان
+                        @endif
+                    </span>
                 </td>
             </tr>
             <tr>
@@ -137,7 +143,7 @@ use App\Models\Product;
                     <h3 class="calc-h3 u-s-m-b-0">Grand Total</h3>
                 </td>
                 <td>
-                    <span class="calc-text">{{$total_price}}تومان</span>
+                    <span class="calc-text grand_total">{{$total_price-Session::get('couponAmount')}}تومان</span>
                 </td>
             </tr>
             </tbody>

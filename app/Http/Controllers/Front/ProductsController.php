@@ -251,6 +251,8 @@ class ProductsController extends Controller
     public function cartUpdate(Request $request)
     {
         if ($request->ajax()) {
+            Session::forget('couponAmount');
+            Session::forget('couponCode');
             $data = $request->all();
             /*echo "<pre>"; print_r($data); die;*/
 
@@ -275,7 +277,8 @@ class ProductsController extends Controller
             Cart::where('id', $data['cartid'])->update(['quantity' => $data['qty']]);
             $getCartItems = Cart::getCartItems();
             $totalCartItems = totalCartItems();
-
+            Session::forget('couponAmount');
+            Session::forget('couponCode');
             return response()->json(['status' => true, 'totalCartItems' => $totalCartItems, 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
                 'headerview' => (string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
 
@@ -286,6 +289,8 @@ class ProductsController extends Controller
     public function cartDelete(Request $request)
     {
         if ($request->ajax()) {
+            Session::forget('couponAmount');
+            Session::forget('couponCode');
             $data = $request->all();
             Cart::where('id', $data['cartid'])->delete();
             $getCartItems = Cart::getCartItems();
@@ -299,12 +304,15 @@ class ProductsController extends Controller
     {
         if ($request->ajax()) {
             $data = $request->all();
+            Session::forget('couponAmount');
+            Session::forget('couponCode');
+
             /*echo "<pre>";print_r($data);die;*/
             $getCartItems = Cart::getCartItems();
             $totalCartItems = totalCartItems();
             $couponCount = Coupon::where('coupon_code', $data['code'])->count();
             if ($couponCount == 0) {
-                return response()->json(['status' => 'false', 'message' => 'کوپن مجاز نمی باشد', 'totalCartItems' => $totalCartItems, 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                return response()->json(['status' => false, 'message' => 'کوپن مجاز نمی باشد', 'totalCartItems' => $totalCartItems, 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
                     'headerview' => (string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
             } else {
                 //Check for other coupon conditions
@@ -327,10 +335,14 @@ class ProductsController extends Controller
                 //Get all selected categories from coupon
                 $catArr = explode(",", $couponDetails->categories);
                 //Check if any cart item not belong to coupon category
+                $total_amount=0;
                 foreach ($getCartItems as $key => $item) {
                     if (!in_array($item['product']['category_id'], $catArr)) {
                         $message = "این کوپن مربوط به هیچکدام از محصولات داخل کارت نمی باشد.";
                     }
+                    $attrPrice=Product::getDiscountAttributePrice($item['product_id'],$item['size']);
+                    $total_amount=$total_amount+($attrPrice['final_price']*$item['quantity']);
+
                 }
                 //Check if coupon is from selected users
                 //Get all selected users from coupon and convert to array
@@ -365,8 +377,26 @@ class ProductsController extends Controller
 
                 //If Error message is there
                 if (isset($message)) {
-                    return response()->json(['status' => 'false', 'message' => $message, 'totalCartItems' => $totalCartItems, 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                    return response()->json(['status' => false, 'message' => $message, 'totalCartItems' => $totalCartItems, 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
                         'headerview' => (string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
+
+                }else{
+                     //Coupon code id correct
+                    //Check if Coupon Amount type is fixed or Percentage
+                    if($couponDetails->amount_type=="Fixed"){
+                        $couponAmount=$couponDetails->amount;
+                    }else{
+                        $couponAmount=$total_amount*($couponDetails->amount/100);
+
+                    }
+                    $grand_total=$total_amount-$couponAmount;
+                    //Ass Coupon code & Amount in Session variables
+                    Session::put('couponAmount',$couponAmount);
+                    Session::put('couponCode',$data['code']);
+                    $message="Coupon Code Successfully applied , You are availing discount!";
+                    return response()->json(['status' => true,'couponAmount'=>$couponAmount ,'grand_total'=>$grand_total,'message' => $message, 'totalCartItems' => $totalCartItems, 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
+                        'headerview' => (string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
+
 
                 }
 
