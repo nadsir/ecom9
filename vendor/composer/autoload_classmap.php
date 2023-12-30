@@ -16,6 +16,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\FilterController' => $baseDir . '/app/Http/Controllers/Admin/FilterController.php',
     'App\\Http\\Controllers\\Admin\\ProductsController' => $baseDir . '/app/Http/Controllers/Admin/ProductsController.php',
     'App\\Http\\Controllers\\Admin\\SectionController' => $baseDir . '/app/Http/Controllers/Admin/SectionController.php',
+    'App\\Http\\Controllers\\Admin\\UserController' => $baseDir . '/app/Http/Controllers/Admin/UserController.php',
     'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => $baseDir . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmablePasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmablePasswordController.php',
     'App\\Http\\Controllers\\Auth\\EmailVerificationNotificationController' => $baseDir . '/app/Http/Controllers/Auth/EmailVerificationNotificationController.php',

@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
         /*$this->call(BannersTableSeeder::class);*/
         /*$this->call(FilterTableSeeder::class);*/
        /* $this->call(FiltersValuesTableSeeder::class);*/
-        $this->call(CouponsTableSedder::class);
+       /* $this->call(CouponsTableSedder::class);*/
+        $this->call(DeliveryAddressTableSeeder::class);
 
     }
 }
