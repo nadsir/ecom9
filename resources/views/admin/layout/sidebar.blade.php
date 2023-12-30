@@ -214,7 +214,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview ">
+                        <li class="nav-item has-treeview @if(Session::get('page')=='users' )menu-open @endif">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon  fa fa-lock"></i>
                                 <p>
@@ -222,9 +222,9 @@
                                     <i class="right fa fa-angle-left"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
+                            <ul class="nav nav-treeview" @if(Session::get('page')=='users')style="display: block;" @endif>
                                 <li class="nav-item">
-                                    <a href="{{url('admin/users')}}" class="nav-link">
+                                    <a href="{{url('admin/users')}}"  class="nav-link @if(Session::get('page')=='users')active @endif">
                                         <i class="fa fa-circle-o nav-icon"></i>
                                         <p> کاربران</p>
                                     </a>

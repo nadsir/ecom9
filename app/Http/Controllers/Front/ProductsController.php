@@ -68,13 +68,16 @@ class ProductsController extends Controller
                 }
                 //checking for price
 
+                $productIds=array();
                 if (isset($data['price']) && !empty($data['price'])) {
                     foreach ($data['price'] as $key => $price) {
                         $priceArr = explode("-", $price);
-                        $productIds[] = Product::select('id')->whereBetween('product_price', [$priceArr[0], $priceArr[1]])->pluck('id')->toArray();
+                        if (isset($priceArr[0]) && isset($priceArr[1])){
+                            $productIds[] = Product::select('id')->whereBetween('product_price', [$priceArr[0], $priceArr[1]])->pluck('id')->toArray();
 
+                        }
                     }
-                    $productIds = call_user_func_array('array_merge', $productIds);
+                    $productIds = array_unique(array_flatten($productIds));
                     $categoryProducts->whereIn('products.id', $productIds);
 
                 }
