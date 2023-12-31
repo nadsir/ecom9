@@ -28,6 +28,7 @@ class VerifyCsrfToken extends Middleware
         "/user/update-password",
         "/apply-coupon",
         "/get-delivery-address",
+        "/save-delivery-address",
 
     ];
 }

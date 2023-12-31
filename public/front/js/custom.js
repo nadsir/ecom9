@@ -354,9 +354,26 @@ $(document).ready(function (){
            },error:function (){
                alert("Error");
            }
-       })
+       });
 
     });
+    //Save Delivery Address
+    $(document).on('submit',"#addressAddEditForm",function (){
+        var formdata=$("#addressAddEditForm").serialize();
+        $.ajax({
+           url:'/save-delivery-address',
+            type:'post',
+            data:formdata,
+            success:function (data){
+               $("#deliveryAddresses").html(data.view)
+
+            },error:function (){
+               alert("Error");
+            }
+        });
+
+    });
+
 });
 
 function get_filter(class_name){

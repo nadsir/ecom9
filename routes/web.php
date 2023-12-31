@@ -159,8 +159,10 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
         //checkout
         Route::match(['GET','POST'],'/checkout','ProductsController@checkout');
         //Get Delivery Address
-       /* */
         Route::post('get-delivery-address','AddressController@getDeliveryAddress');
+        //Save Delivery Address
+        Route::post('save-delivery-address','AddressController@saveDeliveryAddress');
+
     });
 
 

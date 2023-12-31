@@ -5,7 +5,7 @@
             <input type="radio" id="{{$address['id']}}" name="address_id" value="{{$address['id']}}">
         </div>
         <div>
-            <label for="" class="control-label">{{$address['id']}} , {{$address['address']}} , {{$address['city']}} ,
+            <label for="" class="control-label">{{$address['id']}}, {{$address['name']}}  , {{$address['address']}} , {{$address['city']}} ,
                 {{$address['state']}} , {{$address['country']}} , ({{$address['mobile']}})</label>
             <a style="float: right" href="javascript:;" data-addressid="{{$address['id']}}" class="editAddress">Edit</a>
         </div>
@@ -21,6 +21,7 @@
         <!-- Form-Fields -->
         <form id="addressAddEditForm" action="javascript:;" method="post">
             @csrf
+            <input type="hidden" name="delivery_id">
         <div class="group-inline u-s-m-b-13">
             <div class="group-1 u-s-p-r-16">
                 <label for="first-name-extra">Name
@@ -54,15 +55,11 @@
                 <span class="astk">*</span>
             </label>
             <div class="select-box-wrapper">
-
                 <select class="select-box" name="delivery_country" id="delivery_country">
                     <option value="">انتخاب کشور</option>
                     @foreach($countries as $country)
-                        <option value="{{$country['country_name']}} "
-                                @if(isset($country['country_name']) && $country['country_name']==Auth::user()->country)selected @endif
-
-                        >{{$country['country_name']}}</option>
-
+                        <option value="{{$country['country_name']}}"
+                                @if(isset($country['country_name']) && $country['country_name']==Auth::user()->country)selected @endif>{{$country['country_name']}}</option>
                     @endforeach
                 </select>
             </div>
