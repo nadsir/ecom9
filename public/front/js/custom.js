@@ -364,14 +364,33 @@ $(document).ready(function (){
            url:'/save-delivery-address',
             type:'post',
             data:formdata,
-            success:function (data){
-               $("#deliveryAddresses").html(data.view)
+            success:function (resp){
+               $("#deliveryAddresses").html(resp.view)
 
             },error:function (){
                alert("Error");
             }
         });
 
+    });
+    //Remove Delivery Address
+    $(document).on('click','.removeAddress',function (){
+       if (confirm("Are You sure to remove this ?")){
+           var addressid=$(this).data("addressid");
+           $.ajax({
+               data:{addressid:addressid},
+               url:"/remove-delivery-address",
+               type:'post',
+               success:function (resp){
+
+                   $("#deliveryAddresses").html(resp.view)
+
+
+               },error:function (){
+                   alert("Error");
+               }
+           });
+       }
     });
 
 });

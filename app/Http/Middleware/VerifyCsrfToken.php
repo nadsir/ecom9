@@ -29,6 +29,7 @@ class VerifyCsrfToken extends Middleware
         "/apply-coupon",
         "/get-delivery-address",
         "/save-delivery-address",
+        "/remove-delivery-address",
 
     ];
 }
