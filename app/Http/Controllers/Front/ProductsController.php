@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use App\Models\Coupon;
 use App\Models\DeliveryAddress;
 use App\Models\User;
@@ -313,6 +314,7 @@ class ProductsController extends Controller
 
             /*echo "<pre>";print_r($data);die;*/
             $getCartItems = Cart::getCartItems();
+
             $totalCartItems = totalCartItems();
             $couponCount = Coupon::where('coupon_code', $data['code'])->count();
             if ($couponCount == 0) {
@@ -412,8 +414,8 @@ class ProductsController extends Controller
     }
     public function checkout(){
         $deliveryAddresses=DeliveryAddress::deliveryAddresses();
-
-        return view('front.products.checkout')->with(compact('deliveryAddresses'));
+        $countries=Country::where('status',1)->get()->toArray();
+        return view('front.products.checkout')->with(compact('deliveryAddresses','countries'));
 
     }
 }
