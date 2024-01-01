@@ -24,7 +24,26 @@ use App\Models\Product;
     <!-- Cart-Page -->
     <div class="page-cart u-s-p-t-80">
         <div class="container">
+            @if(Session::has('error_message'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>پیام خطا !</strong>
+                    <?php echo Session::get('error_message'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            @if(Session::has('success_message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>پیام پذیرش !</strong>
+                    <?php echo Session::get('success_message'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="row">
+
                 <div class="col-lg-12">
                     <div id="appendCartItems">
                       @include('front.products.cart_items')

@@ -82,7 +82,7 @@ use App\Models\Product;
                                             </td>
                                         </tr>
                                             @php
-                                                $total_price=$total_price+$getDiscountAttibutePrice['final_price']*$item['quantity'];
+                                                $total_price=$total_price+($getDiscountAttibutePrice['final_price']*$item['quantity']);
 
                                             @endphp
                                         @endforeach
