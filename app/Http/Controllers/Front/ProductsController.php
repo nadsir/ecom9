@@ -412,10 +412,30 @@ class ProductsController extends Controller
         }
 
     }
-    public function checkout(){
+    public function checkout(Request $request){
+        if ($request->isMethod("post")){
+            $data=$request->all();
+            /*echo "<pre>";print_r($data);die;*/
+            // Delivery Address validation
+            if (empty($data['address_id'])){
+                $message="Please Select Delivery address";
+                return redirect()->back()->with('error_message',$message);
+            }
+            // Payment method validation
+            if (empty($data['payment_gateway'])){
+                $message="Please Select payment method";
+                return redirect()->back()->with('error_message',$message);
+            }
+            // Payment method validation
+            if (empty($data['accept'])){
+                $message="Please agree to T&c";
+                return redirect()->back()->with('error_message',$message);
+            }
+        }
         $deliveryAddresses=DeliveryAddress::deliveryAddresses();
         $countries=Country::where('status',1)->get()->toArray();
-        return view('front.products.checkout')->with(compact('deliveryAddresses','countries'));
+        $getCartItems = Cart::getCartItems();
+        return view('front.products.checkout')->with(compact('deliveryAddresses','countries','getCartItems'));
 
     }
 }
