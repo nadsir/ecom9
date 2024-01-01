@@ -365,7 +365,22 @@ $(document).ready(function (){
             type:'post',
             data:formdata,
             success:function (resp){
-               $("#deliveryAddresses").html(resp.view)
+                if (resp.type=="error"){
+                    $(".loader").hide();
+                    $.each(resp.errors,function (i,error){
+                        $("#delivery_"+i).attr('style','color:red');
+                        $("#delivery_"+i).html(error);
+
+                        setTimeout(function (){
+                            $("#delivery_"+i).css({'display':'none'});
+                        },3000);
+
+                    });
+
+                }else{
+                    $("#deliveryAddresses").html(resp.view)
+                }
+
 
             },error:function (){
                alert("Error");
