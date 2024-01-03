@@ -481,8 +481,16 @@ class ProductsController extends Controller
             $order->mobile=$deliveryAddresses['mobile'];
             $order->email=Auth::user()->email;
             $order->shipping_charges=$shipping_charges;
-            $order->coupon_code=Session::get('couponCode');
-            $order->coupon_amount=Session::get('couponAmount');
+            if (Session::get('couponCode')==null){
+                $order->coupon_code="بدون تخفیف";
+            }else{
+                $order->coupon_code=Session::get('couponCode');
+            }
+            if (Session::get('couponAmount')==null){
+                $order->coupon_amount=0;
+            }else{
+                $order->coupon_amount=Session::get('couponAmount');
+            }
             $order->order_status=$order_status;
             $order->payment_method= $payment_method;
             $order->payment_gateway= $data['payment_gateway'];
@@ -506,20 +514,26 @@ class ProductsController extends Controller
                 $cartitem->product_price=$getDiscountAttibutePrice['final_price'];
                 $cartitem->product_qty=$item['quantity'];
                 $cartitem->save();
-
             }
+            //Insert Order Id Session variable
+            Session::put('order_id',$order_id);
             DB::commit();
-            echo "order successfully place";
-
-
-
-
-
-
-
+            return redirect('thanks');
         }
 
         return view('front.products.checkout')->with(compact('deliveryAddresses','countries','getCartItems'));
 
+    }
+    public function thanks(){
+        if (Session::has('order_id')){
+            //Empty the cart
+            Cart::where('user_id',Auth::user()->id)->delete();
+            return view('front.products.thanks');
+
+        }else{
+            return redirect('cart');
+
+        }
+        return view('front.products.thanks');
     }
 }
