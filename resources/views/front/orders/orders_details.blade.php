@@ -1,4 +1,6 @@
-
+<?php
+    use App\Models\Product;
+    ?>
 @extends('front.layout.layouts')
 @section('content')
     <!-- Page Introduction Wrapper -->
@@ -38,6 +40,7 @@
                     </table>
                     <table class="table table-striped table-borderless" >
                         <tr class="table-primary">
+                        <th>Product Image</th>
                         <th>Product Code</th>
                         <th>Product Name</th>
                         <th>Product Size</th>
@@ -46,6 +49,12 @@
                         </tr>
                         @foreach($orderDetails['orders_products'] as $product)
                             <tr>
+
+
+                                <td>
+                                    @php $getProductImage=Product::getProductImage($product['product_id']); @endphp
+                                    <a target="_blank" href="{{url('product/'.$product['product_id'])}}"> <img  alt="" style="width: 80px" src="{{asset('front/images/product_images/small/'.$getProductImage)}}"></a>
+                                </td>
                                 <td>{{$product['product_code']}}</td>
                                 <td>{{$product['product_name']}}</td>
                                 <td>{{$product['product_size']}}</td>
