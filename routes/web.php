@@ -167,7 +167,7 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
         //Thanks
         Route::get('thanks','ProductsController@thanks');
         //Users Orders
-        Route::get('user/orders','OrderController@oreders');
+        Route::get('user/orders/{id?}','OrderController@oreders');
 
     });
 

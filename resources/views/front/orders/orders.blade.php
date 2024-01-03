@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-lg-12" align="center">
                     <table class="table table-striped table-borderless" >
-                        <tr>
+                        <tr class="table-primary">
                             <th>Order Id</th>
                             <th>Ordered Products</th>
                             <th>Payment Method</th>
@@ -34,7 +34,7 @@
                         </tr>
                         @foreach($orders as $order)
                             <tr>
-                                <td>{{$order['id']}}</td>
+                                <td><a href="{{url('user/orders/'.$order['id'])}}">{{$order['id']}}</a></td>
                                 <td>
                                     @foreach($order['orders_products'] as $product)
                                         {{$product['product_code']}}<br>
