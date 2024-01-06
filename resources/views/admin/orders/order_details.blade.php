@@ -4,6 +4,15 @@ use App\Models\Product;
 @extends('admin.layout.layout')
 @section('content')
     <div class="content-wrapper" style="min-height: 805px;">
+        @if(Session::has('success_message'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>پیام پذیرش !</strong>
+                {{Session::get('success_message')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+    @endif
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
@@ -234,6 +243,19 @@ use App\Models\Product;
                                 <label> نام : </label>
                                 <label for="">{{$orderDetails['name']}}</label>
                             </div>
+                            <form action="{{url('admin/update-order-status')}}" method="post">
+                                @csrf
+
+                                <select name="order_status" id="" required>
+                                    <option value="">Select</option>
+                                    @foreach($orderStatuses as $status)
+                                    <option  value="{{$status['name']}}" @if(!empty($orderDetails['order_status']) && $orderDetails['order_status']==$status['name']) selected @endif >{{$status['name']}}</option>
+                                    @endforeach
+                                </select>
+                                <button type="submit">بروزرسانی</button>
+
+
+                            </form>
 
 
                         </div>
