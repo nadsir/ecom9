@@ -54,6 +54,7 @@
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">  مقدار سفارش</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending"> وضعیت سفارش</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">  روش پرداخت</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">  فعالیت</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -80,6 +81,10 @@
                                                         </td>
                                                         <td>
                                                             {{$order['payment_method']}}
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{url('admin/orders/'.$order['id'])}}" title="View Order Details">                                                                         <i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i>
+                                                            </a>
                                                         </td>
 
 
