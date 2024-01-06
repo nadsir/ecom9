@@ -96,6 +96,25 @@
 
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview @if(Session::get('page')=='orders')menu-open @endif">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon  fa fa-lock"></i>
+                                <p>
+                                    مدیرت سفارشات
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview"
+                                @if(Session::get('page')=='orders' )style="display: block;" @endif>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/orders')}}" class="nav-link @if(Session::get('page')=='orders')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>سفارشات</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
 
                     @else
                         <li class="nav-item has-treeview @if(Session::get('page')=='update-admin-password' || Session::get('page')=='update-admin-details')menu-open @endif">
@@ -212,6 +231,25 @@
                                         <p>کوپن ها</p>
                                     </a>
                                 </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview @if(Session::get('page')=='orders')menu-open @endif">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon  fa fa-lock"></i>
+                                <p>
+                                    مدیرت سفارشات
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview"
+                                @if(Session::get('page')=='orders' )style="display: block;" @endif>
+                                <li class="nav-item">
+                                    <a href="{{url('admin/orders')}}" class="nav-link @if(Session::get('page')=='orders')active @endif">
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>سفارشات</p>
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
                         <li class="nav-item has-treeview @if(Session::get('page')=='users' )menu-open @endif">
