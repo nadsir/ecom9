@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Coupon;
@@ -9,6 +10,7 @@ use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\OrdersProduct;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Product;
@@ -518,6 +520,28 @@ class ProductsController extends Controller
             //Insert Order Id Session variable
             Session::put('order_id',$order_id);
             DB::commit();
+            $orderDetails=Order::with('orders_products')->where('id',$order_id)->first()->toArray();
+
+            if ($data['payment_gateway']=="COD"){
+                //Send Order Email
+                $email=Auth::user()->email;
+                $messageData=[
+                    'email'=>$email,
+                    'name'=>Auth::user()->name,
+                    'order_id'=>$order_id,
+                    'orderDetails'=>$orderDetails
+                ];
+                Mail::send('emails.order',$messageData,function($message)use ($email){
+                   $message->to($email)->subject('Order Placed - StackDeveloper.in');
+                });
+                //Send Order SMS
+                /*                //Send Register Sms
+                $message="کاربر گرامی شما با موفقیت ثبت نام شدید";
+                $mobile=$data['mobile'];
+                Sms::sendSms($message,$mobile);*/
+            }else{
+                echo "Prepaid payment methods coming soon";
+            }
             return redirect('thanks');
         }
 
