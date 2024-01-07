@@ -248,8 +248,15 @@ use App\Models\Product;
                                     <option  value="{{$status['name']}}" @if(!empty($orderDetails['order_status']) && $orderDetails['order_status']==$status['name']) selected @endif >{{$status['name']}}</option>
                                     @endforeach
                                 </select>
+
                                 <button type="submit">بروزرسانی</button>
                             </form>
+                                <br>
+                                @foreach($orderLog as $log)
+                                    <strong>{{$log['order_status']}}</strong><br>
+                                    {{date('Y-m-d h:i:s', strtotime($log['created_at']))}}
+                                    <hr>
+                                @endforeach
                             @else
                             This feature is restricted.
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItemStatus;
+use App\Models\OrdersLogs;
 use App\Models\OrdersProduct;
 use App\Models\OrderStatus;
 use App\Models\User;
@@ -62,8 +63,9 @@ class OrderController extends Controller
         $userDetails=User::Where('id',$orderDetails['user_id'])->first()->toArray();
         $orderStatuses=OrderStatus::where('status',1)->get()->toArray();
         $orderItemStatuses=OrderItemStatus::where('status',1)->get()->toArray();
+        $orderLog=OrdersLogs::where('order_id',$id)->get()->toArray();
 
-        return view('admin.orders.order_details')->with(compact('orderDetails','userDetails','orderStatuses','orderItemStatuses'));
+        return view('admin.orders.order_details')->with(compact('orderDetails','userDetails','orderStatuses','orderItemStatuses','orderLog'));
     }
     public function updateOrderStatus(Request $request){
         Session::put('page','orders');
@@ -71,6 +73,11 @@ class OrderController extends Controller
             $data=$request->all();
             //Update Order Status
             Order::where('id',$data['order_id'])->update(['order_status'=>$data['order_status']]);
+            //Update Order Log
+            $log=New OrdersLogs;
+            $log->order_id=$data['order_id'];
+            $log->order_status=$data['order_status'];
+            $log->save();
             //Get Delivery Details
             $deliveryDetails=Order::select('mobile','email','name')->where('id',$data['order_id'])->first()->toArray();
             $orderDetails=Order::with('orders_products')->where('id',$data['order_id'])->first()->toArray();
