@@ -238,14 +238,10 @@ use App\Models\Product;
                             <h3 class="card-title">بروزرسانی وضعیت سفارش</h3>
                         </div>
                         <div class="card-body">
-
-                            <div class="form-group">
-                                <label> نام : </label>
-                                <label for="">{{$orderDetails['name']}}</label>
-                            </div>
+                            @if(Auth::guard('admin')->user()->type!="vendor")
                             <form action="{{url('admin/update-order-status')}}" method="post">
+                                <input type="hidden" name="order_id" value="{{$orderDetails['id']}}">
                                 @csrf
-
                                 <select name="order_status" id="" required>
                                     <option value="">Select</option>
                                     @foreach($orderStatuses as $status)
@@ -253,16 +249,13 @@ use App\Models\Product;
                                     @endforeach
                                 </select>
                                 <button type="submit">بروزرسانی</button>
-
-
                             </form>
+                            @else
+                            This feature is restricted.
 
-
+                            @endif
                         </div>
-
                     </div>
-
-
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -282,11 +275,10 @@ use App\Models\Product;
                                     <th>سایز محصول</th>
                                     <th>رنگ محصول</th>
                                     <th>تعداد محصول</th>
+                                    <th>وضعیت محصول</th>
                                 </tr>
                                 @foreach($orderDetails['orders_products'] as $product)
                                     <tr>
-
-
                                         <td>
                                             @php $getProductImage=Product::getProductImage($product['product_id']); @endphp
                                             <a target="_blank" href="{{url('product/'.$product['product_id'])}}"> <img  alt="" style="width: 80px" src="{{asset('front/images/product_images/small/'.$getProductImage)}}"></a>
@@ -296,18 +288,26 @@ use App\Models\Product;
                                         <td>{{$product['product_size']}}</td>
                                         <td>{{$product['product_color']}}</td>
                                         <td>{{$product['product_qty']}}</td>
+                                        <td>
+                                            <form action="{{url('admin/update-order-item-status')}}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="order_item_id" value="{{$product['id']}}">
+
+                                                <select name="item_status" id="" required>
+                                                    <option value="">Select</option>
+                                                    @foreach($orderItemStatuses as $status)
+                                                        <option  value="{{$status['name']}}" @if(!empty($product['item_status']) && $product['item_status']==$status['name']) selected @endif >{{$status['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <button type="submit">بروزرسانی</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>
-
-
                         </div>
-
                     </div>
-
-
                 </div>
-
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
 
