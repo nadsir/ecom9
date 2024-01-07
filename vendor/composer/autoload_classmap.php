@@ -61,6 +61,7 @@ return array(
     'App\\Models\\Order' => $baseDir . '/app/Models/Order.php',
     'App\\Models\\OrderItemStatus' => $baseDir . '/app/Models/OrderItemStatus.php',
     'App\\Models\\OrderStatus' => $baseDir . '/app/Models/OrderStatus.php',
+    'App\\Models\\OrdersLogs' => $baseDir . '/app/Models/OrdersLogs.php',
     'App\\Models\\OrdersProduct' => $baseDir . '/app/Models/OrdersProduct.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\ProductAttribute' => $baseDir . '/app/Models/ProductAttribute.php',

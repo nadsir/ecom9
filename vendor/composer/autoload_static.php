@@ -609,6 +609,7 @@ class ComposerStaticInite9dd5dbc3cc2ea737d9fcb2549785006
         'App\\Models\\Order' => __DIR__ . '/../..' . '/app/Models/Order.php',
         'App\\Models\\OrderItemStatus' => __DIR__ . '/../..' . '/app/Models/OrderItemStatus.php',
         'App\\Models\\OrderStatus' => __DIR__ . '/../..' . '/app/Models/OrderStatus.php',
+        'App\\Models\\OrdersLogs' => __DIR__ . '/../..' . '/app/Models/OrdersLogs.php',
         'App\\Models\\OrdersProduct' => __DIR__ . '/../..' . '/app/Models/OrdersProduct.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\ProductAttribute' => __DIR__ . '/../..' . '/app/Models/ProductAttribute.php',

@@ -242,19 +242,29 @@ use App\Models\Product;
                             <form action="{{url('admin/update-order-status')}}" method="post">
                                 <input type="hidden" name="order_id" value="{{$orderDetails['id']}}">
                                 @csrf
-                                <select name="order_status" id="" required>
+                                <select name="order_status" id="order_status" required >
                                     <option value="">Select</option>
                                     @foreach($orderStatuses as $status)
                                     <option  value="{{$status['name']}}" @if(!empty($orderDetails['order_status']) && $orderDetails['order_status']==$status['name']) selected @endif >{{$status['name']}}</option>
                                     @endforeach
                                 </select>
+                                <input type="text" name="courier_name" id="courier_name" placeholder="Courier Name">
+                                <input type="text" name="tracking_number" id="tracking_number" placeholder="tracking_number">
 
                                 <button type="submit">بروزرسانی</button>
                             </form>
                                 <br>
                                 @foreach($orderLog as $log)
                                     <strong>{{$log['order_status']}}</strong><br>
-                                    {{date('Y-m-d h:i:s', strtotime($log['created_at']))}}
+                                @if($log['order_status']=="Shipped")
+                                        @if(!empty($orderDetails['courier_name']))
+                                            <br><span>Courier Name : {{$orderDetails['courier_name']}} </span>
+                                        @endif
+                                            @if(!empty($orderDetails['tracking_number']))
+                                                <br><span>Tracking Number : {{$orderDetails['tracking_number']}} </span>
+                                            @endif
+                                    @endif
+                                    <br> {{date('Y-m-d h:i:s', strtotime($log['created_at']))}}
                                     <hr>
                                 @endforeach
                             @else
