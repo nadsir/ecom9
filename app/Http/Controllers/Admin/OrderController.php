@@ -150,7 +150,11 @@ class OrderController extends Controller
             $getOrderId=OrdersProduct::select('order_id')->where('id',$data['order_item_id'])->first()->toArray();
             //Get Delivery Details
             $deliveryDetails=Order::select('mobile','email','name')->where('id',$getOrderId['order_id'])->first()->toArray();
-            $orderDetails=Order::with('orders_products')->where('id',$getOrderId['order_id'])->first()->toArray();
+            $order_item_id=$data['order_item_id'];
+            $orderDetails=Order::with(['orders_products'=>function($query)use($order_item_id){
+                $query->where('id',$order_item_id);
+
+            }])->where('id',$getOrderId['order_id'])->first()->toArray();
             if (!empty($data['item_courier_name']) && !empty($data['item_tracking_number'])){
 
                 //Send Order Status Update Email
@@ -165,7 +169,7 @@ class OrderController extends Controller
                     'tracking_number'=>$data['item_tracking_number'],
 
                 ];
-                Mail::send('emails.order_status',$messageData,function($message)use ($email){
+                Mail::send('emails.order_item_status',$messageData,function($message)use ($email){
                     $message->to($email)->subject('Order Status Update - StackDeveloper.in');
                 });
             }else{
@@ -178,7 +182,7 @@ class OrderController extends Controller
                     'orderDetails'=>$orderDetails,
                     'order_status'=>$data['order_item_status'],
                 ];
-                Mail::send('emails.order_status',$messageData,function($message)use ($email){
+                Mail::send('emails.order_item_status',$messageData,function($message)use ($email){
                     $message->to($email)->subject('Order Status Update - StackDeveloper.in');
                 });
             }
