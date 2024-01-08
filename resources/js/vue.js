@@ -425,6 +425,8 @@ $(document).ready(function (){
            $("#tracking_number").hide();
        }
     });
+    //Show Item Courier Name and Tracking Number in case of Shipped Order Item status
+
 
 
 });

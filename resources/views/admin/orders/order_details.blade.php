@@ -1,5 +1,8 @@
 <?php
+
 use App\Models\Product;
+use App\Models\OrdersLogs;
+
 ?>
 @extends('admin.layout.layout')
 @section('content')
@@ -13,7 +16,7 @@ use App\Models\Product;
                 </button>
             </div>
     @endif
-        <!-- Content Header (Page header) -->
+    <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -239,36 +242,45 @@ use App\Models\Product;
                         </div>
                         <div class="card-body">
                             @if(Auth::guard('admin')->user()->type!="vendor")
-                            <form action="{{url('admin/update-order-status')}}" method="post">
-                                <input type="hidden" name="order_id" value="{{$orderDetails['id']}}">
-                                @csrf
-                                <select name="order_status" id="order_status" required >
-                                    <option value="">Select</option>
-                                    @foreach($orderStatuses as $status)
-                                    <option  value="{{$status['name']}}" @if(!empty($orderDetails['order_status']) && $orderDetails['order_status']==$status['name']) selected @endif >{{$status['name']}}</option>
-                                    @endforeach
-                                </select>
-                                <input type="text" name="courier_name" id="courier_name" placeholder="Courier Name">
-                                <input type="text" name="tracking_number" id="tracking_number" placeholder="tracking_number">
+                                <form action="{{url('admin/update-order-status')}}" method="post">
+                                    <input type="hidden" name="order_id" value="{{$orderDetails['id']}}">
+                                    @csrf
+                                    <select name="order_status" id="order_status" required>
+                                        <option value="">Select</option>
+                                        @foreach($orderStatuses as $status)
+                                            <option value="{{$status['name']}}"
+                                                    @if(!empty($orderDetails['order_status']) && $orderDetails['order_status']==$status['name']) selected @endif >{{$status['name']}}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="text" name="courier_name" id="courier_name" placeholder="Courier Name">
+                                    <input type="text" name="tracking_number" id="tracking_number"
+                                           placeholder="tracking_number">
 
-                                <button type="submit">بروزرسانی</button>
-                            </form>
+                                    <button type="submit">بروزرسانی</button>
+                                </form>
                                 <br>
-                                @foreach($orderLog as $log)
+                                @foreach($orderLog as $key=>$log)
+
+                                    {{-- <?php echo "<pre>"; print_r($log['orders_products'][$key]);die;?>--}}
                                     <strong>{{$log['order_status']}}</strong><br>
-                                @if($log['order_status']=="Shipped")
-                                        @if(!empty($orderDetails['courier_name']))
-                                            <br><span>Courier Name : {{$orderDetails['courier_name']}} </span>
-                                        @endif
-                                            @if(!empty($orderDetails['tracking_number']))
-                                                <br><span>Tracking Number : {{$orderDetails['tracking_number']}} </span>
+
+                                        @if(isset($log['order_item_id']) && $log['order_item_id']>0)
+
+                                        @php $getItemDetails=OrdersLogs::getItemDetails($log['order_item_id']) @endphp
+
+                                            -for item {{$getItemDetails['product_code']}}
+                                            @if(!empty($getItemDetails['courier_name']))
+                                                <br><span>Courier Name : {{$getItemDetails['courier_name']}} </span>
+                                            @endif
+                                            @if(!empty($getItemDetails[$key]['tracking_number']))
+                                                <br><span>Tracking Number : {{$getItemDetails['tracking_number']}} </span>
                                             @endif
                                     @endif
                                     <br> {{date('Y-m-d h:i:s', strtotime($log['created_at']))}}
                                     <hr>
                                 @endforeach
                             @else
-                            This feature is restricted.
+                                This feature is restricted.
 
                             @endif
                         </div>
@@ -284,7 +296,7 @@ use App\Models\Product;
                             <h3 class="card-title">اطلاعات محصولات سفارش داده شده</h3>
                         </div>
                         <div class="card-body">
-                            <table class="table table-striped table-borderless" >
+                            <table class="table table-striped table-borderless">
                                 <tr class="table-primary">
                                     <th>عکس محصول</th>
                                     <th>کد محصول</th>
@@ -298,7 +310,9 @@ use App\Models\Product;
                                     <tr>
                                         <td>
                                             @php $getProductImage=Product::getProductImage($product['product_id']); @endphp
-                                            <a target="_blank" href="{{url('product/'.$product['product_id'])}}"> <img  alt="" style="width: 80px" src="{{asset('front/images/product_images/small/'.$getProductImage)}}"></a>
+                                            <a target="_blank" href="{{url('product/'.$product['product_id'])}}"> <img
+                                                    alt="" style="width: 80px"
+                                                    src="{{asset('front/images/product_images/small/'.$getProductImage)}}"></a>
                                         </td>
                                         <td>{{$product['product_code']}}</td>
                                         <td>{{$product['product_name']}}</td>
@@ -310,12 +324,21 @@ use App\Models\Product;
                                                 @csrf
                                                 <input type="hidden" name="order_item_id" value="{{$product['id']}}">
 
-                                                <select name="item_status" id="" required>
+                                                <select name="order_item_status" id="order_item_status" required>
                                                     <option value="">Select</option>
                                                     @foreach($orderItemStatuses as $status)
-                                                        <option  value="{{$status['name']}}" @if(!empty($product['item_status']) && $product['item_status']==$status['name']) selected @endif >{{$status['name']}}</option>
+
+                                                        <option value="{{$status['name']}}"
+                                                                @if(!empty($product['item_status']) && $product['item_status']==$status['name']) selected @endif >{{$status['name']}}</option>
+
                                                     @endforeach
                                                 </select>
+                                                <input style="width: 110px" type="text" name="item_courier_name"
+                                                       id="item_courier_name" placeholder="Courier Name"
+                                                       @if($product['courier_name']) value="{{$product['courier_name']}}" @endif >
+                                                <input style="width: 110px" type="text" name="item_tracking_number"
+                                                       id="item_tracking_number" placeholder="tracking_number"
+                                                       @if($product['tracking_number']) value="{{$product['tracking_number']}}" @endif >
                                                 <button type="submit">بروزرسانی</button>
                                             </form>
                                         </td>
