@@ -36,7 +36,7 @@ use App\Models\Product;
                     </button>
                 </div>
             @endif
-                <form action="{{url('/checkout')}}" method="post" name="checkoutForm" id="checkoutForm">
+
 
                 <div class="row">
                 <div class="col-lg-12 col-md-12">
@@ -51,7 +51,25 @@ use App\Models\Product;
                             </div>
                             <!-- Billing-&-Shipping-Details /- -->
                             <!-- Checkout -->
+
                             <div class="col-lg-6">
+                                <form action="{{url('/checkout')}}" method="post" name="checkoutForm" id="checkoutForm">
+                                    @csrf
+                                @if(count($deliveryAddresses)>0)
+                                    <h4 class="section-h4">آدرس دریافت</h4>
+                                    @foreach($deliveryAddresses as $address)
+                                        <div class="control-group" style="float: left;margin-right: 5px">
+                                            <input type="radio" id="{{$address['id']}}" name="address_id" value="{{$address['id']}}">
+                                        </div>
+                                        <div>
+                                            <label for="" class="control-label">{{$address['id']}}, {{$address['name']}}  , {{$address['address']}} , {{$address['city']}} ,
+                                                {{$address['state']}} , {{$address['country']}} , ({{$address['mobile']}})</label>
+                                            <a style="float: right;margin-left:10px" href="javascript:;" data-addressid="{{$address['id']}}" class="removeAddress">Remove</a>&nbsp;&nbsp;
+                                            <a style="float: right" href="javascript:;" data-addressid="{{$address['id']}}" class="editAddress">Edit</a>&nbsp;&nbsp;
+
+                                        </div>
+                                    @endforeach
+                                @endif
                                 <h4 class="section-h4">Your Order</h4>
                                 <div class="order-table">
                                     <table class="u-s-m-b-13">
@@ -147,13 +165,15 @@ use App\Models\Product;
                                     <button type="submit" class="button button-outline-secondary">Place Order</button>
                                 </div>
                             </div>
+                            </form>
                             <!-- Checkout /- -->
                         </div>
 
                 </div>
             </div>
         </div>
-        </form>
+
+
     </div>
     <!-- Checkout-Page /- -->
 @endsection

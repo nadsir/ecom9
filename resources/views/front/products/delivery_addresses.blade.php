@@ -1,23 +1,13 @@
-@if(count($deliveryAddresses)>0)
-    <h4 class="section-h4">آدرس دریافت</h4>
-    @foreach($deliveryAddresses as $address)
-        <div class="control-group" style="float: left;margin-right: 5px">
-            <input type="radio" id="{{$address['id']}}" name="address_id" value="{{$address['id']}}">
-        </div>
-        <div>
-            <label for="" class="control-label">{{$address['id']}}, {{$address['name']}}  , {{$address['address']}} , {{$address['city']}} ,
-                {{$address['state']}} , {{$address['country']}} , ({{$address['mobile']}})</label>
-            <a style="float: right;margin-left:10px" href="javascript:;" data-addressid="{{$address['id']}}" class="removeAddress">Remove</a>&nbsp;&nbsp;
-            <a style="float: right" href="javascript:;" data-addressid="{{$address['id']}}" class="editAddress">Edit</a>&nbsp;&nbsp;
 
-        </div>
-    @endforeach
-@endif
     <br>
     <h4 class="section-h4 deliveryText">اضافه کردن آدرس دریافت جدید</h4>
     <div class="u-s-m-b-24">
         <input type="checkbox" class="check-box" id="ship-to-different-address" data-toggle="collapse" data-target="#showdifferent">
+        @if(count($deliveryAddresses)>0)
         <label class="label-text newAddress" for="ship-to-different-address">دریافت با آدرس جدید ؟</label>
+        @else
+            <label class="label-text newAddress" for="ship-to-different-address">Check to  add delivery address</label>
+        @endif
     </div>
     <div class="collapse" id="showdifferent">
         <!-- Form-Fields -->

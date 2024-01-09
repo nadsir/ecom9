@@ -378,7 +378,8 @@ $(document).ready(function (){
                     });
 
                 }else{
-                    $("#deliveryAddresses").html(resp.view)
+                    $("#deliveryAddresses").html(resp.view);
+                    window.location.href="checkout";
                 }
 
 
@@ -399,6 +400,7 @@ $(document).ready(function (){
                success:function (resp){
 
                    $("#deliveryAddresses").html(resp.view)
+                   window.location.href="checkout";
 
 
                },error:function (){
