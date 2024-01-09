@@ -84,7 +84,9 @@
                                                         </td>
                                                         <td>
                                                             <a href="{{url('admin/orders/'.$order['id'])}}" title="View Order Details"><i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i></a>&nbsp;&nbsp;
-                                                            <a target="_blank" href="{{url('admin/orders/invoice/'.$order['id'])}}" title="View Order Invoice"><i class="fa fa-print" style="font-size:24px;color:red"></i></a>
+                                                            <a target="_blank" href="{{url('admin/orders/invoice/'.$order['id'])}}" title="View Order Invoice"><i class="fa fa-print" style="font-size:24px;color:black"></i></a>&nbsp;
+                                                            <a target="_blank" href="{{url('admin/orders/invoice/pdf/'.$order['id'])}}" title="Print PDF Order Invoice"><i class="fa fa-file-pdf-o" style="font-size:24px;color:red"></i></a>
+
                                                         </td>
 
 

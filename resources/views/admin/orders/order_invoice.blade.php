@@ -41,6 +41,7 @@
                 </div>
                 <div class="col-xs-6 text-right">
                     <address>
+                        <strong>Shipped to:</strong><br>
                             {{$orderDetails['name']}}<br>
                             {{$orderDetails['address']}}<br>
                             {{$orderDetails['city']}},{{$orderDetails['state']}}<br>
