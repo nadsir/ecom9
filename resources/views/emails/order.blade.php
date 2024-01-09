@@ -96,6 +96,8 @@
         </td>
     </tr>
     <tr><td>&nbsp;</td></tr>
+    <tr><td><a href="{{url('orders/invoice/download/'.$orderDetails['id'])}}">Click Here To Download Invoice</a></td></tr>
+    <tr><td>&nbsp;</td></tr>
     <tr><td>For any queries , you can contact us at <a href="mailto:info@stackdevelopers.in">info@stackdevelopers</a></td></tr>
     <tr><td>&nbsp;</td></tr>
     <tr><td>Regards,<br>Team Stack Developers</td></tr>
