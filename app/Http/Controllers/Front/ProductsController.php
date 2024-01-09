@@ -340,6 +340,15 @@ class ProductsController extends Controller
                 if ($expiry_date < $current_date) {
                     $message = "تاریخ کوپن منقضی شده";
                 }
+                //Check if coupon is for single time
+                if ($couponDetails->coupon_type=="Single Times"){
+                    //Check in orders table if coupn already availed by the user
+                    $couponCount=Order::where(['coupon_code'=>$data['code'],'user_id'=>Auth::user()->id])->count();
+                    if ($couponCount>=1){
+                        $message="This Coupon Code is already availe by you!";
+                    }
+                }
+
                 //Check if coupon is from selected categories
 
                 //Get all selected categories from coupon

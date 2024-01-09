@@ -162,7 +162,7 @@ use App\Models\Product;
                                             <a href="terms-and-conditions.html" class="u-c-brand">terms & conditions</a>
                                         </label>
                                     </div>
-                                    <button type="submit" class="button button-outline-secondary">Place Order</button>
+                                    <button id="placeOrder" type="submit" class="button button-outline-secondary">Place Order</button>
                                 </div>
                             </div>
                             </form>

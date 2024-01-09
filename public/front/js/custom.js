@@ -84,6 +84,10 @@ $(document).ready(function (){
 
 
     });
+    //Show Loader at the time of order placement
+    $(document).on('click','#placeOrder',function (){
+       $(".loader").show();
+    });
     //Register Form Validation
     $("#registerForm").submit(function (){
         $(".loader").show();
