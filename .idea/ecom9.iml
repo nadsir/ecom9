@@ -12,6 +12,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/intervention/image" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cryptommer/smsir" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel/helpers" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/milon/barcode" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

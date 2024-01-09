@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3770bff96fd36485639db950955dad2f2c30c317',
+        'reference' => 'c77dc9fb2cf70a6d5f21bea6094ea9426fc56a4b',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -424,7 +424,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3770bff96fd36485639db950955dad2f2c30c317',
+            'reference' => 'c77dc9fb2cf70a6d5f21bea6094ea9426fc56a4b',
             'dev_requirement' => false,
         ),
         'laravel/pint' => array(
@@ -533,6 +533,15 @@
             'install_path' => __DIR__ . '/../livewire/livewire',
             'aliases' => array(),
             'reference' => '019b1e69d8cd8c7e749eba7a38e4fa69ecbc8f74',
+            'dev_requirement' => false,
+        ),
+        'milon/barcode' => array(
+            'pretty_version' => 'v10.0.1',
+            'version' => '10.0.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../milon/barcode',
+            'aliases' => array(),
+            'reference' => 'e643a713466f0109aa3ad7d29dae4900444187a5',
             'dev_requirement' => false,
         ),
         'mockery/mockery' => array(
