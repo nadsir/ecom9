@@ -83,8 +83,8 @@
                                                             {{$order['payment_method']}}
                                                         </td>
                                                         <td>
-                                                            <a href="{{url('admin/orders/'.$order['id'])}}" title="View Order Details">                                                                         <i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i>
-                                                            </a>
+                                                            <a href="{{url('admin/orders/'.$order['id'])}}" title="View Order Details"><i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i></a>&nbsp;&nbsp;
+                                                            <a target="_blank" href="{{url('admin/orders/invoice/'.$order['id'])}}" title="View Order Invoice"><i class="fa fa-print" style="font-size:24px;color:red"></i></a>
                                                         </td>
 
 
