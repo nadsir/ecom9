@@ -178,6 +178,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
         Route::get('thanks','ProductsController@thanks');
         //Users Orders
         Route::get('user/orders/{id?}','OrderController@oreders');
+        //Paypal
+        Route::get('paypal','paypalController@paypal');
 
     });
 

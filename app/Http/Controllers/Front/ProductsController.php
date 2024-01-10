@@ -548,8 +548,12 @@ class ProductsController extends Controller
                 $message="کاربر گرامی شما با موفقیت ثبت نام شدید";
                 $mobile=$data['mobile'];
                 Sms::sendSms($message,$mobile);*/
+            }if ($data['payment_gateway']=="Paypal") {
+                return  redirect('/paypal');
+
             }else{
-                echo "Prepaid payment methods coming soon";
+
+                echo "Other Prepaid payment methods coming soon";
             }
             return redirect('thanks');
         }

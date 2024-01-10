@@ -164,7 +164,6 @@ use App\Models\Product;
                                     </div>
                                     <button id="placeOrder" type="submit" class="button button-outline-secondary">Place Order</button>
                                 </div>
-                            </div>
                             </form>
                             <!-- Checkout /- -->
                         </div>
