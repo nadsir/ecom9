@@ -18,7 +18,7 @@
  *       notice, this list of conditions and the following disclaimer in the
  *       documentation and/or other materials provided with the distribution.
  *     * Neither the name of the Hoa nor the names of its contributors may be
- *       used to endorse or promote product_images derived from this software without
+ *       used to endorse or promote products derived from this software without
  *       specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
@@ -128,11 +128,7 @@ abstract class File extends FileGeneric implements StreamBufferable, StreamLocka
 
             default:
                 if (true === \ctype_digit($streamName)) {
-                    if (\PHP_VERSION_ID >= 50306) {
-                        $streamName = 'php://fd/'.$streamName;
-                    } else {
-                        throw new FileException('You need PHP5.3.6 to use a file descriptor '.'other than 0, 1 or 2 (tried %d with PHP%s).', 0, [$streamName, \PHP_VERSION]);
-                    }
+                    $streamName = 'php://fd/'.$streamName;
                 }
         }
 
@@ -189,7 +185,7 @@ abstract class File extends FileGeneric implements StreamBufferable, StreamLocka
     {
         $this->setStreamBuffer($size);
 
-        // @TODO manage $callable as a filter?
+        // @todo manage $callable as a filter?
 
         return 1;
     }
