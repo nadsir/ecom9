@@ -295,6 +295,25 @@
 
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview @if( Session::get('page')=='shipping')menu-open @endif">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon  fa fa-file-picture-o"></i>
+                                <p>
+                                    مدیرت ارسال
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{url('admin/shipping-charges')}}" class="nav-link @if(Session::get('page')=='shipping')active @endif" >
+                                        <i class="fa fa-circle-o nav-icon"></i>
+                                        <p>تعرفه ارسال محصولات</p>
+                                    </a>
+                                </li>
+
+
+                            </ul>
+                        </li>
                     @endif
 
                     <li class="nav-item">

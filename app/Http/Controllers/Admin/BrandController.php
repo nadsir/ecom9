@@ -25,7 +25,7 @@ class BrandController extends Controller
             $status=1;
         }
         Brand::where('id',$data['brand_id'])->update(['status'=>$status]);
-        return response()->json(['status'=>$status,'brand_id',$data['brand_id']]);
+        return response()->json(['status'=>$status,'brand_id'=>$data['brand_id']]);
     }
     public function deleteBrand($id){
         //Delete Section

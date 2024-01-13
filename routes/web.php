@@ -119,6 +119,9 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         //Oder Invoices
         Route::get('orders/invoice/{id}','OrderController@viewOrderInvoice');
         Route::get('orders/invoice/pdf/{id}','OrderController@viewPDFInvoice');
+        //Shipping Charges
+        Route::get('shipping-charges','ShippingController@shippingCharges');
+        Route::post('update-shipping-status','ShippingController@updateShippingStatus');
 
     });
 
