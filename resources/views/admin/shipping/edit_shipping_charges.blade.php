@@ -73,10 +73,34 @@
                                                 value="{{$shippingDetails['country']}}" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="rate">هزینه ارسال</label>
-                                        <input type="text" class="form-control" id="rate" placeholder="وارد کردن هزینه ارسال"
-                                               value="{{$shippingDetails['rate']}}"
-                                               name="rate">
+                                        <label for="0_500g">از وزن 0 تا 500 کیلو گرم</label>
+                                        <input type="text" class="form-control" id="0_500g" placeholder="وارد کردن هزینه ارسال"
+                                               value="{{$shippingDetails['0_500g']}}"
+                                               name="0_500g">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="501_1000g">از وزن 5001 تا 1000 کیلو گرم</label>
+                                        <input type="text" class="form-control" id="501_1000g" placeholder="وارد کردن هزینه ارسال"
+                                               value="{{$shippingDetails['501_1000g']}}"
+                                               name="501_1000g">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="1001_2000g">از وزن 1001 تا 2000 کیلو گرم</label>
+                                        <input type="text" class="form-control" id="1001_2000g" placeholder="وارد کردن هزینه ارسال"
+                                               value="{{$shippingDetails['1001_2000g']}}"
+                                               name="1001_2000g">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="2001_5000g">از وزن 2001 تا 5000 کیلو گرم</label>
+                                        <input type="text" class="form-control" id="2001_5000g" placeholder="وارد کردن هزینه ارسال"
+                                               value="{{$shippingDetails['2001_5000g']}}"
+                                               name="2001_5000g">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="above_5000g">بیشتر از 5000 کیلو گرم</label>
+                                        <input type="text" class="form-control" id="above_5000g" placeholder="وارد کردن هزینه ارسال"
+                                               value="{{$shippingDetails['above_5000g']}}"
+                                               name="above_5000g">
                                     </div>
 
 

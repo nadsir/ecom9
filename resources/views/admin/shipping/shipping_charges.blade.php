@@ -23,10 +23,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-light">
-                            <a style="max-width: 150px;float: right;display: inline-block" href="{{url('admin/add-edit-brand')}}" class="btn btn-block btn-primary">اضافه کردن برند</a>
+
 
                             @if(Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -71,12 +71,18 @@
                                 <div id="example1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
 
                                     <div class="row">
-                                        <div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid">
+                                        <div class="col-sm-12">
+                                            <table id="example1" class="table table-bordered table-striped dataTable" role="grid">
                                                 <thead>
                                                 <tr role="row">
                                                     <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 250.367px;" aria-sort="ascending" aria-label="کد ادمین: activate to sort column descending">ردیف</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 446.8px;" aria-label="نام: activate to sort column ascending">نام کشور</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">تعرفه ارسال</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">از وزن 0 تا 500 کیلو گرم</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">از وزن 5001 تا 1000 کیلو گرم</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">از وزن 1001 تا 2000 کیلو گرم</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">از وزن 2001 تا 5000 کیلو گرم</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">بیشتر از 5000 کیلو گرم</th>
+
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 417.383px;" aria-label="وضعیت: activate to sort column ascending">وضعیت</th>
                                                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 117.017px;" aria-label="جزئیات: activate to sort column ascending">جزئیات</th>
                                                 </tr>
@@ -88,7 +94,11 @@
 
                                                         <td>{{$i}}</td>
                                                         <td>{{$shipping['country']}}</td>
-                                                        <td>{{$shipping['rate']}}</td>
+                                                        <td>{{$shipping['0_500g']}}</td>
+                                                        <td>{{$shipping['501_1000g']}}</td>
+                                                        <td>{{$shipping['1001_2000g']}}</td>
+                                                        <td>{{$shipping['2001_5000g']}}</td>
+                                                        <td>{{$shipping['above_5000g']}}</td>
                                                         <td>
                                                             @if($shipping['status'] ==1)
                                                                 <i status="Active" shipping-id="{{$shipping['id']}}" id="shipping-{{$shipping['id']}}"  ref="input" class=" fa" :class="activeClass" v-on:click="changeShippingStatus('shipping-'+{{$shipping['id']}})" style="font-size:24px"></i>
