@@ -59,7 +59,8 @@ use App\Models\Product;
                                     <h4 class="section-h4">آدرس دریافت</h4>
                                     @foreach($deliveryAddresses as $address)
                                         <div class="control-group" style="float: left;margin-right: 5px">
-                                            <input type="radio" id="{{$address['id']}}" name="address_id" value="{{$address['id']}}">
+                                            <input type="radio" id="{{$address['id']}}" name="address_id" value="{{$address['id']}}"
+                                                   shipping_charges="{{$address['shipping_charges']}}" total_price="{{$total_price}}" coupon_amount="{{Session::get('couponAmount')}}">
                                         </div>
                                         <div>
                                             <label for="" class="control-label">{{$address['id']}}, {{$address['name']}}  , {{$address['address']}} , {{$address['city']}} ,
@@ -117,7 +118,11 @@ use App\Models\Product;
                                                 <h6 class="order-h6">Shipping charge</h6>
                                             </td>
                                             <td>
-                                                <h6 class="order-h6">$0.00</h6>
+                                                <h6 class="order-h6">
+                                                    <strong class="shipping_charges">
+                                                        0 تومان
+                                                    </strong>
+                                                </h6>
                                             </td>
                                         </tr>
                                         <tr>
@@ -127,7 +132,7 @@ use App\Models\Product;
                                             <td>
                                                 <h6 class="order-h6">
                                                     @if(Session::has('couponAmount'))
-                                                        تومان{{Session::get('couponAmount')}}
+                                                        <strong class="couponAmount">تومان{{Session::get('couponAmount')}}</strong>
                                                     @else
                                                         0 تومان
                                                     @endif
@@ -139,7 +144,7 @@ use App\Models\Product;
                                                 <h3 class="order-h3">Grand Total</h3>
                                             </td>
                                             <td>
-                                                <h3 class="order-h3">{{$total_price-Session::get('couponAmount')}}تومان</h3>
+                                                <h3 class="order-h3"><strong class="grand_total">{{$total_price-Session::get('couponAmount')}}تومان</strong></h3>
                                             </td>
                                         </tr>
                                         </tbody>

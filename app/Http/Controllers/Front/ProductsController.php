@@ -9,6 +9,7 @@ use App\Models\Coupon;
 use App\Models\DeliveryAddress;
 use App\Models\Order;
 use App\Models\OrdersProduct;
+use App\Models\ShippingCharge;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -427,6 +428,14 @@ class ProductsController extends Controller
     }
     public function checkout(Request $request){
         $deliveryAddresses=DeliveryAddress::deliveryAddresses();
+
+
+        foreach ($deliveryAddresses as $key =>$value){
+            $shippingCharges=ShippingCharge::getShippingCharges($value['country']);
+            $deliveryAddresses[$key]['shipping_charges']=$shippingCharges;
+        }
+
+
         $countries=Country::where('status',1)->get()->toArray();
         $getCartItems = Cart::getCartItems();
         if (count($getCartItems)==0){
@@ -475,6 +484,9 @@ class ProductsController extends Controller
             }
             //Calculate Shipping Charge
             $shipping_charges=0;
+            //Get Shipping Charges
+            $shipping_charges=ShippingCharge::getShippingCharges($deliveryAddresses['country']);
+
             //Calculate Grand Total
             $grand_total=$total_price+$shipping_charges-Session::get('couponAmount');
             //Insert Grand Total in Session Variable
@@ -557,8 +569,15 @@ class ProductsController extends Controller
             }
             return redirect('thanks');
         }
+        $total_price=0;
 
-        return view('front.products.checkout')->with(compact('deliveryAddresses','countries','getCartItems'));
+        foreach ($getCartItems as $item){
+            $attrPrice=Product::getDiscountAttributePrice($item['product_id'],$item['size']);
+            $total_price=$total_price+($attrPrice['final_price']*$item['quantity']);
+        }
+
+
+        return view('front.products.checkout')->with(compact('deliveryAddresses','countries','getCartItems','total_price'));
 
     }
     public function thanks(){

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ShippingCharge extends Model
 {
     use HasFactory;
+    public static function getShippingCharges($country){
+        $getShippingDetails=ShippingCharge::select('rate')->where('country',$country)->first();
+        return $getShippingDetails->rate;
+    }
 }

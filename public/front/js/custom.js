@@ -413,6 +413,22 @@ $(document).ready(function (){
            });
        }
     });
+    //Calculate Grand Total
+    $("input[name=address_id]").bind('change',function (){
+        var shipping_charges=$(this).attr("shipping_charges");
+        var total_price=$(this).attr("total_price");
+        var coupon_amount=$(this).attr("coupon_amount");
+        $(".shipping_charges").html(shipping_charges+"تومان")
+        if (coupon_amount==""){
+            coupon_amount=0;
+        }
+        $(".couponAmount").html(coupon_amount+"تومان")
+        var grand_total=parseInt(total_price)+parseInt(shipping_charges)-parseInt(coupon_amount);
+
+        $(".grand_total").html(grand_total+"تومان")
+
+
+    });
 
 });
 
