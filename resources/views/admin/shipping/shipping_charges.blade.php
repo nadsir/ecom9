@@ -100,7 +100,7 @@
 
                                                             <a href="">
 
-                                                                <a href="{{url('admin/add-edit-shipping/'.$shipping['id'])}}" style="padding: 10px">
+                                                                <a href="{{url('admin/edit-shipping-charges/'.$shipping['id'])}}" style="padding: 10px">
                                                                     <i class="fa fa-pencil-square-o" style="font-size:24px;color:green"></i>
                                                                 </a>
                                                             <!--                                                                    <a  href="{{url('admin/delete-brand/'.$shipping['id'])}}" title="brand" id="delete-{{$shipping['id']}}" v-on:click="confirmDelete('delete-'+{{$shipping['id']}})" style="padding: 10px">
