@@ -212,6 +212,9 @@ class ProductsController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->all();
             /* echo "<pre>";print_r($data);die;*/
+            if ($data['quantity']<=0){
+                $data['quantity']=1;
+            }
             //Check Products Stock is available or not
             $getProductStock = ProductAttribute::getProductStock($data['product_id'], $data['size']);
             if ($getProductStock < $data['quantity']) {
@@ -462,15 +465,13 @@ class ProductsController extends Controller
                 //Prevent Disabled Product to Order
                 $product_status=Product::getProductStatus($item['product_id']);
                 if ($product_status==0){
-                    Product::deleteCartProduct($item['product_id']);
-                    $message="one of the Product is disabled !Please try again";
+                    $message=$item['product']['product_name']."with".$item['size']."Size is no available . please remove from cart and choose some other product.";
                     return redirect('/cart')->with('error_message',$message);
                 }
                 //Prevent Sold Out Products to Order
                 $getProductStock=ProductAttribute::getProductStock($item['product_id'],$item['size']);
                 if ($getProductStock==0){
-                    Product::deleteCartProduct($item['product_id']);
-                    $message="one of the Product is sold out !Please try again";
+                    $message=$item['product']['product_name']."with".$item['size']."Size is no available . please remove from cart and choose some other product.";
                     return redirect('/cart')->with('error_message',$message);
                 }
 
@@ -479,8 +480,18 @@ class ProductsController extends Controller
                 $getAttributeStatus=ProductAttribute::getAttributeStatus($item['product_id'],$item['size']);
 
                 if ($getAttributeStatus==0){
-                    Product::deleteCartProduct($item['product_id']);
-                    $message="one of the Product is  disable !Please try again";
+                    $message=$item['product']['product_name']."with".$item['size']."Size is no available . please remove from cart and choose some other product.";
+                    return redirect('/cart')->with('error_message',$message);
+                }
+                //Prevent Disabled Categories Products to Order
+
+                $getCategoryStatus=Category::getCategoryStatus($item['product']['category_id']);
+
+                if ($getCategoryStatus==0){
+                   /* Product::deleteCartProduct($item['product_id']);
+                    $message="one of the Product is  disable !Please try again";*/
+
+                    $message= "محصول "  . $item['product']['product_name'] ."   با سایز " .  $item['size']." موجود نمی باشد . لطفا از سبد خرید حذف و مصحول دیگری را انتخاب نمایید. ";
                     return redirect('/cart')->with('error_message',$message);
                 }
             }

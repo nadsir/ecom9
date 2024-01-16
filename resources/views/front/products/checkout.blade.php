@@ -28,7 +28,7 @@ use App\Models\Product;
 
         <div class="container">
             @if(Session::has('error_message'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" >
                     <strong>پیام خطا !</strong>
                     <?php echo Session::get('error_message'); ?>
                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
