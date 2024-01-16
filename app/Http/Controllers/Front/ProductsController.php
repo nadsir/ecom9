@@ -457,6 +457,34 @@ class ProductsController extends Controller
         if ($request->isMethod("post")){
             $data=$request->all();
             /*echo "<pre>";print_r($data);die;*/
+            //Website Security
+            foreach ($getCartItems as $item){
+                //Prevent Disabled Product to Order
+                $product_status=Product::getProductStatus($item['product_id']);
+                if ($product_status==0){
+                    Product::deleteCartProduct($item['product_id']);
+                    $message="one of the Product is disabled !Please try again";
+                    return redirect('/cart')->with('error_message',$message);
+                }
+                //Prevent Sold Out Products to Order
+                $getProductStock=ProductAttribute::getProductStock($item['product_id'],$item['size']);
+                if ($getProductStock==0){
+                    Product::deleteCartProduct($item['product_id']);
+                    $message="one of the Product is sold out !Please try again";
+                    return redirect('/cart')->with('error_message',$message);
+                }
+
+                //Prevent Disable Attributes Products to Order
+
+                $getAttributeStatus=ProductAttribute::getAttributeStatus($item['product_id'],$item['size']);
+
+                if ($getAttributeStatus==0){
+                    Product::deleteCartProduct($item['product_id']);
+                    $message="one of the Product is  disable !Please try again";
+                    return redirect('/cart')->with('error_message',$message);
+                }
+            }
+
             // Delivery Address validation
             if (empty($data['address_id'])){
                 $message="Please Select Delivery address";

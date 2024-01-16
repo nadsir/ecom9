@@ -12,4 +12,9 @@ class ProductAttribute extends Model
         $getProductStock=ProductAttribute::select('stock')->where(['product_id'=>$product_id,'size'=>$size])->first();
         return $getProductStock->stock;
     }
+    public static function getAttributeStatus($product_id,$size){
+
+        $getAttributeStatus=ProductAttribute::select('status')->where(['product_id'=>$product_id,'size'=>$size])->first();
+        return $getAttributeStatus->status;
+    }
 }
