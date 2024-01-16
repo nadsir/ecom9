@@ -454,11 +454,6 @@ class ProductsController extends Controller
             $deliveryAddresses[$key]['shipping_charges']=$shippingCharges;
 
         }
-
-
-
-
-
         if ($request->isMethod("post")){
             $data=$request->all();
             /*echo "<pre>";print_r($data);die;*/
@@ -552,6 +547,12 @@ class ProductsController extends Controller
                 $cartitem->product_price=$getDiscountAttibutePrice['final_price'];
                 $cartitem->product_qty=$item['quantity'];
                 $cartitem->save();
+                //Reduce Stock Script Stars
+                $getProductStock=ProductAttribute::getProductStock($item['product_id'],$item['size']);
+                $newStock=$getProductStock-$item['quantity'];
+                ProductAttribute::where(['product_id'=>$item['product_id'],'size'=>$item['size']])->update(['stock'=>$newStock]);
+                //Reduce Stock Script Ends
+
             }
             //Insert Order Id Session variable
             Session::put('order_id',$order_id);
