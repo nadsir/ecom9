@@ -30,11 +30,11 @@
                         <tr class="table-primary"><td colspan="2"><strong>Order Details</strong></td></tr>
                         <tr><td>Order Date</td><td>{{date('Y-m-d h:i:s', strtotime($orderDetails['created_at']))}}</td></tr>
                         <tr><td>Order Status</td><td>{{$orderDetails['order_status']}}</td></tr>
-                        <tr><td>Order Total</td><td>{{$orderDetails['order_status']}}</td></tr>
-                        <tr><td>Shipping Charges</td><td>{{$orderDetails['shipping_charges']}}</td></tr>
+                        <tr><td>Order Total</td><td> تومان{{$orderDetails['grand_total']}}</td></tr>
+                        <tr><td>Shipping Charges</td><td> تومان   {{$orderDetails['shipping_charges']}}</td></tr>
                         @if($orderDetails['coupon_code'] !="")
                         <tr><td>Coupon Code</td><td>{{$orderDetails['coupon_code']}}</td></tr>
-                        <tr><td>Coupon Amount</td><td>{{$orderDetails['coupon_amount']}}</td></tr>
+                        <tr><td>Coupon Amount</td><td> تومان  {{$orderDetails['coupon_amount']}}</td></tr>
                         @endif
                         @if($orderDetails['courier_name'] !="")
                             <tr><td>Courier Name</td><td>{{$orderDetails['courier_name']}}</td></tr>

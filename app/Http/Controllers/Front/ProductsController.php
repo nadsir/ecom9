@@ -427,22 +427,37 @@ class ProductsController extends Controller
 
     }
     public function checkout(Request $request){
-        $deliveryAddresses=DeliveryAddress::deliveryAddresses();
-
-
-        foreach ($deliveryAddresses as $key =>$value){
-            $shippingCharges=ShippingCharge::getShippingCharges($value['country']);
-            $deliveryAddresses[$key]['shipping_charges']=$shippingCharges;
-        }
-
-
         $countries=Country::where('status',1)->get()->toArray();
         $getCartItems = Cart::getCartItems();
         if (count($getCartItems)==0){
             $message="Sopping Cart is empty! Please add products to checkout";
             return redirect('cart')->with('error_message',$message);
+        }
+        $total_price=0;
+        $total_weight=0;
+
+        foreach ($getCartItems as $item){
+
+            $attrPrice=Product::getDiscountAttributePrice($item['product_id'],$item['size']);
+            $total_price=$total_price+($attrPrice['final_price']*$item['quantity']);
+            $product_weight=$item['product']['product_weight'];
+            $total_weight=$total_weight+$product_weight;
 
         }
+
+
+        $deliveryAddresses=DeliveryAddress::deliveryAddresses();
+
+
+        foreach ($deliveryAddresses as $key =>$value){
+            $shippingCharges=ShippingCharge::getShippingCharges($total_weight,$value['country']);
+            $deliveryAddresses[$key]['shipping_charges']=$shippingCharges;
+
+        }
+
+
+
+
 
         if ($request->isMethod("post")){
             $data=$request->all();
@@ -485,7 +500,7 @@ class ProductsController extends Controller
             //Calculate Shipping Charge
             $shipping_charges=0;
             //Get Shipping Charges
-            $shipping_charges=ShippingCharge::getShippingCharges($deliveryAddresses['country']);
+            $shipping_charges=ShippingCharge::getShippingCharges($total_weight,$deliveryAddresses['country']);
 
             //Calculate Grand Total
             $grand_total=$total_price+$shipping_charges-Session::get('couponAmount');
@@ -569,12 +584,7 @@ class ProductsController extends Controller
             }
             return redirect('thanks');
         }
-        $total_price=0;
 
-        foreach ($getCartItems as $item){
-            $attrPrice=Product::getDiscountAttributePrice($item['product_id'],$item['size']);
-            $total_price=$total_price+($attrPrice['final_price']*$item['quantity']);
-        }
 
 
         return view('front.products.checkout')->with(compact('deliveryAddresses','countries','getCartItems','total_price'));

@@ -79,7 +79,7 @@
                                                name="0_500g">
                                     </div>
                                     <div class="form-group">
-                                        <label for="501_1000g">از وزن 5001 تا 1000 کیلو گرم</label>
+                                        <label for="501_1000g">از وزن 501 تا 1000 کیلو گرم</label>
                                         <input type="text" class="form-control" id="501_1000g" placeholder="وارد کردن هزینه ارسال"
                                                value="{{$shippingDetails['501_1000g']}}"
                                                name="501_1000g">
