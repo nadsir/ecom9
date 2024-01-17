@@ -255,6 +255,62 @@
                         <!-- /.card -->
 
                     </div>
+                    <div class="col-md-6">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">اطلاعات کمیسیون</h3>
+                            </div>
+
+                            <!-- /.card-header -->
+                            <!-- form start -->
+
+                            <div class="card-body">
+                                @if(Session::has('error_message'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <strong>پیام خطا !</strong>
+                                        {{Session::get('error_message')}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                @if(Session::has('success_message'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>پیام پذیرش !</strong>
+                                        {{Session::get('success_message')}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                <div class="form-group">
+                                    <label for="vendor_email">  کمیسیون به ازاء هر محصول (%)</label>
+
+                                    <form action="{{url('admin/update-vendor-commission')}}" method="post" >
+                                        @csrf
+                                        <input type="hidden" name="vendor_id" value="{{$vendorDetails['vendor_personal']['id']}}">
+
+                                    <input type="vendor_email" class="form-control" id="vendor_email" placeholder="" name="commission"
+                                 @if(isset($vendorDetails['vendor_personal']['commission'])) value="{{$vendorDetails['vendor_personal']['commission']}}" @endif >
+                                    <br>
+                                    <button type="submit">بروزرسانی</button>
+                                    </form>
+                                </div>
+
+
+
+                            </div>
+                            <!-- /.card-body -->
+
+                        </div>
+                        <!-- /.card -->
+
+                        <!-- Form Element sizes -->
+
+                        <!-- /.card -->
+
+                    </div>
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->

@@ -53,6 +53,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('/update-admin-status','AdminController@updateAdminStatus');
         //update vendor details
         Route::match(['get','post'],'update-vendor-details/{slug}','AdminController@updateVendorDetails');
+        //Update Vendor Commission
+        Route::post('update-vendor-commission','AdminController@updateVendorCommission');
         //Sections
         Route::get('sections','SectionController@sections');
         Route::post('/update-section-status','SectionController@updateSectionStatus');
@@ -123,6 +125,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('shipping-charges','ShippingController@shippingCharges');
         Route::post('update-shipping-status','ShippingController@updateShippingStatus');
         Route::match(['get','post'],'edit-shipping-charges/{id}','ShippingController@editShippingCharges');
+
 
 
     });
