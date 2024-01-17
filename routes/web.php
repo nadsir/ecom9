@@ -130,6 +130,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 });
 Route::get('orders/invoice/download/{id}','App\Http\Controllers\Admin\OrderController@viewPDFInvoice');
 
+
 Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::get('/','IndexController@index');
     //Listing/Categories Routes
@@ -163,7 +164,8 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::get('user/login-register',['as'=>'login','uses'=>'UserController@LoginRegister']);
     //User Register
     Route::post('/user/register','UserController@userRegister');
-
+    //Search Products
+    Route::get('search-products','ProductsController@listing');
     Route::group(['middleware'=>['auth']],function (){
         //User Account
         Route::match(['get','post'],'user/account','UserController@userAccount');

@@ -22,6 +22,7 @@ use App\Models\Product;
                         <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
                     </div>
                 </div>
+
                 <div class="item-content">
                     <div class="what-product-is">
                         <ul class="bread-crumb">
@@ -48,7 +49,15 @@ use App\Models\Product;
                             <span>(23)</span>
                         </div>
                     </div>
-                    @php($getDiscoutnPrice=Product::getDiscountPrice($product['id']))
+
+
+                  <?php
+
+
+                    $getDiscoutnPrice=Product::getDiscountPrice($product['id']);
+                    ?>
+
+
                     @if($getDiscoutnPrice>0)
                         <div class="price-template">
 

@@ -54,6 +54,7 @@ use App\Models\Product;
                             </a>
                         </div>-->
                         <!-- Toolbar Sorter 1  -->
+                        @if(!isset($_REQUEST['search']))
                         <form action="" name="sortProducts" id="sortProducts">
                             <input type="hidden" name="url" value="{{$url}}" id="url">
                         <div class="toolbar-sorter">
@@ -73,6 +74,7 @@ use App\Models\Product;
                         </div>
                         </form>
                         <!-- //end Toolbar Sorter 1  -->
+                        @endif
                         <!-- Toolbar Sorter 2  -->
 <!--                        <div class="toolbar-sorter-2">
                             <div class="select-box-wrapper">
@@ -101,11 +103,14 @@ use App\Models\Product;
                     <div class="filter_products">
                         @include('front.products.ajax_products_listing')
                     </div>
+                    @if(!isset($_REQUEST['search']))
+
 
                     @if(isset($_GET['sort']))
                         <div class="mt-3 mb-3" >{{$categoryProducts->appends(['sort'=>$_GET['sort']])->links()}}</div>
                     @else
                         <div class="mt-3 mb-3" >{{$categoryProducts->links()}}</div>
+                    @endif
                     @endif
 
                     <div>{{$categoryDetails['categoryDetails']['description']}}</div>

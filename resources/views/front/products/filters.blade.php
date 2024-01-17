@@ -48,6 +48,7 @@ $productFilters = ProductsFilter::productFilters();
         <!-- //end Level 2 -->
     </div>
     <!-- Fetch-Categories-from-Root-Category  /- -->
+    @if(!isset($_REQUEST['search']))
     <!-- Filters -->
     <!-- Filter-Size -->
     <?php
@@ -147,6 +148,7 @@ $productFilters = ProductsFilter::productFilters();
             @endif
         @endif
     @endforeach
+        @endif
     <?php /*
     <!-- Filter-Brand /- -->
     <!-- Filter-Price -->
