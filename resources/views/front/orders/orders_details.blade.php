@@ -1,5 +1,7 @@
 <?php
     use App\Models\Product;
+
+
     ?>
 @extends('front.layout.layouts')
 @section('content')

@@ -2,7 +2,10 @@
 
 use App\Models\Product;
 use App\Models\OrdersLogs;
-
+use App\Models\Vendor;
+if(Auth::guard('admin')->user()->type=="vendor"){
+ $getVendorCommission=Vendor::getVendorCommission(Auth::guard('admin')->user()->vendor_id);
+}
 ?>
 @extends('admin.layout.layout')
 @section('content')
@@ -298,13 +301,20 @@ use App\Models\OrdersLogs;
                         <div class="card-body">
                             <table class="table table-striped table-borderless">
                                 <tr class="table-primary">
-                                    <th>عکس محصول</th>
-                                    <th>کد محصول</th>
-                                    <th>نام محصول</th>
-                                    <th>سایز محصول</th>
-                                    <th>رنگ محصول</th>
-                                    <th>تعداد محصول</th>
-                                    <th>وضعیت محصول</th>
+                                    <th>عکس </th>
+                                    <th>کد </th>
+                                    <th>نام </th>
+                                    <th>سایز </th>
+                                    <th>رنگ </th>
+                                    <th>قیمت </th>
+                                    <th>تعداد </th>
+                                    <th> مجموع قیمت</th>
+                                    @if(Auth::guard('admin')->user()->type=="vendor")
+                                    <th>  کمیسیون</th>
+                                    <th>  سهم فروشنده</th>
+                                    @endif
+
+                                    <th>وضعیت </th>
                                 </tr>
                                 @foreach($orderDetails['orders_products'] as $product)
                                     <tr>
@@ -318,7 +328,15 @@ use App\Models\OrdersLogs;
                                         <td>{{$product['product_name']}}</td>
                                         <td>{{$product['product_size']}}</td>
                                         <td>{{$product['product_color']}}</td>
+                                        <td>{{$product['product_price']}}</td>
                                         <td>{{$product['product_qty']}}</td>
+                                        <td>{{$total_price=$product['product_qty']*$product['product_price']}}</td>
+                                        @if(Auth::guard('admin')->user()->type=="vendor")
+
+                                        <td>{{$commission=round($total_price*$getVendorCommission/100,2)}}</td>
+
+                                        <td>{{$total_price-$commission}}</td>
+                                        @endif
                                         <td>
                                             <form action="{{url('admin/update-order-item-status')}}" method="post">
                                                 @csrf

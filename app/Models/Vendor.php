@@ -15,5 +15,10 @@ class Vendor extends Model
         $getVendorShop=VendorsBusinessDetail::select('shop_name')->where('vendor_id',$vendorid)->first()->toArray();
         return $getVendorShop['shop_name'];
     }
+    public static  function getVendorCommission($vendorid){
+        $getVendorCommission=Vendor::select('commission')->where('id',$vendorid)->first()->toArray();
+        return $getVendorCommission['commission'];
+
+    }
 
 }
