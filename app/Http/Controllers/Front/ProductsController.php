@@ -494,11 +494,14 @@ class ProductsController extends Controller
         $deliveryAddresses=DeliveryAddress::deliveryAddresses();
 
 
+
         foreach ($deliveryAddresses as $key =>$value){
             $shippingCharges=ShippingCharge::getShippingCharges($total_weight,$value['country']);
             $deliveryAddresses[$key]['shipping_charges']=$shippingCharges;
 
+
         }
+
         if ($request->isMethod("post")){
             $data=$request->all();
             /*echo "<pre>";print_r($data);die;*/
@@ -665,7 +668,9 @@ class ProductsController extends Controller
                 echo "Other Prepaid payment methods coming soon";
             }
             return redirect('thanks');
+
         }
+
 
 
 

@@ -19,7 +19,7 @@ class ShippingCharge extends Model
                 $rate=$shippingDetails['1001_2000g'];
             }else if ($total_weight>2000 && $total_weight<=5000){
                 $rate=$shippingDetails['2001_5000g'];
-            }else if ($total_weight>5000 && $total_weight<=500){
+            }else if ($total_weight>5000 ){
                 $rate=$shippingDetails['above_5000g'];
             }
 

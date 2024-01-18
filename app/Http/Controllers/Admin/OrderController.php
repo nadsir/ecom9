@@ -69,8 +69,20 @@ class OrderController extends Controller
         $orderStatuses = OrderStatus::where('status', 1)->get()->toArray();
         $orderItemStatuses = OrderItemStatus::where('status', 1)->get()->toArray();
         $orderLog = OrdersLogs::with('orders_products')->where('order_id', $id)->orderBy('id', 'Desc')->get()->toArray();
+        //Calculate Total Items in cart
+        $total_items=0;
+        foreach ($orderDetails['orders_products'] as $product){
+            $total_items=$total_items+$product['product_qty'];
+        }
+        //Calculate Item Discount
+        if ($orderDetails['coupon_amount']>0){
+            $item_discount=round($orderDetails['coupon_amount']/$total_items,2);
+        }else{
+            $item_discount=0;
+        }
 
-        return view('admin.orders.order_details')->with(compact('orderDetails', 'userDetails', 'orderStatuses', 'orderItemStatuses', 'orderLog'));
+
+        return view('admin.orders.order_details')->with(compact('orderDetails', 'userDetails', 'orderStatuses', 'orderItemStatuses', 'orderLog','item_discount'));
     }
 
     public function updateOrderStatus(Request $request)

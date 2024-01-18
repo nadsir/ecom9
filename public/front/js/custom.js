@@ -416,6 +416,7 @@ $(document).ready(function (){
     //Calculate Grand Total
     $("input[name=address_id]").bind('change',function (){
         var shipping_charges=$(this).attr("shipping_charges");
+        console.log(shipping_charges);
         var total_price=$(this).attr("total_price");
         var coupon_amount=$(this).attr("coupon_amount");
         $(".shipping_charges").html(shipping_charges+"تومان")
