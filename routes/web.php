@@ -169,6 +169,9 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::post('/user/register','UserController@userRegister');
     //Search Products
     Route::get('search-products','ProductsController@listing');
+    //
+    Route::match(['get','post'],'contact','CmsController@contact');
+
     Route::group(['middleware'=>['auth']],function (){
         //User Account
         Route::match(['get','post'],'user/account','UserController@userAccount');

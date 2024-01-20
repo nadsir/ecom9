@@ -332,25 +332,20 @@ if (Auth::guard('admin')->user()->type == "vendor") {
                                         <td>
                                             @if($product['vendor_id']>0)
                                                 @if($orderDetails['coupon_amount']>0)
-                                                @php $couponDetails=Coupon::couponDetails($orderDetails['coupon_code'])  @endphp
-                                                @if(  $couponDetails['vendor_id']>0)
+                                                   @php $couponDetails=Coupon::couponDetails($orderDetails['coupon_code'])  @endphp
+
                                                     {{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}
                                                 @else
-                                                    {{$total_price=$product['product_qty']*$product['product_price']}}
-                                                    @endif
-                                                        @else
-                                                            {{$total_price=$product['product_qty']*$product['product_price']}}
+                                                      {{$total_price=$product['product_qty']*$product['product_price']}}
                                                 @endif
-                                                        @else
-                                                            {{$total_price=$product['product_qty']*$product['product_price']}}
-                                            @endif
-                                            @if($product['vendor_id']==0)
+                                            @else
                                                 @if($orderDetails['coupon_amount']>0)
                                                     {{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}
                                                 @else
                                                     {{$total_price=$product['product_qty']*$product['product_price']}}
                                                 @endif
                                             @endif
+
 
                                         </td>
                                         @if(Auth::guard('admin')->user()->type!="vendor")
@@ -364,9 +359,11 @@ if (Auth::guard('admin')->user()->type == "vendor") {
                                             @endif
                                         @endif
                                         @if($product['vendor_id']>0)
+
                                             @php $getVendorCommission=Vendor::getVendorCommission($product['vendor_id']); @endphp
                                             <td>{{$commission=round($total_price*$getVendorCommission/100,2)}}</td>
                                             <td>{{$total_price-$commission}}</td>
+
 
                                         @else
                                             <td>0</td>
