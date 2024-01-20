@@ -3,8 +3,9 @@
 use App\Models\Product;
 use App\Models\OrdersLogs;
 use App\Models\Vendor;
-if(Auth::guard('admin')->user()->type=="vendor"){
- $getVendorCommission=Vendor::getVendorCommission(Auth::guard('admin')->user()->vendor_id);
+use App\Models\Coupon;
+if (Auth::guard('admin')->user()->type == "vendor") {
+    $getVendorCommission = Vendor::getVendorCommission(Auth::guard('admin')->user()->vendor_id);
 }
 ?>
 @extends('admin.layout.layout')
@@ -267,17 +268,17 @@ if(Auth::guard('admin')->user()->type=="vendor"){
                                     {{-- <?php echo "<pre>"; print_r($log['orders_products'][$key]);die;?>--}}
                                     <strong>{{$log['order_status']}}</strong><br>
 
-                                        @if(isset($log['order_item_id']) && $log['order_item_id']>0)
+                                    @if(isset($log['order_item_id']) && $log['order_item_id']>0)
 
                                         @php $getItemDetails=OrdersLogs::getItemDetails($log['order_item_id']) @endphp
 
-                                            -for item {{$getItemDetails['product_code']}}
-                                            @if(!empty($getItemDetails['courier_name']))
-                                                <br><span>Courier Name : {{$getItemDetails['courier_name']}} </span>
-                                            @endif
-                                            @if(!empty($getItemDetails[$key]['tracking_number']))
-                                                <br><span>Tracking Number : {{$getItemDetails['tracking_number']}} </span>
-                                            @endif
+                                        -for item {{$getItemDetails['product_code']}}
+                                        @if(!empty($getItemDetails['courier_name']))
+                                            <br><span>Courier Name : {{$getItemDetails['courier_name']}} </span>
+                                        @endif
+                                        @if(!empty($getItemDetails[$key]['tracking_number']))
+                                            <br><span>Tracking Number : {{$getItemDetails['tracking_number']}} </span>
+                                        @endif
                                     @endif
                                     <br> {{date('Y-m-d h:i:s', strtotime($log['created_at']))}}
                                     <hr>
@@ -301,25 +302,18 @@ if(Auth::guard('admin')->user()->type=="vendor"){
                         <div class="card-body">
                             <table class="table table-striped table-borderless">
                                 <tr class="table-primary">
-                                    <th>عکس </th>
-                                    <th>کد </th>
-                                    <th>نام </th>
-                                    <th>سایز </th>
-                                    <th>رنگ </th>
-                                    <th>قیمت </th>
-                                    <th>تعداد </th>
+                                    <th>عکس</th>
+                                    <th>کد</th>
+                                    <th>نام</th>
+                                    <th>سایز</th>
+                                    <th>رنگ</th>
+                                    <th>قیمت</th>
+                                    <th>تعداد</th>
                                     <th> مجموع قیمت</th>
-
-
                                     <th>نوع ادمین</th>
-
-
-
-                                    <th>  کمیسیون</th>
-                                    <th>  سهم فروشنده</th>
-
-
-                                    <th>وضعیت </th>
+                                    <th> کمیسیون</th>
+                                    <th> سهم فروشنده</th>
+                                    <th>وضعیت</th>
                                 </tr>
                                 @foreach($orderDetails['orders_products'] as $product)
                                     <tr>
@@ -338,33 +332,47 @@ if(Auth::guard('admin')->user()->type=="vendor"){
                                         <td>
                                             @if($product['vendor_id']>0)
                                                 @if($orderDetails['coupon_amount']>0)
-                                                {{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}
-                                            @else
-                                                {{$total_price=$product['product_qty']*$product['product_price']}}
+                                                @php $couponDetails=Coupon::couponDetails($orderDetails['coupon_code'])  @endphp
+                                                @if(  $couponDetails['vendor_id']>0)
+                                                    {{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}
+                                                @else
+                                                    {{$total_price=$product['product_qty']*$product['product_price']}}
+                                                    @endif
+                                                        @else
+                                                            {{$total_price=$product['product_qty']*$product['product_price']}}
+                                                @endif
+                                                        @else
+                                                            {{$total_price=$product['product_qty']*$product['product_price']}}
+                                            @endif
+                                            @if($product['vendor_id']==0)
+                                                @if($orderDetails['coupon_amount']>0)
+                                                    {{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}
+                                                @else
+                                                    {{$total_price=$product['product_qty']*$product['product_price']}}
                                                 @endif
                                             @endif
 
                                         </td>
-                                        @php $getVendorCommission=Vendor::getVendorCommission($product['vendor_id']); @endphp
-                                        @if($getVendorCommission>0)
+                                        @if(Auth::guard('admin')->user()->type!="vendor")
                                             @if($product['vendor_id']>0)
                                                 <td>
-                                                    <a target="_blank" href="/admin/view-vendor-details/{{$product['admin_id']}}">Vendor</a>
+                                                    <a target="_blank"
+                                                       href="/admin/view-vendor-details/{{$product['admin_id']}}">Vendor</a>
                                                 </td>
                                             @else
                                                 <td>Admin</td>
                                             @endif
-
-
+                                        @endif
+                                        @if($product['vendor_id']>0)
+                                            @php $getVendorCommission=Vendor::getVendorCommission($product['vendor_id']); @endphp
                                             <td>{{$commission=round($total_price*$getVendorCommission/100,2)}}</td>
-
                                             <td>{{$total_price-$commission}}</td>
 
-                                            @else
+                                        @else
                                             <td>0</td>
                                             <td>{{$total_price}}</td>
-
                                         @endif
+
                                         <td>
                                             <form action="{{url('admin/update-order-item-status')}}" method="post">
                                                 @csrf

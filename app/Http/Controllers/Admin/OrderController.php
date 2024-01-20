@@ -82,6 +82,7 @@ class OrderController extends Controller
         }
 
 
+
         return view('admin.orders.order_details')->with(compact('orderDetails', 'userDetails', 'orderStatuses', 'orderItemStatuses', 'orderLog','item_discount'));
     }
 

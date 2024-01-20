@@ -16,8 +16,15 @@ class Vendor extends Model
         return $getVendorShop['shop_name'];
     }
     public static  function getVendorCommission($vendorid){
-        $getVendorCommission=Vendor::select('commission')->where('id',$vendorid)->first()->toArray();
-        return $getVendorCommission['commission'];
+        $getVendorCommission=Vendor::select('commission')->where('id',$vendorid)->first();
+        if ($getVendorCommission==null){
+            $getVendorCommission=0;
+            return $getVendorCommission;
+        }else{
+            return $getVendorCommission->commission;
+        }
+
+
 
     }
 
