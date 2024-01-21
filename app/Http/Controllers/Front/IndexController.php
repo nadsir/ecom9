@@ -16,7 +16,10 @@ class IndexController extends Controller
         $bestSeller=Product::where(['is_bestseller'=>'Yes','status'=>1])->inRandomOrder()->get()->toArray();
         $discountedProduct=Product::where('product_discount','>',0)->where('status',1)->limit(6)->inRandomOrder()->get()->toArray();
         $featuredProduct=Product::where(['is_featured'=>'Yes','status'=>1])->limit(6)->get()->toArray();
+        $meta_title="فروشگاه فروش آنلاین اگزوز";
+        $meta_description="فروش آنلاین اگزوز کلیه خودروهای سایپا و ایران خودرو";
+        $meta_Keywords="قطعات خودرو,سایپا, ایران خودرو, فروش آنلاین , خوردروو, کلاسیک ";
 
-        return view('front.index')->with(compact('sliderBanner','fixBanner','newProducts','bestSeller','discountedProduct','featuredProduct'));
+        return view('front.index')->with(compact('sliderBanner','fixBanner','newProducts','bestSeller','discountedProduct','featuredProduct','meta_title','meta_description','meta_Keywords'));
     }
 }

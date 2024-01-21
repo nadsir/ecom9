@@ -18,7 +18,7 @@ class Category extends Model
         return $this->hasMany('App\Models\Category','parent_id')->where('status',1);
     }
     public static function categoryDetails($url){
-        $categoryDetails=Category::select('id','parent_id','category_name','url','description')->with(['subcategories'=>function($query){
+        $categoryDetails=Category::select('id','parent_id','category_name','url','description','meta_title','meta_keywords','meta_description')->with(['subcategories'=>function($query){
             $query->select('id','parent_id','category_name','url','description');
         }])->where('url',$url)->first()->toArray();
        $catIds=array();

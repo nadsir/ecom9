@@ -10,7 +10,19 @@
     <meta name="csrf-token" content="{{csrf_token()}}"/>
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Laravel Multi Vendor E-commerce Template - By Stack Developers Youtube Channel</title>
+    <title>
+        @if(!empty($meta_title))
+            {{$meta_title}}
+        @else
+        Laravel Multi Vendor E-commerce Template - By Stack Developers Youtube Channel
+        @endif
+    </title>
+    @if(!empty($meta_description))
+        <meta name="description" content="{{$meta_description}}">
+    @endif
+    @if(!empty($meta_Keywords))
+        <meta name="Keywords" content="{{$meta_Keywords}}">
+    @endif
     <!-- Standard Favicon -->
     <link href="favicon.ico" rel="shortcut icon">
     <!-- Base Google Font for Web-app -->
