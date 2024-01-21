@@ -46,33 +46,42 @@ use App\Models\Product;
                                 </button>
                             </div>
                         @endif
+                        @if($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>پیام خطا !</strong>
+                                <?php echo implode('', $errors->all('<div>:message</div>')) ?>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <form action="{{url('contact')}}" method="post">@csrf
                             <div class="group-inline u-s-m-b-30">
                                 <div class="group-1 u-s-p-r-16">
                                     <label for="contact-name">Your Name
                                         <span class="astk">*</span>
                                     </label>
-                                    <input type="text" id="contact-name" class="text-field" placeholder="Name" name="name">
+                                    <input type="text" id="contact-name" class="text-field" placeholder="Name" name="name" value="{{old('name')}}" required>
                                 </div>
                                 <div class="group-2">
                                     <label for="contact-email">Your Email
                                         <span class="astk">*</span>
                                     </label>
-                                    <input type="text" id="contact-email" class="text-field" placeholder="Email" name="email">
+                                    <input type="text" id="contact-email" class="text-field" placeholder="Email" name="email" value="{{old('email')}}" required>
                                 </div>
                             </div>
                             <div class="u-s-m-b-30">
                                 <label for="contact-subject">Subject
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="contact-subject" class="text-field" placeholder="Subject" name="subject">
+                                <input type="text" id="contact-subject" class="text-field" placeholder="Subject" name="subject" value="{{old('subject')}}" required>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="contact-message">Message:</label>
-                                <textarea class="text-area" id="contact-message" name="message"></textarea>
+                                <label for="contact-message">Message:  <span class="astk">*</span></label>
+                                <textarea class="text-area" id="contact-message" name="message" value="{{old('message')}}" required></textarea>
                             </div>
                             <div class="u-s-m-b-30">
-                                <button type="submit" class="button button-outline-secondary">Send Message</button>
+                                <button type="submit" class="button button-outline-secondary"  >Send Message</button>
                             </div>
                         </form>
                     </div>
