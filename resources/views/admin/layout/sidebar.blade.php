@@ -270,7 +270,7 @@
                                 <li class="nav-item">
                                     <a href="{{url('admin/subscribers')}}" class="nav-link ">
                                         <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>امضا کننده</p>
+                                        <p>مدیریت اعضا</p>
                                     </a>
                                 </li>
 
