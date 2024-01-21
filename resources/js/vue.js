@@ -326,6 +326,34 @@ createApp({
                     alert(error);
                 });
         },
+
+        //Update Subscribe Value Status
+        changeSubscriberStatus(item){
+
+            var status=document.getElementById(item).getAttribute("status");
+
+            var subscriber_id=document.getElementById(item).getAttribute("subscriber-id");
+
+            axios.post('/admin/update-subscriber-status',{
+                status:status,subscriber_id:subscriber_id
+            }).then(function (response) {
+                var data=document.getElementById(item).className;
+                if (data=='fa fa-toggle-on'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-on");
+                    element.classList.add('fa-toggle-off');
+                    element.setAttribute("status", "Deactive");
+                } else if (data=='fa fa-toggle-off'){
+                    var element = document.getElementById(item);
+                    element.classList.remove("fa-toggle-off");
+                    element.classList.add('fa-toggle-on');
+                    element.setAttribute("status", "Active");
+                }
+            })
+                .catch(function (error) {
+                    alert(error);
+                });
+        },
         //Confirm Delete
         /*confirmDelete(item){
             var title=document.getElementById(item).getAttribute("title");

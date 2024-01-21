@@ -126,6 +126,10 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::post('update-shipping-status','ShippingController@updateShippingStatus');
         Route::match(['get','post'],'edit-shipping-charges/{id}','ShippingController@editShippingCharges');
 
+        //Newsletter Subscriber
+        Route::get('subscribers','NewsletterController@subscribers');
+        Route::post('/update-subscriber-status','NewsletterController@updateSubscriberStatus');
+        Route::get('delete-subscriber/{id}','NewsletterController@deleteSubscriber');
 
 
     });
