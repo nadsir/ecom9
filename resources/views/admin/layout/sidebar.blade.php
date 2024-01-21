@@ -316,7 +316,7 @@
                         </li>
                     @endif
 
-                    <li class="nav-item">
+{{--                    <li class="nav-item">
                         <a href="pages/widgets.html" class="nav-link">
                             <i class="nav-icon fa fa-th"></i>
                             <p>
@@ -581,7 +581,7 @@
                             <i class="nav-icon fa fa-circle-o text-info"></i>
                             <p>اطلاعات</p>
                         </a>
-                    </li>
+                    </li>--}}
                     <li class="nav-item">
                         <a href="{{url('admin/logout')}}" class="nav-link">
                             <button type="button" class="btn btn-block btn-warning"><i class="fa fa-sign-out"

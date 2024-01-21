@@ -9,9 +9,7 @@
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">داشبورد دوم</h1>
                 </div><!-- /.col -->
-                <button @click="warn('Form cannot be submitted yet.', $event)">
-                    Submit
-                </button>
+
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item"><a href="#">خانه</a></li>
@@ -33,10 +31,10 @@
                         <span class="info-box-icon bg-info elevation-1"><i class="fa fa-gear"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">ترافیک Cpu</span>
+                            <span class="info-box-text">مجموعه بخش ها</span>
                             <span class="info-box-number">
-                  10
-                  <small>%</small>
+                  {{$sectionsCount}}
+<!--                  <small>%</small>-->
                 </span>
                         </div>
                         <!-- /.info-box-content -->
@@ -49,8 +47,8 @@
                         <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-google-plus"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">لایک‌ها</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-text">مجموع دسته بندی ها</span>
+                            <span class="info-box-number">{{$categoriesCount}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -66,8 +64,67 @@
                         <span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">فروش</span>
-                            <span class="info-box-number">760</span>
+                            <span class="info-box-text">مجموع محصولات</span>
+                            <span class="info-box-number">{{$productsCount}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-warning elevation-1"><i class="fa fa-users"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">مجموع برند</span>
+                            <span class="info-box-number">{{$brandsCount}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-dollar-sign"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">مجموع سفارشات</span>
+                            <span class="info-box-number">{{$ordersCount}}</span>
+
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-danger elevation-1"><i class="fa fa-google-plus"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">مجموع کوپن</span>
+                            <span class="info-box-number">{{$couponsCount}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+                <!-- fix for small devices only -->
+                <div class="clearfix hidden-md-up"></div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <span class="info-box-icon bg-success elevation-1"><i class="fa fa-shopping-cart"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">مجموع کاربر</span>
+                            <span class="info-box-number">{{$usersCount}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -227,10 +284,10 @@
             <!-- /.row -->
 
             <!-- Main row -->
-            <div class="row">
-                <!-- Left col -->
+<!--            <div class="row">
+                &lt;!&ndash; Left col &ndash;&gt;
                 <div class="col-md-8">
-                    <!-- MAP & BOX PANE -->
+                    &lt;!&ndash; MAP & BOX PANE &ndash;&gt;
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">گزارش بازدیدها</h3>
@@ -244,11 +301,11 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- /.card-header -->
+                        &lt;!&ndash; /.card-header &ndash;&gt;
                         <div class="card-body p-0">
                             <div class="d-md-flex">
                                 <div class="p-1 flex-1" style="overflow: hidden">
-                                    <!-- Map will be created here -->
+                                    &lt;!&ndash; Map will be created here &ndash;&gt;
                                     <div id="world-map-markers" style="height: 325px; overflow: hidden"></div>
                                 </div>
                                 <div class="card-pane-right bg-success pt-2 pb-2 pl-4 pr-4">
@@ -257,28 +314,28 @@
                                         <h5 class="description-header mt-2">8390</h5>
                                         <span class="description-text">بازدیدها</span>
                                     </div>
-                                    <!-- /.description-block -->
+                                    &lt;!&ndash; /.description-block &ndash;&gt;
                                     <div class="description-block mb-4">
                                         <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
                                         <h5 class="description-header mt-2">30%</h5>
                                         <span class="description-text">ارجاعات</span>
                                     </div>
-                                    <!-- /.description-block -->
+                                    &lt;!&ndash; /.description-block &ndash;&gt;
                                     <div class="description-block">
                                         <div class="sparkbar pad" data-color="#fff">90,50,90,70,61,83,63</div>
                                         <h5 class="description-header mt-2">70%</h5>
                                         <span class="description-text">یکتا</span>
                                     </div>
-                                    <!-- /.description-block -->
-                                </div><!-- /.card-pane-right -->
-                            </div><!-- /.d-md-flex -->
+                                    &lt;!&ndash; /.description-block &ndash;&gt;
+                                </div>&lt;!&ndash; /.card-pane-right &ndash;&gt;
+                            </div>&lt;!&ndash; /.d-md-flex &ndash;&gt;
                         </div>
-                        <!-- /.card-body -->
+                        &lt;!&ndash; /.card-body &ndash;&gt;
                     </div>
-                    <!-- /.card -->
+                    &lt;!&ndash; /.card &ndash;&gt;
                     <div class="row">
                         <div class="col-md-6">
-                            <!-- DIRECT CHAT -->
+                            &lt;!&ndash; DIRECT CHAT &ndash;&gt;
                             <div class="card direct-chat direct-chat-warning">
                                 <div class="card-header">
                                     <h3 class="card-title">چت مستقیم</h3>
@@ -293,78 +350,78 @@
                                         </button>
                                     </div>
                                 </div>
-                                <!-- /.card-header -->
+                                &lt;!&ndash; /.card-header &ndash;&gt;
                                 <div class="card-body">
-                                    <!-- Conversations are loaded here -->
+                                    &lt;!&ndash; Conversations are loaded here &ndash;&gt;
                                     <div class="direct-chat-messages">
-                                        <!-- Message. Default to the left -->
+                                        &lt;!&ndash; Message. Default to the left &ndash;&gt;
                                         <div class="direct-chat-msg">
                                             <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name float-left">محمدرضا عطوان</span>
                                                 <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
                                             </div>
-                                            <!-- /.direct-chat-info -->
+                                            &lt;!&ndash; /.direct-chat-info &ndash;&gt;
                                             <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                                            <!-- /.direct-chat-img -->
+                                            &lt;!&ndash; /.direct-chat-img &ndash;&gt;
                                             <div class="direct-chat-text">
                                                 واقعا این قالب رایگانه ؟ قابل باور نیست
                                             </div>
-                                            <!-- /.direct-chat-text -->
+                                            &lt;!&ndash; /.direct-chat-text &ndash;&gt;
                                         </div>
-                                        <!-- /.direct-chat-msg -->
+                                        &lt;!&ndash; /.direct-chat-msg &ndash;&gt;
 
-                                        <!-- Message to the right -->
+                                        &lt;!&ndash; Message to the right &ndash;&gt;
                                         <div class="direct-chat-msg right">
                                             <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name float-right">سارا</span>
                                                 <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
                                             </div>
-                                            <!-- /.direct-chat-info -->
+                                            &lt;!&ndash; /.direct-chat-info &ndash;&gt;
                                             <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
-                                            <!-- /.direct-chat-img -->
+                                            &lt;!&ndash; /.direct-chat-img &ndash;&gt;
                                             <div class="direct-chat-text">
                                                 بهتره اینو باور کنی :)
                                             </div>
-                                            <!-- /.direct-chat-text -->
+                                            &lt;!&ndash; /.direct-chat-text &ndash;&gt;
                                         </div>
-                                        <!-- /.direct-chat-msg -->
+                                        &lt;!&ndash; /.direct-chat-msg &ndash;&gt;
 
-                                        <!-- Message. Default to the left -->
+                                        &lt;!&ndash; Message. Default to the left &ndash;&gt;
                                         <div class="direct-chat-msg">
                                             <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name float-left">محمدرضا عطوان</span>
                                                 <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
                                             </div>
-                                            <!-- /.direct-chat-info -->
+                                            &lt;!&ndash; /.direct-chat-info &ndash;&gt;
                                             <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
-                                            <!-- /.direct-chat-img -->
+                                            &lt;!&ndash; /.direct-chat-img &ndash;&gt;
                                             <div class="direct-chat-text">
                                                 میخوام با این قالب یه اپلیکیشن باحال بزنم ؟‌ تو هم همکاری میکنی ؟
                                             </div>
-                                            <!-- /.direct-chat-text -->
+                                            &lt;!&ndash; /.direct-chat-text &ndash;&gt;
                                         </div>
-                                        <!-- /.direct-chat-msg -->
+                                        &lt;!&ndash; /.direct-chat-msg &ndash;&gt;
 
-                                        <!-- Message to the right -->
+                                        &lt;!&ndash; Message to the right &ndash;&gt;
                                         <div class="direct-chat-msg right">
                                             <div class="direct-chat-info clearfix">
                                                 <span class="direct-chat-name float-right">سارا</span>
                                                 <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
                                             </div>
-                                            <!-- /.direct-chat-info -->
+                                            &lt;!&ndash; /.direct-chat-info &ndash;&gt;
                                             <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
-                                            <!-- /.direct-chat-img -->
+                                            &lt;!&ndash; /.direct-chat-img &ndash;&gt;
                                             <div class="direct-chat-text">
                                                 اره حتما
                                             </div>
-                                            <!-- /.direct-chat-text -->
+                                            &lt;!&ndash; /.direct-chat-text &ndash;&gt;
                                         </div>
-                                        <!-- /.direct-chat-msg -->
+                                        &lt;!&ndash; /.direct-chat-msg &ndash;&gt;
 
                                     </div>
-                                    <!--/.direct-chat-messages-->
+                                    &lt;!&ndash;/.direct-chat-messages&ndash;&gt;
 
-                                    <!-- Contacts are loaded here -->
+                                    &lt;!&ndash; Contacts are loaded here &ndash;&gt;
                                     <div class="direct-chat-contacts">
                                         <ul class="contacts-list">
                                             <li>
@@ -378,10 +435,10 @@
                               </span>
                                                         <span class="contacts-list-msg">How have you been? I was...</span>
                                                     </div>
-                                                    <!-- /.contacts-list-info -->
+                                                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
                                                 </a>
                                             </li>
-                                            <!-- End Contact Item -->
+                                            &lt;!&ndash; End Contact Item &ndash;&gt;
                                             <li>
                                                 <a href="#">
                                                     <img class="contacts-list-img" src="dist/img/user7-128x128.jpg">
@@ -393,10 +450,10 @@
                               </span>
                                                         <span class="contacts-list-msg">I will be waiting for...</span>
                                                     </div>
-                                                    <!-- /.contacts-list-info -->
+                                                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
                                                 </a>
                                             </li>
-                                            <!-- End Contact Item -->
+                                            &lt;!&ndash; End Contact Item &ndash;&gt;
                                             <li>
                                                 <a href="#">
                                                     <img class="contacts-list-img" src="dist/img/user3-128x128.jpg">
@@ -408,10 +465,10 @@
                               </span>
                                                         <span class="contacts-list-msg">I'll call you back at...</span>
                                                     </div>
-                                                    <!-- /.contacts-list-info -->
+                                                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
                                                 </a>
                                             </li>
-                                            <!-- End Contact Item -->
+                                            &lt;!&ndash; End Contact Item &ndash;&gt;
                                             <li>
                                                 <a href="#">
                                                     <img class="contacts-list-img" src="dist/img/user5-128x128.jpg">
@@ -423,10 +480,10 @@
                               </span>
                                                         <span class="contacts-list-msg">Where is your new...</span>
                                                     </div>
-                                                    <!-- /.contacts-list-info -->
+                                                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
                                                 </a>
                                             </li>
-                                            <!-- End Contact Item -->
+                                            &lt;!&ndash; End Contact Item &ndash;&gt;
                                             <li>
                                                 <a href="#">
                                                     <img class="contacts-list-img" src="dist/img/user6-128x128.jpg">
@@ -438,10 +495,10 @@
                               </span>
                                                         <span class="contacts-list-msg">Can I take a look at...</span>
                                                     </div>
-                                                    <!-- /.contacts-list-info -->
+                                                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
                                                 </a>
                                             </li>
-                                            <!-- End Contact Item -->
+                                            &lt;!&ndash; End Contact Item &ndash;&gt;
                                             <li>
                                                 <a href="#">
                                                     <img class="contacts-list-img" src="dist/img/user8-128x128.jpg">
@@ -453,16 +510,16 @@
                               </span>
                                                         <span class="contacts-list-msg">Never mind I found...</span>
                                                     </div>
-                                                    <!-- /.contacts-list-info -->
+                                                    &lt;!&ndash; /.contacts-list-info &ndash;&gt;
                                                 </a>
                                             </li>
-                                            <!-- End Contact Item -->
+                                            &lt;!&ndash; End Contact Item &ndash;&gt;
                                         </ul>
-                                        <!-- /.contacts-list -->
+                                        &lt;!&ndash; /.contacts-list &ndash;&gt;
                                     </div>
-                                    <!-- /.direct-chat-pane -->
+                                    &lt;!&ndash; /.direct-chat-pane &ndash;&gt;
                                 </div>
-                                <!-- /.card-body -->
+                                &lt;!&ndash; /.card-body &ndash;&gt;
                                 <div class="card-footer">
                                     <form action="#" method="post">
                                         <div class="input-group">
@@ -473,14 +530,14 @@
                                         </div>
                                     </form>
                                 </div>
-                                <!-- /.card-footer-->
+                                &lt;!&ndash; /.card-footer&ndash;&gt;
                             </div>
-                            <!--/.direct-chat -->
+                            &lt;!&ndash;/.direct-chat &ndash;&gt;
                         </div>
-                        <!-- /.col -->
+                        &lt;!&ndash; /.col &ndash;&gt;
 
                         <div class="col-md-6">
-                            <!-- USERS LIST -->
+                            &lt;!&ndash; USERS LIST &ndash;&gt;
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">آخرین اعضا</h3>
@@ -493,7 +550,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <!-- /.card-header -->
+                                &lt;!&ndash; /.card-header &ndash;&gt;
                                 <div class="card-body p-0">
                                     <ul class="users-list clearfix">
                                         <li>
@@ -537,21 +594,21 @@
                                             <span class="users-list-date">۱۱ دی</span>
                                         </li>
                                     </ul>
-                                    <!-- /.users-list -->
+                                    &lt;!&ndash; /.users-list &ndash;&gt;
                                 </div>
-                                <!-- /.card-body -->
+                                &lt;!&ndash; /.card-body &ndash;&gt;
                                 <div class="card-footer text-center">
                                     <a href="#">مشاهده همه کاربران</a>
                                 </div>
-                                <!-- /.card-footer -->
+                                &lt;!&ndash; /.card-footer &ndash;&gt;
                             </div>
-                            <!--/.card -->
+                            &lt;!&ndash;/.card &ndash;&gt;
                         </div>
-                        <!-- /.col -->
+                        &lt;!&ndash; /.col &ndash;&gt;
                     </div>
-                    <!-- /.row -->
+                    &lt;!&ndash; /.row &ndash;&gt;
 
-                    <!-- TABLE: LATEST ORDERS -->
+                    &lt;!&ndash; TABLE: LATEST ORDERS &ndash;&gt;
                     <div class="card">
                         <div class="card-header border-transparent">
                             <h3 class="card-title">آخرین سفارشات</h3>
@@ -565,7 +622,7 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- /.card-header -->
+                        &lt;!&ndash; /.card-header &ndash;&gt;
                         <div class="card-body p-0">
                             <div class="table-responsive">
                                 <table class="table m-0">
@@ -637,21 +694,21 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- /.table-responsive -->
+                            &lt;!&ndash; /.table-responsive &ndash;&gt;
                         </div>
-                        <!-- /.card-body -->
+                        &lt;!&ndash; /.card-body &ndash;&gt;
                         <div class="card-footer clearfix">
                             <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">سفارش جدید</a>
                             <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">مشاهده همه سفار</a>
                         </div>
-                        <!-- /.card-footer -->
+                        &lt;!&ndash; /.card-footer &ndash;&gt;
                     </div>
-                    <!-- /.card -->
+                    &lt;!&ndash; /.card &ndash;&gt;
                 </div>
-                <!-- /.col -->
+                &lt;!&ndash; /.col &ndash;&gt;
 
                 <div class="col-md-4">
-                    <!-- Info Boxes Style 2 -->
+                    &lt;!&ndash; Info Boxes Style 2 &ndash;&gt;
                     <div class="info-box mb-3 bg-warning">
                         <span class="info-box-icon"><i class="fa fa-tag"></i></span>
 
@@ -659,9 +716,9 @@
                             <span class="info-box-text">فهرست</span>
                             <span class="info-box-number">5,200</span>
                         </div>
-                        <!-- /.info-box-content -->
+                        &lt;!&ndash; /.info-box-content &ndash;&gt;
                     </div>
-                    <!-- /.info-box -->
+                    &lt;!&ndash; /.info-box &ndash;&gt;
                     <div class="info-box mb-3 bg-success">
                         <span class="info-box-icon"><i class="fa fa-heart-o"></i></span>
 
@@ -669,9 +726,9 @@
                             <span class="info-box-text">برگزیده‌ها</span>
                             <span class="info-box-number">92,050</span>
                         </div>
-                        <!-- /.info-box-content -->
+                        &lt;!&ndash; /.info-box-content &ndash;&gt;
                     </div>
-                    <!-- /.info-box -->
+                    &lt;!&ndash; /.info-box &ndash;&gt;
                     <div class="info-box mb-3 bg-danger">
                         <span class="info-box-icon"><i class="fa fa-cloud-download"></i></span>
 
@@ -679,9 +736,9 @@
                             <span class="info-box-text">دانلود</span>
                             <span class="info-box-number">114,381</span>
                         </div>
-                        <!-- /.info-box-content -->
+                        &lt;!&ndash; /.info-box-content &ndash;&gt;
                     </div>
-                    <!-- /.info-box -->
+                    &lt;!&ndash; /.info-box &ndash;&gt;
                     <div class="info-box mb-3 bg-info">
                         <span class="info-box-icon"><i class="fa fa-comment-o"></i></span>
 
@@ -689,9 +746,9 @@
                             <span class="info-box-text">پیام مستقیم</span>
                             <span class="info-box-number">163,921</span>
                         </div>
-                        <!-- /.info-box-content -->
+                        &lt;!&ndash; /.info-box-content &ndash;&gt;
                     </div>
-                    <!-- /.info-box -->
+                    &lt;!&ndash; /.info-box &ndash;&gt;
 
                     <div class="card">
                         <div class="card-header">
@@ -704,16 +761,16 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- /.card-header -->
+                        &lt;!&ndash; /.card-header &ndash;&gt;
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="chart-responsive">
                                         <canvas id="pieChart" height="150"></canvas>
                                     </div>
-                                    <!-- ./chart-responsive -->
+                                    &lt;!&ndash; ./chart-responsive &ndash;&gt;
                                 </div>
-                                <!-- /.col -->
+                                &lt;!&ndash; /.col &ndash;&gt;
                                 <div class="col-md-4">
                                     <ul class="chart-legend clearfix">
                                         <li><i class="fa fa-circle-o text-danger"></i> Chrome</li>
@@ -724,11 +781,11 @@
                                         <li><i class="fa fa-circle-o text-secondary"></i> دیگر</li>
                                     </ul>
                                 </div>
-                                <!-- /.col -->
+                                &lt;!&ndash; /.col &ndash;&gt;
                             </div>
-                            <!-- /.row -->
+                            &lt;!&ndash; /.row &ndash;&gt;
                         </div>
-                        <!-- /.card-body -->
+                        &lt;!&ndash; /.card-body &ndash;&gt;
                         <div class="card-footer bg-white p-0">
                             <ul class="nav nav-pills flex-column">
                                 <li class="nav-item">
@@ -757,11 +814,11 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- /.footer -->
+                        &lt;!&ndash; /.footer &ndash;&gt;
                     </div>
-                    <!-- /.card -->
+                    &lt;!&ndash; /.card &ndash;&gt;
 
-                    <!-- PRODUCT LIST -->
+                    &lt;!&ndash; PRODUCT LIST &ndash;&gt;
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">محصولات تازه اضافه شده</h3>
@@ -775,7 +832,7 @@
                                 </button>
                             </div>
                         </div>
-                        <!-- /.card-header -->
+                        &lt;!&ndash; /.card-header &ndash;&gt;
                         <div class="card-body p-0">
                             <ul class="products-list product-list-in-card pl-2 pr-2">
                                 <li class="item">
@@ -790,7 +847,7 @@
                       </span>
                                     </div>
                                 </li>
-                                <!-- /.item -->
+                                &lt;!&ndash; /.item &ndash;&gt;
                                 <li class="item">
                                     <div class="product-img">
                                         <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
@@ -803,7 +860,7 @@
                       </span>
                                     </div>
                                 </li>
-                                <!-- /.item -->
+                                &lt;!&ndash; /.item &ndash;&gt;
                                 <li class="item">
                                     <div class="product-img">
                                         <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
@@ -819,7 +876,7 @@
                       </span>
                                     </div>
                                 </li>
-                                <!-- /.item -->
+                                &lt;!&ndash; /.item &ndash;&gt;
                                 <li class="item">
                                     <div class="product-img">
                                         <img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
@@ -832,19 +889,19 @@
                       </span>
                                     </div>
                                 </li>
-                                <!-- /.item -->
+                                &lt;!&ndash; /.item &ndash;&gt;
                             </ul>
                         </div>
-                        <!-- /.card-body -->
+                        &lt;!&ndash; /.card-body &ndash;&gt;
                         <div class="card-footer text-center">
                             <a href="javascript:void(0)" class="uppercase">نمایش همه محصولات</a>
                         </div>
-                        <!-- /.card-footer -->
+                        &lt;!&ndash; /.card-footer &ndash;&gt;
                     </div>
-                    <!-- /.card -->
+                    &lt;!&ndash; /.card &ndash;&gt;
                 </div>
-                <!-- /.col -->
-            </div>
+                &lt;!&ndash; /.col &ndash;&gt;
+            </div>-->
             <!-- /.row -->
         </div><!--/. container-fluid -->
     </section>

@@ -4,6 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Section;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Order;
+use App\Models\Coupon;
+use App\Models\Brand;
+use App\Models\User;
+
 use App\Models\Vendor;
 use App\Models\VendorsBankDetail;
 use App\Models\VendorsBusinessDetail;
@@ -22,7 +30,15 @@ class   AdminController extends Controller
     public function dashboard()
     {
         Session::put('page','dashboard');
-        return view('admin.dashboard');
+        $sectionsCount=Section::count();
+        $productsCount=Product::count();
+        $ordersCount=Order::count();
+        $categoriesCount=Category::count();
+        $couponsCount=Coupon::count();
+        $brandsCount=Brand::count();
+        $usersCount=User::count();
+
+        return view('admin.dashboard')->with(compact('sectionsCount','productsCount','ordersCount','categoriesCount','couponsCount','brandsCount','usersCount'));
     }
 
     public function updateVendorDetails($slug,Request $request){
