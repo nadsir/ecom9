@@ -441,3 +441,34 @@ function get_filter(class_name){
     return filter;
 
 }
+
+function addSubscriber(){
+    var subscriber_email=$("#subscriber_email").val();
+    var mailFormat=/\S+@\S+\.\S+/;
+    if (subscriber_email.match(mailFormat)){
+        $.ajax({
+            type:'post',
+            url:'add-subscriber-email',
+            data:{subscriber_email:subscriber_email },
+            success:function (resp){
+                if (resp=="exists"){
+                    Swal.fire({
+                        icon: "alert",
+                        title: "You email is already exists",
+                    });
+                }else if (resp=="saved"){
+                    Swal.fire({
+                        icon: "success",
+                        title: "thanks for adding your email",
+                    });
+                }
+            },error:function (){
+                alert("Error");
+            }
+        })
+    }else{
+        alert('please enter valid email');
+    }
+
+
+}

@@ -12,9 +12,10 @@
                 Subscribe to the mailing list to receive updates on promotions, new arrivals, discount and coupons.
             </p>
             <form class="newsletter-form">
+                @csrf
                 <label class="sr-only" for="newsletter-field">Enter your Email</label>
-                <input type="text" id="newsletter-field" placeholder="Your Email Address">
-                <button type="submit" class="button">SUBMIT</button>
+                <input type="text" id="subscriber_email" placeholder="Your Email Address" name="subscriber_email" required>
+                <button type="button" class="button" onclick="addSubscriber()">SUBMIT</button>
             </form>
         </div>
         <!-- Outer-Footer /- -->

@@ -15,8 +15,6 @@ class NewsletterController extends Controller
         $subscribers=NewsletterSubscriber::get()->toArray();
         return  view('admin.subscribers.subscribers')->with(compact('subscribers'));
     }
-
-
     public function updateSubscriberStatus(Request $request){
         Session::put('page','subscribers');
         $data=$request->all();
@@ -35,4 +33,5 @@ class NewsletterController extends Controller
         return redirect()->back()->with('success_message',$message);
 
     }
+
 }

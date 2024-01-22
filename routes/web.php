@@ -132,6 +132,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('delete-subscriber/{id}','NewsletterController@deleteSubscriber');
 
 
+
     });
 
 });
@@ -173,8 +174,10 @@ Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::post('/user/register','UserController@userRegister');
     //Search Products
     Route::get('search-products','ProductsController@listing');
-    //
+    //Contact page
     Route::match(['get','post'],'contact','CmsController@contact');
+    //Add Subscriber Email
+    Route::post('add-subscriber-email','NewsletterController@addSubscriberEmail');
 
     Route::group(['middleware'=>['auth']],function (){
         //User Account

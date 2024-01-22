@@ -93,7 +93,9 @@
 
 
                                                         <td>{{$subscriber['email']}}</td>
-                                                        <td>{{$subscriber['created_at']}}</td>
+                                                        <td>
+
+                                                            {{ date("F j, Y, g:i a",strtotime($subscriber['created_at']))}}</td>
                                                         <td>
                                                             @if($subscriber['status'] ==1)
                                                                 <i status="Active" subscriber-id="{{$subscriber['id']}}" id="subscriber-{{$subscriber['id']}}"  ref="input" class=" fa" :class="activeClass" v-on:click="changeSubscriberStatus('subscriber-'+{{$subscriber['id']}})" style="font-size:24px"></i>
@@ -104,8 +106,6 @@
                                                         <td>
 
                                                             <a href="">
-
-
 
                                                                 <a module="subscriber" moduleid="{{$subscriber['id']}}"  href="javascript:void(0)" title="subscriber" id="delete-{{$subscriber['id']}}" v-on:click="confirmDelete('delete-'+{{$subscriber['id']}})" style="padding: 10px">
                                                                     <i class="fa fa-trash-o" style="font-size:24px;color:red"></i>

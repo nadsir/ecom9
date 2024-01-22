@@ -30,6 +30,7 @@ class VerifyCsrfToken extends Middleware
         "/get-delivery-address",
         "/save-delivery-address",
         "/remove-delivery-address",
+        "/add-subscriber-email",
 
 
     ];
