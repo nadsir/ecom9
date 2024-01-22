@@ -723,6 +723,13 @@ class ProductsController extends Controller
                 $cartitem->product_size=$item['size'];
                 $getDiscountAttibutePrice=Product::getDiscountAttributePrice($item['product_id'],$item['size']);
                 $cartitem->product_price=$getDiscountAttibutePrice['final_price'];
+                $getProductStock=ProductAttribute::getProductStock($item['product_id'],$item['size']);
+
+                if ($item['quantity']>$getProductStock){
+                    $message=$getProductDetails['product_name']."with".$item['size']."quantity is no available . please reduce its quantity adn try again.";
+                    return redirect('/cart')->with('error_message',$message);
+
+                }
                 $cartitem->product_qty=$item['quantity'];
                 $cartitem->save();
                 //Reduce Stock Script Stars
