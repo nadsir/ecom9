@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\NewsletterSubscriber;
 use Illuminate\Http\Request;
 
+
 class NewsletterController extends Controller
 {
     public function addSubscriberEmail(Request $request){
@@ -25,4 +26,5 @@ class NewsletterController extends Controller
         }
 
     }
+
 }

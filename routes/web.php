@@ -130,6 +130,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('subscribers','NewsletterController@subscribers');
         Route::post('/update-subscriber-status','NewsletterController@updateSubscriberStatus');
         Route::get('delete-subscriber/{id}','NewsletterController@deleteSubscriber');
+        Route::get('exports-subscribers','NewsletterController@exportSubscribers');
 
 
 

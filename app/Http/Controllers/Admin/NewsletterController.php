@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\subscribersExport;
 use App\Http\Controllers\Controller;
 use App\Models\NewsletterSubscriber;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Session;
 
 class NewsletterController extends Controller
@@ -31,6 +33,10 @@ class NewsletterController extends Controller
         NewsletterSubscriber::where('id',$id)->delete();
         $message="بخش مورد نظر با موفقیت حذف شد !";
         return redirect()->back()->with('success_message',$message);
+
+    }
+    public function exportSubscribers(){
+        return Excel::download(new subscribersExport ,'subscribers.xlsx');
 
     }
 

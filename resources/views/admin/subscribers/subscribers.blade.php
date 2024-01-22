@@ -26,6 +26,9 @@
                     <div class="col-md-10">
                         <!-- general form elements -->
                         <div class="card card-light">
+                            <a href="{{url('admin/exports-subscribers')}}" style="max-width: 150px;float: right" class="btn btn-block btn-primary">
+                                خروجی اکسل
+                            </a>
 
                             @if(Session::has('error_message'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
