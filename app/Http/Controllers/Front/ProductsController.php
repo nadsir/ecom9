@@ -23,6 +23,7 @@ use Session;
 use Illuminate\Support\Facades\Route;
 use DB;
 use Auth;
+use Mail;
 
 class ProductsController extends Controller
 {
@@ -318,6 +319,7 @@ class ProductsController extends Controller
         if (!empty($productDetails['group_code'])) {
             $groupProducts = Product::select('id', 'product_image')->where('id', '!=', $id)->where(['group_code' => $productDetails['group_code'], 'status' => 1])->get()->toArray();
         }
+
 
 
         $totalStock = ProductAttribute::where('product_id', $id)->sum('stock');

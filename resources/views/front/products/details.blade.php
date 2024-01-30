@@ -163,35 +163,87 @@ $productFilters = ProductsFilter::productFilters();
                         <form action="{{url('cart/add')}}" class="post-form" method="post">
                             @csrf
                             <input type="hidden" name="product_id" value="{{$productDetails['id']}}">
-                        <div class="section-5-product-variants u-s-p-y-14">
-                            <div class="sizes u-s-m-b-11">
-                                <span>سایز های موجود :</span>
-                                <div class="size-variant select-box-wrapper">
-                                    <select name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="select-box product-size" required>
-                                        <option value="">انتخاب سایز</option>
-                                               @foreach($productDetails['attributes'] as $attributes)
-                                        <option value="{{$attributes['size']}}">{{$attributes['size']}}</option>
-                                        @endforeach
-
-                                    </select>
+                            @if($productDetails['attributes'] !=null)
+                            @if($productDetails['attributes'][0]['size']=="free")
+                                <div class="section-5-product-variants u-s-p-y-14">
+                                    <div class="sizes u-s-m-b-11">
+                                            <select style="display: none" name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="select-box product-size" required>
+                                                @foreach($productDetails['attributes'] as $attributes)
+                                                    <option value="{{$attributes['size']}}">{{$attributes['size']}}</option>
+                                                @endforeach
+                                            </select>
+                                        <strong>فاقد سایز بندی</strong>
+                                    </div>
+                                    @if(count($groupProducts)>0)
+                                        <div>
+                                            <div><strong>رنگ محصول</strong></div>
+                                            <div style="margin-top: 10px">
+                                                @foreach($groupProducts as $product)
+                                                    <a href="{{url('product/'.$product['id'])}}">
+                                                        <img style="width: 70px" src="{{asset('front/images/product_images/small/'.$product['product_image'])}}" alt="">
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="size u-s-m-b-11" style="margin-top: 10px"></div>
                                 </div>
-                            </div>
-                            @if(count($groupProducts)>0)
-                            <div >
-                                <div><strong>رنگ محصول</strong></div>
-                                <div style="margin-top: 10px">
-                                    @foreach($groupProducts as $product)
-                                        <a href="{{url('product/'.$product['id'])}}">
-                                            <img style="width: 70px" src="{{asset('front/images/product_images/small/'.$product['product_image'])}}" alt="">
-                                        </a>
 
-                                    @endforeach
+                            @else
+                                <div class="section-5-product-variants u-s-p-y-14">
+                                    <div class="sizes u-s-m-b-11">
+                                        <span>سایز های موجود :</span>
+                                        <div class="size-variant select-box-wrapper">
+                                            <select name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="select-box product-size" required>
+                                                <option value="">انتخاب سایز</option>
+                                                @foreach($productDetails['attributes'] as $attributes)
+                                                    <option value="{{$attributes['size']}}">{{$attributes['size']}}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    @if(count($groupProducts)>0)
+                                        <div >
+                                            <div><strong>رنگ محصول</strong></div>
+                                            <div style="margin-top: 10px">
+                                                @foreach($groupProducts as $product)
+                                                    <a href="{{url('product/'.$product['id'])}}">
+                                                        <img style="width: 70px" src="{{asset('front/images/product_images/small/'.$product['product_image'])}}" alt="">
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="size u-s-m-b-11" style="margin-top: 10px"></div>
                                 </div>
-
-                            </div>
                             @endif
-                            <div class="size u-s-m-b-11" style="margin-top: 10px"></div>
-                        </div>
+                            @else
+                                <div class="section-5-product-variants u-s-p-y-14">
+                                    <div class="sizes u-s-m-b-11">
+                                        <select style="display: none" name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="select-box product-size" required>
+
+                                                <option value="free">free</option>
+
+                                        </select>
+                                        <strong>بدون دسته بندی</strong>
+                                    </div>
+                                    @if(count($groupProducts)>0)
+                                        <div>
+                                            <div><strong>رنگ محصول</strong></div>
+                                            <div style="margin-top: 10px">
+                                                @foreach($groupProducts as $product)
+                                                    <a href="{{url('product/'.$product['id'])}}">
+                                                        <img style="width: 70px" src="{{asset('front/images/product_images/small/'.$product['product_image'])}}" alt="">
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="size u-s-m-b-11" style="margin-top: 10px"></div>
+                                </div>
+                            @endif
+
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
 
                                 <div class="quick-social-media-wrapper u-s-m-b-22">

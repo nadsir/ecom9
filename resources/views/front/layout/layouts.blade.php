@@ -50,6 +50,9 @@
     <!--custom-->
     <link rel="stylesheet" href="{{url('front/css/custom.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @yield('jquery_slider_css')
+
+
 </head>
 
 <body>
@@ -101,7 +104,7 @@
         }
     </style>
 </noscript>
-
+@yield('jquery_slider_js')
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 <script>
     window.ga = function () {

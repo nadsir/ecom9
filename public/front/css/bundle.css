@@ -5,6 +5,17 @@
 /**
  * Set up a background-color and height on the root and body element.
  */
+@font-face {
+    font-family: B Yekan;
+    src: url(../fonts/Yekan/BYekan+.ttf);
+}
+.yekan{
+    font-family: "B Yekan";
+}
+.yekanB{
+    font-family: "B Yekan";
+    font-size: 20px !important;
+}
 html, body {
   background-color: #ffffff;
   height: 100%; }
@@ -175,7 +186,7 @@ body {
  * Includes support for styling links too.
  */
 .u-c-brand {
-  color: #d90429 !important; }
+  color: #fdb414 !important; }
 
 /*--------------------------------------------------------------
 5.0 Vendor Extensions
@@ -506,12 +517,13 @@ body {
     text-align: end;
     height: 52px;
     line-height: 52px;
-    background: #d90429;
+    background: #fdb414;
     border-radius: 8px 8px 0 0;
     color: #ffffff;
     cursor: pointer;
     display: block;
-    font-size: 13px;
+      font-family: "B Yekan";
+    font-size: 20px;
     overflow: hidden;
     text-transform: uppercase;
     padding-left: 20px; }
@@ -823,7 +835,7 @@ body {
     outline: 0; }
 
 .button-primary {
-  background: #d90429;
+  background: #fdb414;
   font-weight: 700;
   color: #ffffff; }
   .button-primary:hover {
@@ -919,7 +931,7 @@ body {
     list-style: none; }
     .g-nav > li > a {
       display: block;
-      font-size: 13px;
+      font-size: 16px;
       padding: 14px 10px; }
       .g-nav > li > a > i.fas.fa-chevron-down {
         font-size: 6px;
@@ -927,6 +939,7 @@ body {
     .g-nav > li:hover > a:first-child {
       color: #d90429; }
       .g-nav > li:hover > a:first-child + .g-dropdown {
+
         opacity: 1;
         visibility: visible;
         top: 100%; }
@@ -936,7 +949,8 @@ body {
   box-shadow: 0 1px 2px rgba(86, 86, 90, 0.5);
   padding: 20px;
   position: absolute;
-  text-align: left;
+  text-align: right;
+    left: -50px !important;
   top: 120%;
   transform-origin: 0 0 0;
   transition: all 0.3s ease 0s;
@@ -968,7 +982,7 @@ body {
   left: 0;
   padding: 20px 30px;
   position: absolute;
-  text-align: left;
+  text-align: right;
   top: 120%;
   transform-origin: 0 0 0;
   transition: all 0.3s ease 0s;
@@ -1432,7 +1446,7 @@ body {
 /* Sub-component-4 */
 [class*="tab-nav-style-1-"] > .nav-item {
   position: relative;
-  margin-bottom: 15px; }
+  /*margin-bottom: 15px;*/ }
   [class*="tab-nav-style-1-"] > .nav-item + .nav-item {
     margin-left: 8px; }
 
@@ -1448,7 +1462,7 @@ body {
   color: #727272; }
   .tab-nav-style-1-a > .nav-item > .nav-link:after {
     content: "";
-    background-color: #d90429;
+   /* background-color: #d90429;*/
     height: 3px;
     position: absolute;
     width: 100%;
@@ -1458,8 +1472,8 @@ body {
     transform: scale(0); }
 
 .tab-nav-style-1-a > .nav-item > .nav-link.active {
-  border-color: #d90429;
-  color: #d90429; }
+/*  border-color: #d90429;*/
+  color: #fdb414; }
 
 /* Sub-component-4 v2 */
 .tab-nav-style-1-b > .nav-item > .nav-link {
@@ -1713,7 +1727,7 @@ body {
   overflow: hidden; }
   .form-searchbox .text-field {
     padding: 0 0 0 15px;
-    border-color: #d90429; }
+    border-color: #fdb414; }
   .form-searchbox .select-hide {
     visibility: hidden; }
   .form-searchbox .select-box-position {
@@ -1722,7 +1736,7 @@ body {
     top: 50%;
     transform: translateY(-50%); }
     .form-searchbox .select-box-position .select-box {
-      border-left: 1px solid #d90429;
+      border-left: 1px solid #fdb414;
       border-right: none;
       border-top: none;
       border-bottom: none; }
@@ -1758,7 +1772,7 @@ body {
   line-height: 26px;
   font-weight: 700;
   position: absolute;
-  background-color: #d90429;
+  background-color: #fdb414;
   width: 26px;
   left: 17px;
   top: -15px;
@@ -2086,7 +2100,7 @@ body {
     width: 100%;
     height: 23px;
     margin-bottom: 14px;
-    background: url(../images/payment/pay-3.png) center center no-repeat; }
+   /* background: url(../images/payment/pay-3.png) center center no-repeat;*/ }
 
 .social-media-wrapper {
   margin-bottom: 6px; }
@@ -2155,7 +2169,10 @@ body {
 
 /* 9.5 Site-Priorities */
 .app-priority .priority-wrapper {
-  border-bottom: 1px solid #DCDCDD; }
+  /*border-bottom: 1px solid #DCDCDD;*/
+    margin-top: 100px;
+    margin-bottom: 100px
+}
   .app-priority .priority-wrapper .single-item-wrapper {
     text-align: center; }
     .app-priority .priority-wrapper .single-item-wrapper .single-item-icon {
@@ -3436,6 +3453,7 @@ body {
 @media (max-width: 991px) {
   /* 7.1 Top-Header */
   .primary-nav, .secondary-nav {
+
     text-align: center;
     float: none; }
   /* 7.2 Mid-Header */
@@ -3543,6 +3561,15 @@ body {
 
 /* Extra small devices (portrait phones, less than and equal to 575px) */
 @media (max-width: 575px) {
+    .ion-ios-arrow-back{
+        display: none;
+    }
+    .tex-section-menu{
+        padding-right: 35px
+    }
+    .ion-ios-add-circle{
+        display: none;
+    }
   /* 15.0 404-page  */
   .align-center h1 {
     font-size: 155px; }
@@ -3552,6 +3579,6 @@ body {
   .mid-nav > li {
     margin-left: 0; }
   .item-counter {
-    left: 90px;
+    left: 25px;
     top: 8px; } }
 

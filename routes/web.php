@@ -140,6 +140,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
 Route::get('orders/invoice/download/{id}','App\Http\Controllers\Admin\OrderController@viewPDFInvoice');
 
 
+
 Route::namespace('App\Http\Controllers\Front')->group(function (){
     Route::get('/','IndexController@index');
     //Listing/Categories Routes

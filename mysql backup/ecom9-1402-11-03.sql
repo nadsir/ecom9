@@ -110,7 +110,7 @@ CREATE TABLE `carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `carts` */
 
@@ -118,7 +118,7 @@ insert  into `carts`(`id`,`session_id`,`user_id`,`product_id`,`size`,`quantity`,
 (29,'5a8d5380eafa28edd37e0004f336d13f',29,15,'کوچک',1,'2023-12-21 08:41:36','2023-12-21 10:16:50'),
 (43,'65ca17f30a4427b6ae07a3d683c93d4c',0,15,'کوچک',1,'2023-12-25 07:00:44','2023-12-25 07:00:44'),
 (90,'f29e96713337a9b373f42eb9bbb7ab33',0,13,'کوچک',1,'2024-01-16 09:46:54','2024-01-16 09:46:54'),
-(128,'120a845b37cd574b692a02d19d219d85',33,13,'کوچک',1,'2024-01-21 06:49:39','2024-01-21 09:10:03');
+(129,'058aa47e14d6a5f31dc51dfdfdb9f856',33,15,'کوچک',2,'2024-01-22 09:10:32','2024-01-22 09:10:32');
 
 /*Table structure for table `categories` */
 
@@ -675,7 +675,7 @@ CREATE TABLE `orders` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `orders` */
 
@@ -790,7 +790,7 @@ insert  into `product_attributes`(`id`,`product_id`,`size`,`price`,`stock`,`sku`
 (14,13,'بزرگ',10.00,10,'t-b-3',1,'2023-12-05 08:26:30','2024-01-20 06:36:55'),
 (15,16,'64 گیگ',120000.00,5,'s1',1,'2023-12-05 08:27:23','2023-12-05 08:27:23'),
 (16,16,'128 گیگ',130000.00,4,'s2',1,'2023-12-05 08:27:53','2023-12-05 08:27:53'),
-(17,15,'کوچک',120000.00,10,'SM002',1,'2023-12-05 08:49:13','2023-12-05 08:49:13'),
+(17,15,'کوچک',120000.00,1,'SM002',1,'2023-12-05 08:49:13','2024-01-22 09:11:01'),
 (19,20,'کوچک',10.00,4,'SM002d',1,'2023-12-26 11:53:18','2024-01-20 08:49:36'),
 (20,22,'کوچک',10.00,5,'dff',1,'2024-01-18 08:21:10','2024-01-20 08:44:25'),
 (21,22,'بزرگ',10.00,9,'dcs',1,'2024-01-18 09:33:28','2024-01-20 08:49:36');
@@ -846,7 +846,7 @@ insert  into `products`(`id`,`section_id`,`category_id`,`brand_id`,`admin_id`,`v
 (18,1,13,13,1,0,'superadmin','سویی شرت سفید','sw01','سفید',450000,10,0,'32487.jfif',NULL,NULL,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',NULL,NULL,NULL,NULL,'آستین بلند',NULL,'پلی استر',NULL,NULL,NULL,'Yes','NO',1,'2023-11-27 09:46:21','2024-01-21 07:28:03'),
 (19,2,4,9,1,0,'superadmin','گوشی آیفون','AT02','آبی',20000,10,0,'13128.webp',NULL,NULL,NULL,'IOS','۶.۰ اینچ و بزرگتر',NULL,NULL,NULL,'4 گیگ',NULL,NULL,NULL,NULL,'No','NO',1,'2023-12-03 09:36:15','2023-12-03 09:55:50'),
 (20,1,6,2,2,1,'vendor','تی شرت صورتی','p13','صورتی',20000,0,1500,'21774.webp',NULL,'100',NULL,NULL,NULL,NULL,NULL,'آستین بلند',NULL,'کتان',NULL,NULL,NULL,'No','NO',1,'2023-12-09 10:30:50','2024-01-16 06:33:43'),
-(22,1,10,1,2,1,'vendor','دامن','123456','سیاه',20000,0,700,'64757.jpg',NULL,NULL,NULL,NULL,NULL,NULL,'گل گلی','آستین بلند',NULL,NULL,NULL,NULL,NULL,'No','NO',1,'2024-01-18 08:19:56','2024-01-18 09:39:40');
+(22,1,10,1,2,1,'vendor','دامن','456','سیاه',20000,0,700,'64757.jpg',NULL,NULL,NULL,NULL,NULL,NULL,'گل گلی','آستین بلند',NULL,NULL,NULL,NULL,NULL,'No','NO',1,'2024-01-18 08:19:56','2024-01-22 08:48:48');
 
 /*Table structure for table `products_filters` */
 
@@ -939,7 +939,7 @@ CREATE TABLE `recently_viewed_products` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `recently_viewed_products` */
 
@@ -1010,7 +1010,8 @@ insert  into `recently_viewed_products`(`id`,`product_id`,`session_id`,`created_
 (66,22,'3045b154d26effbce360163fd8a2c181',NULL,NULL),
 (67,13,'120a845b37cd574b692a02d19d219d85',NULL,NULL),
 (68,22,'120a845b37cd574b692a02d19d219d85',NULL,NULL),
-(69,18,'120a845b37cd574b692a02d19d219d85',NULL,NULL);
+(69,18,'120a845b37cd574b692a02d19d219d85',NULL,NULL),
+(70,15,'058aa47e14d6a5f31dc51dfdfdb9f856',NULL,NULL);
 
 /*Table structure for table `sections` */
 

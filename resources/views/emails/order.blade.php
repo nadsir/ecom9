@@ -8,25 +8,25 @@
     <title>Document</title>
 </head>
 <body>
-<table style="width: 700px;">
+<table style="width: 700px;text-align: right;direction: rtl" >
     <tr><td>&nbsp;</td></tr>
     <tr><td><img src="{{asset('front/images/mail-logo/stack-developers-logo.png')}}" alt=""></td></tr>
     <tr><td>&nbsp;</td></tr>
-    <tr><td>Hello {{$name}}</td></tr>
+    <tr><td> سلام  {{$name}}</td></tr>
     <tr><td>&nbsp;</td></tr>
-    <tr><td>Thank you for shopping with us . Your order details are as below :</td></tr>
+    <tr><td>با تشکر از خرید شما جزئیات خرید شما به شرح زیر می باشد :</td></tr>
     <tr><td>&nbsp;</td></tr>
-    <tr><td>Order no. {{$order_id}}</td></tr>
+    <tr><td>شماره سفارش  {{$order_id}} </td></tr>
     <tr><td>&nbsp;</td></tr>
     <tr><td>
             <table style="width: 95%" cellpadding="5" cellspacing="5" bgcolor="#f9f9f9">
                 <tr bgcolor="#cccccc">
-                    <td>Product Name</td>
-                    <td>Product Code</td>
-                    <td>Product Size</td>
-                    <td>Product Color</td>
-                    <td>Product Quantity</td>
-                    <td>Product price</td>
+                    <td>نام محصول</td>
+                    <td>کدمحصول</td>
+                    <td>سایز محصول</td>
+                    <td>رنگ محصول</td>
+                    <td>تعداد محصول</td>
+                    <td>قیمت محصول</td>
                 </tr>
                 @foreach($orderDetails['orders_products'] as $order)
                     <tr bgcolor="#cccccc">
@@ -39,12 +39,12 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="5" align="right">Shipping Charges</td>
-                    <td>INR {{$orderDetails['shipping_charges']}}</td>
+                    <td colspan="5" align="right">هزینه ارسال محصول</td>
+                    <td>تومان {{$orderDetails['shipping_charges']}}</td>
                 </tr>
                 <tr>
-                    <td colspan="5" align="right">Coupon Discount</td>
-                    <td>INR
+                    <td colspan="5" align="right">کد تخفیف :</td>
+                    <td>تومان
                         @if($orderDetails['coupon_amount']>0)
                         {{$orderDetails['coupon_amount']}}
                         @else
@@ -53,8 +53,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5" align="right">Grand Total</td>
-                    <td>INR {{$orderDetails['grand_total']}}</td>
+                    <td colspan="5" align="right">مجموع کل :</td>
+                    <td>تومان {{$orderDetails['grand_total']}}</td>
                 </tr>
 
             </table>
@@ -65,42 +65,42 @@
         <td>
             <table>
                 <tr>
-                    <td><strong>Delivery Address::</strong></td>
+                    <td><strong>آدرس ارسال :</strong></td>
                 </tr>
                 <tr>
                     <td>{{$orderDetails['name']}}</td>
-                </tr>
-                <tr>
-                    <td>{{$orderDetails['address']}}</td>
-                </tr>
-                <tr>
-                    <td>{{$orderDetails['city']}}</td>
-                </tr>
-                <tr>
-                    <td>{{$orderDetails['state']}}</td>
                 </tr>
                 <tr>
                     <td>{{$orderDetails['country']}}</td>
                 </tr>
                 <tr>
-                    <td>{{$orderDetails['pincode']}}</td>
+                    <td>{{$orderDetails['state']}}</td>
+                </tr>
+                <tr>
+                    <td>{{$orderDetails['city']}}</td>
+                </tr>
+
+                <tr>
+                    <td>{{$orderDetails['address']}}</td>
                 </tr>
                 <tr>
                     <td>{{$orderDetails['mobile']}}</td>
                 </tr>
                 <tr>
-                    <td>{{$orderDetails['name']}}</td>
+                    <td>{{$orderDetails['pincode']}}</td>
                 </tr>
+
+
             </table>
 
         </td>
     </tr>
     <tr><td>&nbsp;</td></tr>
-    <tr><td><a href="{{url('orders/invoice/download/'.$orderDetails['id'])}}">Click Here To Download Invoice</a></td></tr>
+    <tr><td><a href="{{url('orders/invoice/download/'.$orderDetails['id'])}}">برای دانلود فاکتور کلیک کنید</a></td></tr>
     <tr><td>&nbsp;</td></tr>
-    <tr><td>For any queries , you can contact us at <a href="mailto:info@stackdevelopers.in">info@stackdevelopers</a></td></tr>
+    <tr><td>برای رفع هرگونه مشکل سوال مورد نظر را ارسال کنید <a href="mailto:info@parsegzoz.com">info@parsegzoz.com</a></td></tr>
     <tr><td>&nbsp;</td></tr>
-    <tr><td>Regards,<br>Team Stack Developers</td></tr>
+    <tr><td>با احترام<br>تیم پشتیبانی پارس اگزوز  </td></tr>
     <tr><td>&nbsp;</td></tr>
 
 </table>

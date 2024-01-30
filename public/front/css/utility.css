@@ -8,6 +8,7 @@
  * p means padding. e.g. `u-s-m-t-22` means apply top margin 22 pixels.
  */
 /* Margin with value `auto`. */
+
 .u-s-m-t-auto {
   margin-top: auto; }
 
@@ -452,13 +453,13 @@
   margin-top: 9px; }
 
 .u-s-m-r-9 {
-  margin-right: 9px; }
+  margin-left: 9px; }
 
 .u-s-m-b-9 {
   margin-bottom: 9px; }
 
 .u-s-m-l-9 {
-  margin-left: 9px; }
+  margin-right: 9px; }
 
 .u-s-m-x-9 {
   margin: 0 9px; }
