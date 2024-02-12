@@ -290,7 +290,7 @@
 </head>
 
 <body>
-<header class="clearfix" style="direction: rtl">
+<header class="clearfix" style="direction: rtl;text-align: right">
     <div class="container">
 
             <img src="{{ public_path("/front/images/main-logo/parsegzoz-logo-header.png") }}" alt="" style="width: 150px; ">
@@ -307,8 +307,8 @@
     </div>
 </header>
 
-<section >
-    <div class="container">
+<section style="text-align: right;direction: rtl;font-family: 'B Yekan'">
+    <div class="container" >
         <div class="details clearfix">
             <div class="data right">
                 <div class="title" >شماره سفارش:{{$orderDetails['id'] }}</div>
@@ -334,6 +334,7 @@
             <thead>
             <tr>
                 <th> کدمحصول</th>
+                <th> نام محصول</th>
                 <th> سایز</th>
                 <th> رنگ</th>
                 <th> تعداد</th>
@@ -349,8 +350,9 @@
 
             <tr>
                 <td >{{ $product['product_code']}}</td>
-                <td >{{ $product['product_size']}}</td>
-                <td >{{ $product['product_color']}}</td>
+                <td >{{ $product['product_name']}}</td>
+                <td >@if($product['product_size'] !='free'){{ $product['product_size']}}@else محصول فاقد سایز بندی @endif</td>
+                <td >@if($product['product_color'] !='free'){{ $product['product_color']}}@else محصول فاقد رنگ بندی @endif</td>
                 <td >{{ $product['product_qty']}}</td>
                 <td >{{ $product['product_price']}} تومان </td>
                 <td >{{$product['product_qty'] * $product['product_price']}} تومان </td>

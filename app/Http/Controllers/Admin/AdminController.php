@@ -40,7 +40,6 @@ class   AdminController extends Controller
 
         return view('admin.dashboard')->with(compact('sectionsCount','productsCount','ordersCount','categoriesCount','couponsCount','brandsCount','usersCount'));
     }
-
     public function updateVendorDetails($slug,Request $request){
         if ($slug=="personal"){
             Session::put('page','update_personal_details');
@@ -226,7 +225,6 @@ class   AdminController extends Controller
         }
 
     }
-
     public function updateAdminPassword(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -250,7 +248,6 @@ class   AdminController extends Controller
         return view('admin.settings.update-admin-password')->with(compact('adminDetails'));
 
     }
-
     public function checkPassword(Request $request)
     {
         $data = $request->all();
@@ -260,7 +257,6 @@ class   AdminController extends Controller
             return "false";
         }
     }
-
     public function updateAdminDetails(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -304,11 +300,11 @@ class   AdminController extends Controller
         return view('admin.settings.update-admin-details');
 
     }
-
     public function login(Request $request)
     {
         if ($request->isMethod('post')) {
             $data = $request->all();
+
             /*echo "<pre>";print_r($data);die;*/
             //default validation
             /*            $validated=$request->validate([
@@ -322,7 +318,8 @@ class   AdminController extends Controller
             ];
             $customMessages = [
                 'email.required' => 'فیلد ایمیل اجباری می باشد',
-                'email.required' => 'فیلد ایمیل اشتباه وارد شده',
+                'email.email' => 'فرمت ایمیل معتبر نمی باشد',
+                'email.max' => 'طول ایمیل بیشتر از حد مجاز',
                 'password.required' => 'فیلد کلمه عبور اجباری می باشد',
             ];
             $this->validate($request, $rule, $customMessages);
@@ -351,7 +348,6 @@ class   AdminController extends Controller
         return view('admin.login');
 
     }
-
     public function admins($type=null){
         $admins=Admin::query();
 

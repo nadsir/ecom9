@@ -50,14 +50,61 @@
     <!--custom-->
     <link rel="stylesheet" href="{{url('front/css/custom.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @yield('jquery_slider_css')
 
+    <style>
+        @yield('collapse_filter_menu_css')
+        span {cursor:pointer; }
+
+        .minus, .plus{
+            width:20px;
+            height:34px;
+            background:#f2f2f2;
+            border-radius:4px;
+            padding:3px 5px 8px 5px;
+            border:1px solid #ddd;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            color: #fdb414;
+
+        }
+        .inputcounter {
+            height: 34px;
+            width: 100px;
+            text-align: center;
+            font-size: 26px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .minus-a, .plus-a{
+            width:20px;
+            height:34px;
+            background:#f2f2f2;
+            border-radius:4px;
+            padding:3px 5px 8px 5px;
+            border:1px solid #ddd;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            color: #fdb414 !important;
+
+        }
+
+        .swal2-container{
+           font-family: "B Yekan";
+        }
+
+    </style>
+    <script src="https://kit.fontawesome.com/ea3dc63fb4.js" crossorigin="anonymous"></script>
+    @yield('jquery_slider_css')
 
 </head>
 
 <body>
 <div class="loader">
-    <img width="50px" src="{{asset('front/images/loaders/loader.gif')}}" alt="loading...." />
+    <img width="150px" src="{{asset('front/images/loaders/loader.gif')}}" alt="loading...." />
 </div>
 
 <!-- app -->
@@ -104,9 +151,19 @@
         }
     </style>
 </noscript>
-@yield('jquery_slider_js')
+
+
+<script>
+    @yield('collapse_filter_menu_js')
+</script>
+
+<script type="text/javascript">
+
+</script>
+
 <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
 <script>
+
     window.ga = function () {
         ga.q.push(arguments)
     };
@@ -180,7 +237,24 @@
             api2._init();
         }
     });
+    $(document).ready(function() {
+        $('.minus').click(function () {
+            var $input = $(this).parent().find('input');
+            var count = parseInt($input.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $input.val(count);
+            $input.change();
+            return false;
+        });
+        $('.plus').click(function () {
+            var $input = $(this).parent().find('input');
+            $input.val(parseInt($input.val()) + 1);
+            $input.change();
+            return false;
+        });
+    });
 </script>
 @include('front.layout.scripts')
+@yield('jquery_slider_js')
 </body>
 </html>

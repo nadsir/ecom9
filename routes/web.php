@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/test',function (){
-    return view('welcome2');
+    return view('emails.vendor_confirmation');
 });
 Route::get('/dashboard', function () {
 

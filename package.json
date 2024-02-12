@@ -20,7 +20,9 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^4.2.3",
+        "cleave.js": "^1.6.0",
         "gsap": "^3.12.2",
+        "persian-currency-converter": "^1.0.10",
         "sweetalert2": "^11.9.0",
         "vue": "^3.2.36",
         "vue-loader": "^17.0.1"

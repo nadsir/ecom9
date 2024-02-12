@@ -7,16 +7,7 @@ use App\Models\Product;
     <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>Cart</h2>
-                <ul class="bread-crumb">
-                    <li class="has-separator">
-                        <i class="ion ion-md-home"></i>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li class="is-marked">
-                        <a href="#">Thanks</a>
-                    </li>
-                </ul>
+
             </div>
         </div>
     </div>
@@ -27,9 +18,10 @@ use App\Models\Product;
 
             <div class="row">
 
-                <div class="col-lg-12" align="center">
-                    <h3>YOUR ORDER HAS BEEN PLACED SUCCESSFULLY</h3>
-                    <P>Your order number is {{Session::get('order_id')}} and Grand total is INR {{Session::get('grand_total')}}</P>
+                <div class="col-lg-12" align="center" style="font-family: 'B Yekan';direction: rtl;text-align: center">
+                    <h3>سفارش شما با موفقیت به ثبت رسید</h3>
+                    <h3>با تشکر از خرید شما</h3>
+                    <P>شماره سفارش شما {{Session::get('order_id')}} و مبلغ نهایی پرداخت{{Session::get('grand_total')}}تومان می باشد  </P>
                 </div>
             </div>
         </div>

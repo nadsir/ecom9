@@ -1,6 +1,64 @@
 
 $(document).ready(function (){
 
+    //change string to currency
+    (function ($) {
+        $.fn.simpleMoneyFormat = function() {
+            this.each(function(index, el) {
+                var elType = null; // input or other
+                var value = null;
+                // get value
+                if($(el).is('input') || $(el).is('textarea')){
+                    value = $(el).val().replace(/,/g, '');
+                    elType = 'input';
+                } else {
+                    value = $(el).text().replace(/,/g, '');
+                    elType = 'other';
+                }
+                // if value changes
+                $(el).on('paste keyup', function(){
+                    value = $(el).val().replace(/,/g, '');
+                    formatElement(el, elType, value); // format element
+                });
+                formatElement(el, elType, value); // format element
+            });
+            function formatElement(el, elType, value){
+                var result = '';
+                var valueArray = value.split('');
+                var resultArray = [];
+                var counter = 0;
+                var temp = '';
+                for (var i = valueArray.length - 1; i >= 0; i--) {
+                    temp += valueArray[i];
+                    counter++
+                    if(counter == 3){
+                        resultArray.push(temp);
+                        counter = 0;
+                        temp = '';
+                    }
+                };
+                if(counter > 0){
+                    resultArray.push(temp);
+                }
+                for (var i = resultArray.length - 1; i >= 0; i--) {
+                    var resTemp = resultArray[i].split('');
+                    for (var j = resTemp.length - 1; j >= 0; j--) {
+                        result += resTemp[j];
+                    };
+                    if(i > 0){
+                        result += ','
+                    }
+                };
+                if(elType == 'input'){
+                    $(el).val(result);
+                } else {
+                    $(el).empty().text(result);
+                }
+            }
+        };
+    }(jQuery));
+    $('.money').simpleMoneyFormat();
+    // end change string to currency
    $("#getPrice").change(function (){
       var size=$(this).val();
       var product_id=$(this).attr("product-id");
@@ -10,10 +68,10 @@ $(document).ready(function (){
           type:'post',
           success:function (resp){
               if (resp['discount']>0){
-        $(".getAttributePrice").html("<div class='price'><h4> :تومان "+resp['final_price']+"</h4></div><div class='original-price'><span>Original Price:</span><span> :تومان "+resp['product_price']+"</span></div>");
+        $(".getAttributePrice").html("<div class='price'><h4> "+resp['final_price']+" تومان </h4></div><div class='original-price'><span>Original Price:</span><span> "+resp['product_price']+" تومان </span></div>");
 
               }else{
-                  $(".getAttributePrice").html("<div class='price'><h4>:تومان "+resp['final_price']+"</h4></div>");
+                  $(".getAttributePrice").html("<div class='price'><h4> "+resp['final_price']+" تومان </h4></div>");
               }
           },error:function (){
               alert(error)
@@ -37,7 +95,12 @@ $(document).ready(function (){
             var quantity=$(this).data('qty');
             //check Qty is atleast 1
             if (quantity<=1){
-                alert('تعداد محصول باید یک یا بیشتر باشد');
+                Swal.fire({
+                    confirmButtonColor: "#fdb414",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "تلاش مجدد",
+                    text: 'تعداد محصول باید یک یا بیشتر باشد',
+                },);
                 return false;
             }
             // increase the qty by 1
@@ -51,7 +114,13 @@ $(document).ready(function (){
             success:function (resp){
                 $(".totalCartItems").html(resp.totalCartItems);
                 if (resp.status==false){
-                    alert(resp.message);
+                    Swal.fire({
+                        confirmButtonColor: "#fdb414",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "تلاش مجدد",
+                        text: resp.message,
+                    },);
+
                 }
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerview);
@@ -64,22 +133,39 @@ $(document).ready(function (){
     //Delete Cart Items
     $(document).on('click','.deleteCartItem',function (){
         var cartid=$(this).data('cartid');
-        var result=confirm("از حذف محصول اطمینان دارید ؟")
-        if (result){
-            $.ajax({
+        Swal.fire({
+            title: "از حذف محصول مورد نظر اطمینان دارید",
+            text: "محصول از سبد خرید شما حذف خواهد شد",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#fdb414",
+            cancelButtonColor: "#5b5a5a",
+            confirmButtonText: "بله اطمینان دارم",
+            cancelButtonText:"خیر"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    data:{cartid:cartid},
+                    url:'/cart/delete',
+                    type:'post',
+                    success:function (resp){
+                        $(".totalCartItems").html(resp.totalCartItems);
+                        $("#appendCartItems").html(resp.view);
+                        $("#appendHeaderCartItems").html(resp.headerview);
+                    },error:function (){
+                        alert("Error")
+                    }
+                })
+                Swal.fire({
+                    confirmButtonColor: "#fdb414",
+                    title: "! حذف شد",
+                    text: "محصول موردنظر با موفقیت حذف شد.",
+                    confirmButtonText: "بله",
+                    icon: "success"
+                });
+            }
+        });
 
-                data:{cartid:cartid},
-                url:'/cart/delete',
-                type:'post',
-                success:function (resp){
-                    $(".totalCartItems").html(resp.totalCartItems);
-                    $("#appendCartItems").html(resp.view);
-                    $("#appendHeaderCartItems").html(resp.headerview);
-                },error:function (){
-                    alert("Error")
-                }
-            })
-        }
 
 
 
@@ -230,12 +316,14 @@ $(document).ready(function (){
     //login Form Validation
     $("#loginForm").submit(function (){
         var formdata=$(this).serialize();
+        $(".loader").show();
         $.ajax({
             url:"/user/login",
             type:"POST",
             data:formdata,
             success:function (resp) {
                 if (resp.type == "error") {
+                    $(".loader").hide();
                     $.each(resp.errors, function (i, error) {
                         $("#login-" + i).attr('style', 'color:red');
                         $("#login-" + i).html(error);
@@ -244,12 +332,15 @@ $(document).ready(function (){
                         }, 3000);
                     });
                 }  else if (resp.type == "incorrect") {
+                    $(".loader").hide();
                     $("#login-error" ).attr('style', 'color:red');
                     $("#login-error" ).html(resp.message);
                 }else if (resp.type == "inactive") {
+                    $(".loader").hide();
                     $("#login-error" ).attr('style', 'color:red');
                     $("#login-error" ).html(resp.message);
                 }else if (resp.type == "success") {
+                    $(".loader").hide();
                     window.location.href = resp.url;
                 }
 
@@ -302,7 +393,14 @@ $(document).ready(function (){
         if (user==1){
 
         }else {
-            alert("Please Login to apply coupon");
+            Swal.fire({
+                confirmButtonColor: "#fdb414",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "تلاش مجدد",
+                    text: "برای استفاده از کد تخفیف لطفا لاگین کنید !",
+
+                },);
+
             return false;
         }
         var code=$("#code").val();
@@ -312,19 +410,30 @@ $(document).ready(function (){
             url:'/apply-coupon',
             success:function (resp){
                 if (resp.message!=""){
-                    alert(resp.message);
+                    Swal.fire({
+                        confirmButtonColor: "#fdb414",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "بله",
+                        text: resp.message,
+
+                    },);
+
                 }
 
                 $(".totalCartItems").html(resp.totalCartItems);
                 $("#appendCartItems").html(resp.view);
                 $("#appendHeaderCartItems").html(resp.headerview);
                 if(resp.couponAmount>0){
-                    $(".couponAmount").text("تومان"+resp.couponAmount)
+                    $(".couponAmount").text(resp.couponAmount);
+                    $('.couponAmount').addClass("money");
+
                 }else {
-                    $(".couponAmount").text("0 تومان")
+                    $(".couponAmount").text("0 تومان");
+
                 }
                 if(resp.grand_total>0){
-                    $(".grand_total").text("تومان"+resp.grand_total)
+                    $(".grand_total").text(resp.grand_total);
+
 
                 }
             },error:function (){
@@ -372,7 +481,7 @@ $(document).ready(function (){
                 if (resp.type=="error"){
                     $(".loader").hide();
                     $.each(resp.errors,function (i,error){
-                        $("#delivery_"+i).attr('style','color:red');
+                        $("#delivery_"+i).attr('style','color:red').attr('style','position:absolute').attr('style','margin-top:-69px');
                         $("#delivery_"+i).html(error);
 
                         setTimeout(function (){
@@ -395,23 +504,42 @@ $(document).ready(function (){
     });
     //Remove Delivery Address
     $(document).on('click','.removeAddress',function (){
-       if (confirm("Are You sure to remove this ?")){
-           var addressid=$(this).data("addressid");
-           $.ajax({
-               data:{addressid:addressid},
-               url:"/remove-delivery-address",
-               type:'post',
-               success:function (resp){
+        Swal.fire({
 
-                   $("#deliveryAddresses").html(resp.view)
-                   window.location.href="checkout";
+            text: "آدرس شما حذف خواهد شد",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#fdb414",
+            cancelButtonColor: "#5b5a5a",
+            confirmButtonText: "بله اطمینان دارم",
+            cancelButtonText:"خیر"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var addressid=$(this).data("addressid");
+                $.ajax({
+                    data:{addressid:addressid},
+                    url:"/remove-delivery-address",
+                    type:'post',
+                    success:function (resp){
+
+                        $("#deliveryAddresses").html(resp.view)
+                        window.location.href="checkout";
 
 
-               },error:function (){
-                   alert("Error");
-               }
-           });
-       }
+                    },error:function (){
+                        alert("Error");
+                    }
+                });
+                Swal.fire({
+                    confirmButtonColor: "#fdb414",
+                    title: "! حذف شد",
+                    text: "آدرس مورد نظر حذف شد.",
+                    confirmButtonText: "بله",
+                    icon: "success"
+                });
+            }
+        });
+
     });
     //Calculate Grand Total
     $("input[name=address_id]").bind('change',function (){
@@ -427,6 +555,7 @@ $(document).ready(function (){
         var grand_total=parseInt(total_price)+parseInt(shipping_charges)-parseInt(coupon_amount);
 
         $(".grand_total").html(grand_total+"تومان")
+
 
 
     });

@@ -259,6 +259,7 @@ class ProductsController extends Controller
                     $meta_Keywords=$categoryDetails['categoryDetails']['meta_keywords'];
                     $meta_description=$categoryDetails['categoryDetails']['meta_description'];
 
+
                     return view('front.products.listing')->with(compact('categoryDetails', 'categoryProducts', 'url','meta_title','meta_description','meta_Keywords'));
 
 
@@ -319,6 +320,7 @@ class ProductsController extends Controller
         if (!empty($productDetails['group_code'])) {
             $groupProducts = Product::select('id', 'product_image')->where('id', '!=', $id)->where(['group_code' => $productDetails['group_code'], 'status' => 1])->get()->toArray();
         }
+
 
 
 
@@ -499,7 +501,7 @@ class ProductsController extends Controller
                 $total_amount=0;
                 foreach ($getCartItems as $key => $item) {
                     if (!in_array($item['product']['category_id'], $catArr)) {
-                        $message = "این کوپن مربوط به هیچکدام از محصولات داخل کارت نمی باشد.";
+                        $message = ". این کوپن مربوط به هیچکدام از محصولات داخل کارت نمی باشد";
                     }
                     $attrPrice=Product::getDiscountAttributePrice($item['product_id'],$item['size']);
                     $total_amount=$total_amount+($attrPrice['final_price']*$item['quantity']);
@@ -554,7 +556,7 @@ class ProductsController extends Controller
                     //Ass Coupon code & Amount in Session variables
                     Session::put('couponAmount',$couponAmount);
                     Session::put('couponCode',$data['code']);
-                    $message="Coupon Code Successfully applied , You are availing discount!";
+                    $message="کد تخفیف با موقیت اعمال شد .";
                     return response()->json(['status' => true,'couponAmount'=>$couponAmount ,'grand_total'=>$grand_total,'message' => $message, 'totalCartItems' => $totalCartItems, 'view' => (string)View::make('front.products.cart_items')->with(compact('getCartItems')),
                         'headerview' => (string)View::make('front.layout.header_cart_items')->with(compact('getCartItems'))]);
 
@@ -639,17 +641,17 @@ class ProductsController extends Controller
 
             // Delivery Address validation
             if (empty($data['address_id'])){
-                $message="Please Select Delivery address";
+                $message="لطفا آدرس دریافت را انتخاب کنید .";
                 return redirect()->back()->with('error_message',$message);
             }
             // Payment method validation
             if (empty($data['payment_gateway'])){
-                $message="Please Select payment method";
+                $message="لطفا روش پرداخت را مشخص کنید .";
                 return redirect()->back()->with('error_message',$message);
             }
             // Agree to T&C Validation
             if (empty($data['accept'])){
-                $message="Please agree to T&c";
+                $message="درصورت پذیرفتن قوانین لطفا تایید بفرمایید.";
                 return redirect()->back()->with('error_message',$message);
             }
             //Get Delivery Address from address_id

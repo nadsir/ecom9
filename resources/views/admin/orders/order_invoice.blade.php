@@ -3,11 +3,11 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
+<div class="container" style="text-align: right;direction: rtl;font-family: 'B Yekan'">
     <div class="row">
         <div class="col-xs-12">
             <div class="invoice-title">
-                <h2>Invoice</h2><h3 class="pull-right">Order # {{$orderDetails['id']}}
+                <h2>سفارش</h2><h3 class="pull-right">سفارش # {{$orderDetails['id']}}
                     <?php  echo DNS1D::getBarcodeHTML($orderDetails['id'], 'C39'); ?>
 
 
@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-xs-6">
                     <address>
-                        <strong>Billed To:</strong><br>
+                        <strong>صورت حساب:</strong><br>
                         {{$userDetails['name']}}<br>
                         @if(!empty($userDetails['address']))
                         {{$userDetails['address']}}<br>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-xs-6 text-right">
                     <address>
-                        <strong>Shipped to:</strong><br>
+                        <strong>ارسال شده به:</strong><br>
                             {{$orderDetails['name']}}<br>
                             {{$orderDetails['address']}}<br>
                             {{$orderDetails['city']}},{{$orderDetails['state']}}<br>
@@ -54,13 +54,13 @@
             <div class="row">
                 <div class="col-xs-6">
                     <address>
-                        <strong>Payment Method:</strong><br>
+                        <strong>روش پرداخت:</strong><br>
                    {{$orderDetails['payment_method']}}
                     </address>
                 </div>
                 <div class="col-xs-6 text-right">
                     <address>
-                        <strong>Order Date:</strong><br>
+                        <strong>تاریخ سفارش:</strong><br>
                         {{date('Y-m-d h:i:s', strtotime($orderDetails['created_at']))}}<br><br>
                     </address>
                 </div>
@@ -72,19 +72,20 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><strong>Order summary</strong></h3>
+                    <h3 class="panel-title"><strong>خلاصه سفارش</strong></h3>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-condensed">
                             <thead>
                             <tr>
-                                <td><strong>Product Code</strong></td>
-                                <td class="text-center"><strong>Size</strong></td>
-                                <td class="text-center"><strong>Color</strong></td>
-                                <td class="text-center"><strong>Price</strong></td>
-                                <td class="text-center"><strong>Quantity</strong></td>
-                                <td class="text-center"><strong>Total</strong></td>
+                                <td><strong>کد محصول</strong></td>
+                                <td><strong>نام محصول</strong></td>
+                                <td class="text-center"><strong>سایز</strong></td>
+                                <td class="text-center"><strong>رنگ</strong></td>
+                                <td class="text-center"><strong>قیمت</strong></td>
+                                <td class="text-center"><strong>تعداد</strong></td>
+                                <td class="text-center"><strong>مجموع</strong></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -93,9 +94,10 @@
                             @foreach($orderDetails['orders_products'] as $product)
 
                                 <tr>
-                                <td>{{$product['product_code']}}<?php  echo DNS1D::getBarcodeHTML($product['product_code'], 'C39'); ?></td>
-                                <td class="text-center">{{$product['product_size']}}</td>
-                                <td class="text-center">{{$product['product_color']}}</td>
+                                <td>{{$product['product_code']}}<?php /* echo DNS1D::getBarcodeHTML($product['product_code'], 'C39'); */?></td>
+                                <td>{{$product['product_name']}}</td>
+                                <td class="text-center">@if($product['product_size'] !='free'){{ $product['product_size']}}@else محصول فاقد سایز بندی @endif</td>
+                                <td class="text-center">@if($product['product_color'] !='free'){{ $product['product_color']}}@else محصول فاقد رنگ بندی @endif</td>
                                 <td class="text-center"> تومان{{$product['product_price']}}</td>
                                 <td class="text-center"> {{$product['product_qty']}}</td>
                                 <td class="text-center"> {{$product['product_price'] * $product['product_qty']}}</td>
@@ -107,7 +109,7 @@
                                 <td class="thick-line"></td>
                                 <td class="thick-line"></td>
                                 <td class="thick-line"></td>
-                                <td class="thick-line text-right"><strong>Subtotal</strong></td>
+                                <td class="thick-line text-right"><strong>مجموع</strong></td>
                                 <td class="thick-line text-right"> تومان{{$subTotal}}</td>
                             </tr>
                             <tr>
@@ -115,7 +117,7 @@
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
-                                <td class="no-line text-right"><strong>Shipping Charges</strong></td>
+                                <td class="no-line text-right"><strong>هزینه ارسال محصول</strong></td>
                                 <td class="no-line text-right"> تومان0  </td>
                             </tr>
                             <tr>
@@ -123,7 +125,7 @@
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
                                 <td class="no-line"></td>
-                                <td class="no-line text-right"><strong>Grand total</strong></td>
+                                <td class="no-line text-right"><strong>مجموع کل</strong></td>
                                 <td class="no-line text-right"><strong> تومان{{$orderDetails['grand_total']}}</strong><br>
                                 @if($orderDetails['payment_method']=="COD")
                                         <font color="red"> Already paid</font>

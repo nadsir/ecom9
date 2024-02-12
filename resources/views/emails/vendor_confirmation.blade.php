@@ -8,14 +8,19 @@
     <title>Document</title>
 </head>
 <body>
-<tr><td>Dear {{$name}}</td></tr>
-<tr><td>&nbsp;<br></td></tr>
-<tr><td>Please Click below link to activate your Vendor account</td></tr>
-<tr><td><a href="{{url('vendor/confirm/'.$code)}}">{{url('vendor/confirm/'.$code)}}</a></td></tr>
-<tr><td>&nbsp;<br></td></tr>
-<tr><td>Thanks & Regards ,</td></tr>
-<tr><td>&nbsp;<br></td></tr>
-<tr><td>Stack Developers</td></tr>
+<table style="text-align: right;direction: rtl;float: right">
+    <tr><td><img src="{{asset('front/images/main-logo/parsegzoz-logo-header.png')}}" alt=""> <hr></td></tr>
+
+    <tr><td style="padding-right: 20px"> {{$name}} سلام </td></tr>
+    <tr><td>&nbsp;<br></td></tr>
+    <tr><td style="padding-right: 20px">برای فعال شدن حساب فروشندگی شما لطفا وارد لینک زیر شوید</td></tr>
+    <tr><td style="padding-right: 20px"><a href="{{url('vendor/confirm/'.$code)}}">{{url('vendor/confirm/'.$code)}}</a></td></tr>
+    <tr><td>&nbsp;<br></td></tr>
+    <tr><td style="padding-right: 20px">با تشکر و احترام</td></tr>
+    <tr><td>&nbsp;<br></td></tr>
+    <tr><td style="padding-right: 20px">شرکت تولید صنعتی پارس اگزوز</td></tr>
+
+</table>
 
 </body>
 </html>

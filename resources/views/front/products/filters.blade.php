@@ -4,12 +4,195 @@ $productFilters = ProductsFilter::productFilters();
 
 
 ?>
-<div class="col-lg-3 col-md-3 col-sm-12">
+
+<div class="col-lg-3 col-md-3 col-sm-12 " style="text-align: right;direction: rtl;font-family: 'B Yekan'">
+
     <!-- Fetch-Categories-from-Root-Category  -->
     <div class="fetch-categories" v-on:click="test">
-        <h3 class="title-name">Browse Categories</h3>
+
+        <div id="main" style="margin-top: 15px">
+            <div class="container">
+                <div class="accordion" id="faq">
+                    <div class="card">
+                        <div class="card-header" style="box-shadow: 10px 10px 5px 0px rgba(255,255,255,1)!important;" >
+                            <h3 class="title-name " style="padding: 12px">  اعمال فیلتر ها <i class="ion ion-ios-funnel" style="float: left"></i></h3>
+                        </div>
+
+                        <div style="margin-top: 55px">
+                            <div class="card-body" style="padding: 0px!important;">
+                            @if(!isset($_REQUEST['search']))
+                                <!-- Filters -->
+                                    <!-- Filter-Size -->
+                                    <?php
+                                    $getSizes = ProductsFilter::getSizes($url);
+                                    ?>
+                                    @if($getSizes != null && $getSizes[0] !="free")
+
+                                        <div id="main">
+                                            <div class="container" style="padding: 0px">
+                                                <div class="accordion" id="faq">
+                                                    <div class="card">
+                                                        <div class="card-header" id="faqhead1">
+                                                            <a href="#" class="btn btn-header-link collapsed" data-toggle="collapse" data-target="#size"
+                                                               aria-expanded="true" aria-controls="faq1">سایز</a>
+                                                        </div>
+                                                        <div id="size" class="collapse " aria-labelledby="faqhead1" data-parent="#faq">
+                                                            <div class="card-body" style="">
+
+                                                                @foreach($getSizes as $key=> $size)
+                                                                    <input type="checkbox" class="check-box size" name="size[]" id="size{{$key}}" value="{{$size}}">
+                                                                    <label style="margin-right:12px" for="size{{$key}}">{{$size}}
+                                                                    <!--                    <span class="total-fetch-items">(2)</span>-->
+                                                                    </label>
+                                                                    <br>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                <!-- Filter-Size -->
+                                    <!-- Filter-Color -->
+                                    <?php
+                                    $getColors = ProductsFilter::getColors($url);
+                                    ?>
+                                    @if($getColors != null && $getColors[0] !="free")
+                                    <div id="main">
+                                        <div class="container" style="padding: 0px">
+                                            <div class="accordion" id="faq">
+                                                <div class="card">
+                                                    <div class="card-header" id="faqhead1">
+                                                        <a href="#" class="btn btn-header-link collapsed" data-toggle="collapse" data-target="#color"
+                                                           aria-expanded="true" aria-controls="faq1">رنگ</a>
+                                                    </div>
+                                                    <div id="color" class="collapse " aria-labelledby="faqhead1" data-parent="#faq">
+                                                        <div class="card-body">
+
+                                                            @foreach($getColors as $key=>$color)
+                                                                <input type="checkbox" class="check-box color" name="color[]" id="color{{$key}}" value="{{$color}}">
+                                                                <label style="margin-right:12px" for="color{{$key}}">{{$color}}
+                                                                <!--                    <span class="total-fetch-items">(1)</span>-->
+                                                                </label>
+                                                                <br>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    <?php
+                                    $getBrands = ProductsFilter::getBrands($url);
+                                    ?>
+                                    <div id="main">
+                                        <div class="container" style="padding: 0px">
+                                            <div class="accordion" id="faq">
+                                                <div class="card">
+                                                    <div class="card-header" id="faqhead1">
+                                                        <a href="#" class="btn btn-header-link collapsed" data-toggle="collapse" data-target="#brnad"
+                                                           aria-expanded="true" aria-controls="faq1">برند</a>
+                                                    </div>
+                                                    <div id="brnad" class="collapse " aria-labelledby="faqhead1" data-parent="#faq">
+                                                        <div class="card-body">
+                                                            @foreach($getBrands as $key=>$brand)
+                                                                <div>
+                                                                    <input  type="checkbox" class="check-box brand" name="brand[]" id="brand{{$key}}" value="{{$brand['id']}}">
+                                                                    <label style="margin-right:12px" for="brand{{$key}}">{{$brand['name']}}</label>
+                                                                </div>
+                                                                <br>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Filter-price/- -->
+                                    <div id="main">
+                                        <div class="container" style="padding: 0px">
+                                            <div class="accordion" id="faq">
+                                                <div class="card">
+                                                    <div class="card-header" id="faqhead1">
+                                                        <a href="#" class="btn btn-header-link collapsed" data-toggle="collapse" data-target="#price"
+                                                           aria-expanded="true" aria-controls="faq1">قیمت</a>
+                                                    </div>
+                                                    <div id="price" class="collapse " aria-labelledby="faqhead1" data-parent="#faq">
+                                                        <div class="card-body">
+                                                            <?php $prices = array('0-1000', '1000-2000', '2000-5000', '5000-10000', '10000-100000'); ?>
+                                                            @foreach($prices as $key=>$price)
+                                                                <input type="checkbox" class="check-box price" id="price{{$key}}" name="price[]" value="{{$price}}">
+                                                                <label style="margin-right:12px" for="price{{$key}}">  {{$price}}  تومان
+                                                                    <!--                        <span class="total-fetch-items">(0)</span>-->
+                                                                </label>
+                                                                <br>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Filter -->
+
+
+                                    <div id="main">
+                                        <div class="container" style="padding: 0px">
+                                            <div class="accordion" id="faq">
+
+                                                @foreach($productFilters as $filter)
+                                                    <?php
+                                                    $filterAvailable = ProductsFilter::filterAvailable($filter['id'], $categoryDetails['categoryDetails']['id'])
+                                                    ?>
+                                                    @if($filterAvailable == "Yes")
+                                                        @if(count($filter['filter_values'])>0)
+
+                                                            <div class="card">
+                                                                <div class="card-header" id="faqhead1">
+                                                                    <a href="#" class="btn btn-header-link collapsed" data-toggle="collapse" data-target="#{{$filter['id']}}"
+                                                                       aria-expanded="true" aria-controls="faq1">{{$filter['filter_name']}}</a>
+                                                                </div>
+                                                                <form class="facet-form" action="#" method="post">
+                                                                    <div id="{{$filter['id']}}" class="collapse " aria-labelledby="faqhead1" data-parent="#faq">
+                                                                        <div class="card-body">
+                                                                            @foreach($filter['filter_values'] as $value)
+                                                                                <input type="checkbox" class="check-box {{$filter['filter_column']}}"
+                                                                                       name="{{$filter['filter_column']}}[]" id="{{$value['filter_value']}}"
+                                                                                       value="{{$value['filter_value']}}">
+                                                                                <label style="margin-right:12px"
+                                                                                       for="{{$value['filter_value']}}">{{ucwords($value['filter_value'])}}
+                                                                                <!--                    <span class="total-fetch-items">(0)</span>-->
+                                                                                </label>
+                                                                                <br>
+                                                                            @endforeach
+                                                                        </div>
+
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+
+                                                        @endif
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <!-- Level 1 -->
-        <h3 class="fetch-mark-category">
+<!--        <h3 class="fetch-mark-category">
             <a href="listing.html">T-Shirts
                 <span class="total-fetch-items">(5)</span>
             </a>
@@ -25,10 +208,10 @@ $productFilters = ProductsFilter::productFilters();
                     <span class="total-fetch-items">(2)</span>
                 </a>
             </li>
-        </ul>
+        </ul>-->
         <!-- //end Level 1 -->
         <!-- Level 2 -->
-        <h3 class="fetch-mark-category">
+<!--        <h3 class="fetch-mark-category">
             <a href="listing.html">Shirts
                 <span class="total-fetch-items">(5)</span>
             </a>
@@ -44,111 +227,13 @@ $productFilters = ProductsFilter::productFilters();
                     <span class="total-fetch-items">(2)</span>
                 </a>
             </li>
-        </ul>
+        </ul>-->
         <!-- //end Level 2 -->
     </div>
+
+
     <!-- Fetch-Categories-from-Root-Category  /- -->
-    @if(!isset($_REQUEST['search']))
-    <!-- Filters -->
-    <!-- Filter-Size -->
-    <?php
-    $getSizes = ProductsFilter::getSizes($url);
-    ?>
-    <div class="facet-filter-associates">
-        <h3 class="title-name">Size</h3>
-        <form class="facet-form" action="#" method="post">
-            <div class="associate-wrapper">
-                @foreach($getSizes as $key=> $size)
-                    <input type="checkbox" class="check-box size" name="size[]" id="size{{$key}}" value="{{$size}}">
-                    <label class="label-text" for="size{{$key}}">{{$size}}
-                    <!--                    <span class="total-fetch-items">(2)</span>-->
-                    </label>
-                @endforeach
 
-            </div>
-        </form>
-    </div>
-    <!-- Filter-Size -->
-    <!-- Filter-Color -->
-    <?php
-    $getColors = ProductsFilter::getColors($url);
-    ?>
-    <div class="facet-filter-associates">
-        <h3 class="title-name">Color</h3>
-        <form class="facet-form" action="#" method="post">
-            <div class="associate-wrapper">
-                @foreach($getColors as $key=>$color)
-                    <input type="checkbox" class="check-box color" name="color[]" id="color{{$key}}" value="{{$color}}">
-                    <label class="label-text" for="color{{$key}}">{{$color}}
-                    <!--                    <span class="total-fetch-items">(1)</span>-->
-                    </label>
-                @endforeach
-
-            </div>
-        </form>
-    </div>
-    <?php
-    $getBrands = ProductsFilter::getBrands($url);
-    ?>
-    <div class="facet-filter-associates">
-        <h3 class="title-name">Brand</h3>
-        <form class="facet-form" action="#" method="post">
-            <div class="associate-wrapper">
-                @foreach($getBrands as $key=>$brand)
-                <input type="checkbox" class="check-box brand" name="brand[]" id="brand{{$key}}" value="{{$brand['id']}}">
-                <label class="label-text" for="brand{{$key}}">{{$brand['name']}}
-<!--                    <span class="total-fetch-items">(0)</span>-->
-                </label>
-                @endforeach
-
-            </div>
-        </form>
-    </div>
-    <!-- Filter-price/- -->
-    <div class="facet-filter-associates">
-        <h3 class="title-name">قیمت</h3>
-        <form class="facet-form" action="#" method="post">
-            <div class="associate-wrapper">
-                <?php $prices = array('0-1000', '1000-2000', '2000-5000', '5000-10000', '10000-100000'); ?>
-                @foreach($prices as $key=>$price)
-                    <input type="checkbox" class="check-box price" id="price{{$key}}" name="price[]" value="{{$price}}">
-                    <label class="label-text" for="price{{$key}}">  {{$price}}  تومان
-<!--                        <span class="total-fetch-items">(0)</span>-->
-                    </label>
-                @endforeach
-
-            </div>
-        </form>
-    </div>
-    <!-- Filter -->
-    @foreach($productFilters as $filter)
-        <?php
-        $filterAvailable = ProductsFilter::filterAvailable($filter['id'], $categoryDetails['categoryDetails']['id'])
-
-        ?>
-        @if($filterAvailable == "Yes")
-            @if(count($filter['filter_values'])>0)
-                <div class="facet-filter-associates">
-                    <h3 class="title-name">{{$filter['filter_name']}}</h3>
-                    <form class="facet-form" action="#" method="post">
-                        <div class="associate-wrapper">
-                            @foreach($filter['filter_values'] as $value)
-                                <input type="checkbox" class="check-box {{$filter['filter_column']}}"
-                                       name="{{$filter['filter_column']}}[]" id="{{$value['filter_value']}}"
-                                       value="{{$value['filter_value']}}">
-                                <label class="label-text"
-                                       for="{{$value['filter_value']}}">{{ucwords($value['filter_value'])}}
-                                <!--                    <span class="total-fetch-items">(0)</span>-->
-                                </label>
-                            @endforeach
-
-                        </div>
-                    </form>
-                </div>
-            @endif
-        @endif
-    @endforeach
-        @endif
     <?php /*
     <!-- Filter-Brand /- -->
     <!-- Filter-Price -->

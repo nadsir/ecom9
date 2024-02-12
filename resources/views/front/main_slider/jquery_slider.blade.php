@@ -1,11 +1,6 @@
 
 @section('jquery_slider_css')
     <style>
-
-
-
-
-
         :root {
             --marquee-width: 99.1vw;
             --marquee-height: 20vh;

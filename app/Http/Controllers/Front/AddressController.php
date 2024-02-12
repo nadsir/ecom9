@@ -36,7 +36,21 @@ class AddressController extends Controller
 
             ],
                 [
-                    'delivery_name.required'=>'Please accept our Terms & Conditions'
+                    'delivery_name.required'=>'لطفا فیلد نام را پرکنید',
+                    'delivery_address.required'=>'لطفا فیلد آدرس را پرکنید',
+                    'delivery_city.required'=>'لطفا فیلد شهر را پرکنید',
+                    'delivery_state.required'=>'لطفا فیلد محله را پرکنید',
+                    'delivery_country.required'=>'لطفا فیلد کشور را پرکنید',
+                    'delivery_pincode.required'=>'لطفا فیلد کدپستی را پرکنید',
+                    'delivery_mobile.required'=>'لطفا فیلد موبایل را پرکنید',
+
+                    'delivery_name.string'=>'لطفا فیلد نام باید کلمه باشد',
+                    'delivery_address.string'=>'لطفا فیلد آدرس باید کلمه باشد',
+                    'delivery_city.string'=>'لطفا فیلد شهر باید کلمه باشد',
+                    'delivery_state.string'=>'لطفا فیلد محله باید کلمه باشد',
+                    'delivery_country.string'=>'لطفا فیلد کشور باید کلمه باشد',
+                    'delivery_pincode.digits'=>'کدپستی باید 10 رقمی باشد',
+
                 ]);
             if ($validadtor->passes()){
 

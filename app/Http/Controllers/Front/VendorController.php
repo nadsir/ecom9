@@ -135,7 +135,7 @@ class VendorController extends Controller
 
 
                 //Redirect to Vendor Login/Register page with Success message
-                $message="ایمیل فروش شما فعال گردید . شما میتوانید وارد شده و اطلاعات خود را تکمیل کنید";
+                $message="ایمیل حساب فروش  شما فعال گردید . شما میتوانید وارد شده و اطلاعات خود را تکمیل کنید";
                 return redirect('vendor/login-register')->with('success_message',$message);
             }
 

@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-<table style="width: 700px;text-align: right;direction: rtl" >
+<table style="width: 100%;text-align: right;direction: rtl" >
     <tr><td>&nbsp;</td></tr>
     <tr><td><img src="{{asset('front/images/mail-logo/stack-developers-logo.png')}}" alt=""></td></tr>
     <tr><td>&nbsp;</td></tr>
@@ -32,8 +32,8 @@
                     <tr bgcolor="#cccccc">
                         <td>{{$order['product_name']}}</td>
                         <td>{{$order['product_code']}}</td>
-                        <td>{{$order['product_size']}}</td>
-                        <td>{{$order['product_color']}}</td>
+                        <td>@if($order['product_size']!='free'){{$order['product_size']}}@else فاقد سایز بندی@endif</td>
+                        <td>@if($order['product_color']!='free'){{$order['product_color']}}@else فاقد رنگ بندی@endif</td>
                         <td>{{$order['product_qty']}}</td>
                         <td>{{$order['product_price']}}</td>
                     </tr>

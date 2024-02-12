@@ -6,23 +6,35 @@ use App\Models\Product;
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">
         <div class="container">
-            <div class="page-intro">
-                <h2>Cart</h2>
-                <ul class="bread-crumb">
-                    <li class="has-separator">
-                        <i class="ion ion-md-home"></i>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li class="is-marked">
-                        <a href="cart.html">Cart</a>
-                    </li>
-                </ul>
+
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col" style="text-align: center">
+                <div class="page-intro" style="font-family: 'B Yekan';text-align: right;direction: rtl">
+                    <h2 style="text-align: center">کارت</h2>
+                    <ul class="bread-crumb" style="text-align: center" >
+                        <li class="has-separator">
+                            <i class="ion ion-md-home"></i>
+                            <a href="index.html">صفحه اصلی</a>
+                        </li>
+                        <li class="is-marked" >
+                            <a  href="cart.html">کارت</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+
+
+
     <!-- Page Introduction Wrapper /- -->
     <!-- Cart-Page -->
-    <div class="page-cart u-s-p-t-80">
+    <div class="page-cart u-s-p-t-80" style="direction: rtl;text-align: right;font-family: 'B Yekan'">
         <div class="container">
             @if(Session::has('error_message'))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -46,24 +58,51 @@ use App\Models\Product;
 
                 <div class="col-lg-12">
                     <div id="appendCartItems">
-                      @include('front.products.cart_items')
+                        @include('front.products.cart_items')
                     </div>
                     <!-- Coupon -->
                     <div class="coupon-continue-checkout u-s-m-b-60">
                         <div class="coupon-area">
-                            <h6>Enter your coupon code if you have one.</h6>
-                            <div class="coupon-field">
+                            <h6>در صورت داشتن کوپن خرید کد را وارد کنید .</h6>
+                            <div class="calculation u-s-m-b-60" style="border-radius: 6px 6px 6px 6px;
+-moz-border-radius: 6px 6px 6px 6px;
+-webkit-border-radius: 6px 6px 6px 6px;
+border: 1px solid #fdb414;">
                                 <form id="ApplyCoupon" method="post" action="javascript:void(0);" @if(Auth::check()) user="1" @endif>
                                     @csrf
                                     <label class="sr-only" for="coupon-code">Apply Coupon</label>
                                     <input id="code" name="code" type="text" class="text-field" placeholder="کد کوپن">
-                                    <button type="submit" class="button">اعمال کوپن </button>
+                                    <button type="submit" class="button" style="background-color: #fdb414;
+    width: 100%;
+    border: none!important;
+    -webkit-box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);margin-top: 10px">اعمال کوپن </button>
                                 </form>
                             </div>
                         </div>
-                        <div class="button-area">
-                            <a href="{{url('/')}}" class="continue">Continue Shopping</a>
-                            <a href="{{url('/checkout')}}" class="checkout">Proceed to Checkout</a>
+                        <div class="button-area u-s-m-b-60" style="text-align: center;    text-align: center;
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-between">
+                            <div>
+                                <a href="{{url('/')}}" class="continue" style="background-color: #fdb414;
+    width: 100%;
+    border: none!important;
+    -webkit-box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);">ادامه خرید</a>
+                            </div>
+                            <div>
+                                <a href="{{url('/checkout')}}" class="continue" style="background-color: #fdb414;
+    width: 100%;
+    border: none!important;
+    -webkit-box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 16px -6px rgba(0,0,0,0.75);">انتقال به صفحه پرداخت</a>
+                            </div>
+
+
                         </div>
                     </div>
                     <!-- Coupon /- -->

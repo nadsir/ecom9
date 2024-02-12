@@ -63,8 +63,8 @@ $totalCartItems=totalCartItems();
                                 </li>
                                 <li>
                                     <a href="{{url("user/logout")}}">
-                                        <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                        خروج</a>
+                                        خروج<i class="fas fa-sign-in-alt u-s-m-r-9"></i>
+                                        </a>
                                 </li>
                             @else
                             <li>

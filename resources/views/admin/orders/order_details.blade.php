@@ -72,7 +72,7 @@ if (Auth::guard('admin')->user()->type == "vendor") {
                                 </div>
                                 <div class="form-group">
                                     <label> مجموع سفارش : </label>
-                                    <label for="">{{$orderDetails['grand_total']}}</label>
+                                    <label for="" class="money">{{$orderDetails['grand_total']}}</label>
                                 </div>
                                 <div class="form-group">
                                     <label>هزینه ارسال : </label>
@@ -325,28 +325,12 @@ if (Auth::guard('admin')->user()->type == "vendor") {
                                         </td>
                                         <td>{{$product['product_code']}}</td>
                                         <td>{{$product['product_name']}}</td>
-                                        <td>{{$product['product_size']}}</td>
-                                        <td>{{$product['product_color']}}</td>
-                                        <td>{{$product['product_price']}}</td>
+                                        <td >@if($product['product_size'] !='free'){{ $product['product_size']}}@else محصول فاقد سایز بندی @endif</td>
+                                        <td >@if($product['product_color'] !='free'){{ $product['product_color']}}@else محصول فاقد رنگ بندی @endif</td>
+                                        <td class="money">{{$product['product_price']}}</td>
                                         <td>{{$product['product_qty']}}</td>
-                                        <td>
-                                            @if($product['vendor_id']>0)
-                                                @if($orderDetails['coupon_amount']>0)
-                                                   @php $couponDetails=Coupon::couponDetails($orderDetails['coupon_code'])  @endphp
-
-                                                    {{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}
-                                                @else
-                                                      {{$total_price=$product['product_qty']*$product['product_price']}}
-                                                @endif
-                                            @else
-                                                @if($orderDetails['coupon_amount']>0)
-                                                    {{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}
-                                                @else
-                                                    {{$total_price=$product['product_qty']*$product['product_price']}}
-                                                @endif
-                                            @endif
-
-
+                                        <td >
+                                            @if($product['vendor_id']>0)@if($orderDetails['coupon_amount']>0)@php $couponDetails=Coupon::couponDetails($orderDetails['coupon_code'])@endphp{{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}@else{{$total_price=$product['product_qty']*$product['product_price']}}@endif @else @if($orderDetails['coupon_amount']>0){{$total_price=$product['product_qty']*$product['product_price']-$item_discount}}@else{{$total_price=$product['product_qty']*$product['product_price']}}@endif @endif
                                         </td>
                                         @if(Auth::guard('admin')->user()->type!="vendor")
                                             @if($product['vendor_id']>0)
@@ -361,8 +345,8 @@ if (Auth::guard('admin')->user()->type == "vendor") {
                                         @if($product['vendor_id']>0)
 
                                             @php $getVendorCommission=Vendor::getVendorCommission($product['vendor_id']); @endphp
-                                            <td>{{$commission=round($total_price*$getVendorCommission/100,2)}}</td>
-                                            <td>{{$total_price-$commission}}</td>
+                                            <td class="money">{{$commission=round($total_price*$getVendorCommission/100,2)}}</td>
+                                            <td class="money">{{$total_price-$commission}}</td>
 
 
                                         @else

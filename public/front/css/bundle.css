@@ -96,7 +96,7 @@ body {
   position: relative;
   z-index: 1;
   color: #ffffff;
-  padding: 68px 0; }
+  padding: 135px 0; }
   [class*="page-style-"]:after {
     content: '';
     position: absolute;
@@ -121,9 +121,13 @@ body {
 
 /* Page introduction style a */
 .page-style-a {
-  background: url(../images/pattern/pattern-a.png) repeat center center; }
+  background: url(../images/pattern/Frame2.jpg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
   .page-style-a:after {
-    background: rgba(52, 58, 64, 0.5); }
+  /*  background: rgba(52, 58, 64, 0.5);*/ }
 
 /* Page introduction style b */
 .page-style-b {
@@ -384,9 +388,11 @@ body {
     color: #292929; }
 
 .product-slider-previous {
+    background-color:#fdb414 ;
   left: 0; }
 
 .product-slider-next {
+    background-color:#fdb414 ;
   right: 0; }
 
 /* Specific-Category-Slider (Previous & Next Buttons) */
@@ -839,7 +845,7 @@ body {
   font-weight: 700;
   color: #ffffff; }
   .button-primary:hover {
-    background: #cf0427; }
+    background: #f9c85c; }
 
 .button-outline-secondary {
   background-color: transparent;
@@ -858,7 +864,7 @@ body {
 
 /* Checkbox Component */
 .check-box {
-  display: none; }
+  /*display: none;*/ }
   .check-box + .label-text {
     position: relative;
     cursor: pointer;
@@ -879,7 +885,7 @@ body {
       border: 1px solid #DCDCDD; }
 
 .check-box:checked + .label-text {
-  color: #d90429; }
+  /*color: #d90429;*/ }
   .check-box:checked + .label-text:before {
     font-family: 'Font Awesome 5 Free';
     content: '\F00C';
@@ -897,11 +903,11 @@ body {
     padding: 0;
     color: #ffffff; }
   .check-box:checked + .label-text:after {
-    background-color: #d90429;
+    background-color: #7b7b7b;
     border: none; }
 
 .check-box:checked + .no-color {
-  color: #292929; }
+  color: #7b7b7b; }
 
 /* Continue-Link component */
 .continue-link-wrapper {
@@ -1399,9 +1405,9 @@ body {
       border: 1px solid #DCDCDD; }
 
 .radio-box:checked + .label-text {
-  color: #d90429; }
+  color: #fdb414; }
   .radio-box:checked + .label-text:after {
-    background-color: #d90429;
+    background-color: #fdb414;
     border: none; }
 
 /* Rating Box component */
@@ -2466,7 +2472,7 @@ body {
       border-color: #d90429;
       color: #272B34; }
   .single-product-nav > .nav-item > .nav-link.active {
-    border-color: #d90429;
+    border-color: #fdb414;
     color: #272B34; }
   .single-product-nav > .nav-item + .nav-item {
     margin-left: 8px; }
@@ -3053,7 +3059,7 @@ body {
     content: ' ';
     border-bottom: 2px solid #d90429;
     display: block;
-    width: 30%;
+   /* width: 30%;*/
     position: absolute;
     bottom: -1px; }
 

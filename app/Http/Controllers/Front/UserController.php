@@ -35,7 +35,18 @@ class UserController extends Controller
                 'accept'=>'required'
             ],
             [
-                'accept.required'=>'Please accept our Terms & Conditions'
+                'name.required'=>'لطفا فیلد نام کاربری را پر کنید',
+                'name.string'=>'فیلد نام فقط باید حرف باشد',
+                'name.max'=>'تعداد حروف بیشتر از صد کارکتر می باشد',
+                'mobile.required'=>'لطفا فیلد شماره همراه را پر کنید',
+                'mobile.numeric'=>'فیلد شماره تلفن باید عدد باشد',
+                'email.required'=>'لطفا فیلد ایمیل را پر کنید',
+                'email.email'=>'فرمت ایمیل نادرست می باشد',
+                'email.max'=>'تعداد کارکترها بیشتر از صد کارکتر می باشد',
+                'email.unique'=>'ایمیل تکراری می باشد',
+                'password.required'=>'لطفا فیلد گذر واژه را پر کنید',
+                'password.min'=>'گذر واژه باید بیشتر از شش کارکتر باشد',
+                'accept.required'=>'لطفا قوانین سایت را بپذیرید',
             ]);
             if ($validadtor->passes()){
                 //Register the User
@@ -230,7 +241,9 @@ class UserController extends Controller
                 [
                     'email.required'=>'پر کردن فیلد ایمیل اجباری است.',
                     'email.email'=>'فرمت ایمیل نا معتبر می باشد.',
+                    'email.exists'=>'ایمیل مورد نظر اشتباه وارد شده',
                 ]);
+
             if ($validadtor->passes()) {
                 if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password']])){
                     if (Auth::user()->status==0){
