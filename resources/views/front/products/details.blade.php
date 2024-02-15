@@ -497,12 +497,18 @@ $productFilters = ProductsFilter::productFilters();
                             @endif
                             <!-- Description-Tab /- -->
                             <!-- Details-Tab -->
+                                @if($productFilters != null)
                                 @foreach($productFilters as $filter)
                                     @if(isset($productDetails['category_id']))
                                         <?php $filterAvailable = ProductsFilter::filterAvailable($filter['id'], $productDetails['category_id']);?>
+
                                     @endif
                                 @endforeach
-                                @if($filterAvailable != "Yes")
+                                @else
+                                <?php  $filterAvailable="No"; ?>
+                                @endif
+
+                                @if($filterAvailable != "Yes" )
                             <div class="tab-pane fade" id="detail">
                                 <div class="specification-whole-container">
 

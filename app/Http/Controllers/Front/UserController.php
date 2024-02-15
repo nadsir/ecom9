@@ -61,7 +61,7 @@ class UserController extends Controller
                 $email=$data['email'];
                 $messageData=['name'=>$data['name'],'email'=>$data['email'],'code'=>base64_encode($data['email'])];
                 Mail::send('emails.confirmation',$messageData,function ($message)use($email){
-                    $message->to($email)->subject('تایید اکانت شما در فروشگاه X');
+                    $message->to($email)->subject('تایید اکانت شما در فروشگاه پارس اگزوز');
                 });
                 $redirectTo=url('cart');
                 //Redirect back user with success message

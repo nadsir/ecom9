@@ -46,13 +46,13 @@ class CategoryController extends Controller
            $data=$request->all();
 
            $rules=[
-               'category_name'=>'required|regex:/^[\pL\s\-]+$/u',
+               'category_name'=>'required',
                'section_id'=>'required',
                'url'=>'required',
            ];
            $customMessages = [
                'category_name.required' => 'فیلد نام دسته بندی اجباری می باشد',
-               'category_name.regex' => 'فیلد نام دسته بندی باید مجاز باشد',
+               /*'category_name.regex' => 'فیلد نام دسته بندی باید مجاز باشد',*/
                'section_id.required' => 'فیلد بخش اجباری می باشد',
                'url.required' => 'فیلد آدرس دسته بندی اجباری می باشد',
            ];

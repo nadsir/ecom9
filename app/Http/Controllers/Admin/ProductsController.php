@@ -20,6 +20,7 @@ class ProductsController extends Controller
 {
     public function products()
     {
+
         Session::put('page', 'products');
         $adminType = Auth::guard('admin')->user()->type;
         $vendor_id = Auth::guard('admin')->user()->vendor_id;
@@ -37,7 +38,7 @@ class ProductsController extends Controller
         if ($adminType == "vendor") {
             $products = $products->where('vendor_id', $vendor_id);
         }
-        $products = $products->get()->toArray();
+        $products = $products->orderBy('id', 'DESC')->get()->toArray();
         return view('admin.products.products')->with(compact('products'));
     }
 
@@ -80,7 +81,7 @@ class ProductsController extends Controller
             /* echo "<pre>";print_r(Auth::guard('admin')->user()); die;*/
             $rules = [
                 'category_id' => 'required',
-                'product_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'product_name' => 'required',
                 'product_code' => 'required',
                 'product_price' => 'required|numeric',
                 'product_color' => 'required|regex:/^[\pL\s\-]+$/u',
@@ -88,7 +89,7 @@ class ProductsController extends Controller
             $customMessages = [
                 'category_id.required' => 'فیلد  دسته بندی اجباری می باشد',
                 'product_name.required' => 'فیلد نام محصول اجباری باشد',
-                'product_name.regex' => 'فیلد نام محصول باید مجاز باشد',
+                /*'product_name.regex' => 'فیلد نام محصول باید مجاز باشد',*/
                 'product_code.required' => 'فیلد کد محصول اجباری باشد',
                 'product_code.regex' => 'فیلد کد محصول باید مجاز باشد',
                 'product_price.required' => 'فیلد قیمت محصول اجباری باشد',
